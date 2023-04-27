@@ -23,6 +23,13 @@ namespace API.Controllers
             return db.Sizes;
         }
 
+        // GET: api/Sizes/Material
+        [Route("api/Sizes/Material")]
+        public IQueryable<Size> GetSizesByMaterialID(int materialID)
+        {
+            return db.Sizes.Where(e => e.MaterialID == materialID);
+        }
+
         // GET: api/Sizes/5
         [ResponseType(typeof(Size))]
         public async Task<IHttpActionResult> GetSize(int id)
@@ -114,6 +121,11 @@ namespace API.Controllers
         private bool SizeExists(int id)
         {
             return db.Sizes.Count(e => e.SizeID == id) > 0;
+        }
+
+        private bool MaterialExists(int id)
+        {
+            return db.Materials.Count(e => e.MaterialID == id) > 0;
         }
     }
 }

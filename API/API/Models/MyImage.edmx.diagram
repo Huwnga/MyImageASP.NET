@@ -4,57 +4,60 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a87a93ac3e39451aa32a2cb76ba0a6d0" Name="Diagram1">
-        <EntityTypeShape EntityType="MyImageModel.Address" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.CartDetail" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Cart" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Customer" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Employee" Width="1.5" PointX="3.75" PointY="17.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Feedback" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.FunctionGroup" Width="1.5" PointX="11.25" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Function" Width="1.5" PointX="6" PointY="24.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Group" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Image" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.OrderDetail" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Order" Width="1.5" PointX="6" PointY="20.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Organization" Width="1.5" PointX="1.5" PointY="18.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Payment" Width="1.5" PointX="3.75" PointY="23" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Product" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.ProductSize" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Size" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.StatusOrder" Width="1.5" PointX="3.75" PointY="25.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.UserFunction" Width="1.5" PointX="8.25" PointY="16.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.UserGroup" Width="1.5" PointX="8.25" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.User" Width="1.5" PointX="6" PointY="16.625" IsExpanded="true" />
-        <AssociationConnector Association="MyImageModel.FK__Address__Custome__628FA481" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__CartDetai__CartI__73BA3083" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__CartDetai__Image__76969D2E" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__CartDetai__Produ__74AE54BC" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__CartDetai__SizeI__75A278F5" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Carts__CustomerI__619B8048" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Feedbacks__Custo__6477ECF3" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Orders__Customer__6754599E" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Employees__Manag__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Employees__Organ__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Orders__Employee__66603565" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Users__EmployeeI__5FB337D6" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Feedbacks__Produ__656C112C" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__FunctionG__Funct__6E01572D" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__FunctionG__Group__6EF57B66" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__UserFunct__Funct__6D0D32F4" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__UserGroup__Group__6B24EA82" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Images__ProductI__6383C8BA" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__OrderDeta__Image__72C60C4A" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__OrderDeta__Order__6FE99F9F" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__OrderDeta__Produ__70DDC3D8" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__OrderDeta__SizeI__71D1E811" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Orders__PaymentI__693CA210" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Orders__StatusOr__68487DD7" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__Organizat__Paren__60A75C0F" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__ProductSi__Produ__787EE5A0" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__ProductSi__SizeI__778AC167" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__UserFunct__UserI__6C190EBB" ManuallyRouted="false" />
-        <AssociationConnector Association="MyImageModel.FK__UserGroup__UserI__6A30C649" ManuallyRouted="false" />
+      <Diagram DiagramId="57671d823f6946f79f472e205ddb5e9d" Name="Diagram1">
+        <EntityTypeShape EntityType="MyImageModel.Address" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.CartDetail" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Cart" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Customer" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Employee" Width="1.5" PointX="6" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Feedback" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.FunctionGroup" Width="1.5" PointX="13.5" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Function" Width="1.5" PointX="8.25" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Group" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Image" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Material" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.OrderDetail" Width="1.5" PointX="10.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Order" Width="1.5" PointX="8.25" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Organization" Width="1.5" PointX="3.75" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Payment" Width="1.5" PointX="6" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Product" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.ProductSize" Width="1.5" PointX="5.25" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Size" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.StatusOrder" Width="1.5" PointX="6" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.UserFunction" Width="1.5" PointX="10.5" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.UserGroup" Width="1.5" PointX="10.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.User" Width="1.5" PointX="8.25" PointY="16.75" IsExpanded="true" />
+        <AssociationConnector Association="MyImageModel.FK__Address__Custome__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__CartDetai__CartI__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__CartDetai__Image__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__CartDetai__Produ__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__CartDetai__SizeI__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Carts__CustomerI__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Feedbacks__Custo__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Orders__Customer__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Employees__Manag__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Employees__Organ__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Orders__Employee__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Users__EmployeeI__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Feedbacks__Produ__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__FunctionG__Funct__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__FunctionG__Group__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__UserFunct__Funct__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__UserGroup__Group__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Images__ProductI__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__OrderDeta__Image__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Products__Materi__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Sizes__MaterialI__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__OrderDeta__Order__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__OrderDeta__Produ__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__OrderDeta__SizeI__75A278F5" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Orders__PaymentI__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Orders__StatusOr__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__Organizat__Paren__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__ProductSi__Produ__7C4F7684" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__ProductSi__SizeI__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__UserFunct__UserI__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="MyImageModel.FK__UserGroup__UserI__6E01572D" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

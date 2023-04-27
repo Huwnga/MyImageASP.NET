@@ -115,6 +115,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Materials">
+      <EntityTypeMapping TypeName="MyImageModel.Material">
+        <MappingFragment StoreEntitySet="Materials">
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="MyImageModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetails">
@@ -168,7 +176,7 @@
         <MappingFragment StoreEntitySet="Products">
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="Material" ColumnName="Material" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
           <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
           <ScalarProperty Name="UnitsOnOrder" ColumnName="UnitsOnOrder" />
           <ScalarProperty Name="ReoderLevel" ColumnName="ReoderLevel" />
@@ -189,6 +197,7 @@
       <EntityTypeMapping TypeName="MyImageModel.Size">
         <MappingFragment StoreEntitySet="Sizes">
           <ScalarProperty Name="SizeID" ColumnName="SizeID" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
           <ScalarProperty Name="SizeName" ColumnName="SizeName" />
         </MappingFragment>
       </EntityTypeMapping>
