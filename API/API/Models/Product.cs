@@ -14,6 +14,16 @@ namespace API.Models
     
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.CartDetails = new HashSet<CartDetail>();
+            this.Feedbacks = new HashSet<Feedback>();
+            this.Images = new HashSet<Image>();
+            this.OrderDetails = new HashSet<OrderDetail>();
+            this.ProductSizes = new HashSet<ProductSize>();
+        }
+    
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public Nullable<int> MaterialID { get; set; }
@@ -21,6 +31,16 @@ namespace API.Models
         public Nullable<short> UnitsOnOrder { get; set; }
         public Nullable<short> ReoderLevel { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartDetail> CartDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
         public virtual Material Material { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductSize> ProductSizes { get; set; }
     }
 }

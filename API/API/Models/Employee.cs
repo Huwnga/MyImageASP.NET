@@ -14,6 +14,14 @@ namespace API.Models
     
     public partial class Employee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            this.Employees1 = new HashSet<Employee>();
+            this.Orders = new HashSet<Order>();
+            this.Users = new HashSet<User>();
+        }
+    
         public int EmployeeID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -30,7 +38,13 @@ namespace API.Models
         public Nullable<int> OrganizationID { get; set; }
         public string PhotoPath { get; set; }
     
-        public virtual Employee Manager { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employee> Employees1 { get; set; }
+        public virtual Employee Employee1 { get; set; }
         public virtual Organization Organization { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

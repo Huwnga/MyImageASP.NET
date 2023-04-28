@@ -14,9 +14,8 @@ namespace API.Models
     
     public partial class ProductSize
     {
-        public int ProductSizeID { get; set; }
-        public Nullable<int> ProductID { get; set; }
-        public Nullable<int> SizeID { get; set; }
+        public int ProductID { get; set; }
+        public int SizeID { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
     
         public virtual Product Product { get; set; }

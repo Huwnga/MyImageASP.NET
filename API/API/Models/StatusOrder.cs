@@ -14,7 +14,16 @@ namespace API.Models
     
     public partial class StatusOrder
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public StatusOrder()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int StatusOrderID { get; set; }
         public string StatusOrderName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

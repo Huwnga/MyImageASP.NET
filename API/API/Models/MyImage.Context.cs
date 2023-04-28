@@ -31,7 +31,6 @@ namespace API.Models
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
-        public virtual DbSet<FunctionGroup> FunctionGroups { get; set; }
         public virtual DbSet<Function> Functions { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Image> Images { get; set; }
@@ -45,7 +44,6 @@ namespace API.Models
         public virtual DbSet<Size> Sizes { get; set; }
         public virtual DbSet<StatusOrder> StatusOrders { get; set; }
         public virtual DbSet<UserFunction> UserFunctions { get; set; }
-        public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

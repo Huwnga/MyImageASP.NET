@@ -14,16 +14,24 @@ namespace API.Models
     
     public partial class Order
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
         public int OrderID { get; set; }
         public Nullable<int> EmployeeID { get; set; }
         public Nullable<int> CustomerID { get; set; }
         public Nullable<int> StatusOrderID { get; set; }
         public Nullable<int> PaymentID { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<int> Quantity { get; set; }
+        public string Description { get; set; }
+        public string ShipAddress { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual Payment Payment { get; set; }
         public virtual StatusOrder StatusOrder { get; set; }
     }

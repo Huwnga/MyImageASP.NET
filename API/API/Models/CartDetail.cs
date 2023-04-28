@@ -14,9 +14,8 @@ namespace API.Models
     
     public partial class CartDetail
     {
-        public int CartDetailID { get; set; }
-        public Nullable<int> CartID { get; set; }
-        public Nullable<int> ProductID { get; set; }
+        public int CartID { get; set; }
+        public int ProductID { get; set; }
         public Nullable<int> SizeID { get; set; }
         public Nullable<int> ImageID { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }

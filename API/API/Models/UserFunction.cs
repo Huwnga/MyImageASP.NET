@@ -15,8 +15,8 @@ namespace API.Models
     public partial class UserFunction
     {
         public int UserFunctionID { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public Nullable<int> FunctionID { get; set; }
+        public int UserID { get; set; }
+        public int FunctionID { get; set; }
     
         public virtual Function Function { get; set; }
         public virtual User User { get; set; }

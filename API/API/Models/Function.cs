@@ -14,8 +14,20 @@ namespace API.Models
     
     public partial class Function
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Function()
+        {
+            this.UserFunctions = new HashSet<UserFunction>();
+            this.Groups = new HashSet<Group>();
+        }
+    
         public int FunctionID { get; set; }
         public string FunctionName { get; set; }
         public string FunctionDescription { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserFunction> UserFunctions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }

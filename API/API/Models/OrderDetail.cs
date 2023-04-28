@@ -14,9 +14,8 @@ namespace API.Models
     
     public partial class OrderDetail
     {
-        public int OrderDetailID { get; set; }
-        public Nullable<int> OrderID { get; set; }
-        public Nullable<int> ProductID { get; set; }
+        public int OrderID { get; set; }
+        public int ProductID { get; set; }
         public Nullable<int> SizeID { get; set; }
         public Nullable<int> ImageID { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
