@@ -26,9 +26,9 @@
                 <img src='@Url.Content("~/Content/Images/logo.png")' alt="" style="width:10rem; height:auto" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
-                    aria-controls="navbar" aria-expanded="false" aria-label="Materials">
+                    aria-controls="navbar" aria-expanded="false" aria-label="Main Navigation">
                 <span class="navbar-toggler-icon">
-                    <title>Materials</title>
+                    <title>Main Navigation</title>
                 </span>
             </button>
             <div class="collapse navbar-collapse" id="navbar">
@@ -76,7 +76,7 @@
             </div>
         </div>
     </nav>
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent px-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#lmaterial"
                     aria-controls="lmaterial" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,7 +87,7 @@
                     @if (materials.Count < 1)
                     {
                         <li>
-                            <span class="text-secondary text-center fw-semibold">There is no material in this</span>
+                            <p class="text-center text-secondary fw-semibold">There is no material in this</p>
                         </li>
                     }
 
