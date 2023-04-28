@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Client.Models
 {
-    public class Product
+    public partial class Product
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
@@ -13,7 +13,7 @@ namespace Client.Models
         public Nullable<short> UnitsInStock { get; set; }
         public Nullable<short> UnitsOnOrder { get; set; }
         public Nullable<short> ReoderLevel { get; set; }
-
+    
         public virtual Material Material { get; set; }
     }
 }
