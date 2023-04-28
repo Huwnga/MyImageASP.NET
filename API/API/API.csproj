@@ -211,9 +211,6 @@
     <Compile Include="Models\Function.cs">
       <DependentUpon>MyImage.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\FunctionGroup.cs">
-      <DependentUpon>MyImage.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Group.cs">
       <DependentUpon>MyImage.tt</DependentUpon>
     </Compile>
@@ -268,9 +265,6 @@
     <Compile Include="Models\UserFunction.cs">
       <DependentUpon>MyImage.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserGroup.cs">
-      <DependentUpon>MyImage.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -284,8 +278,8 @@
     <Content Include="Global.asax" />
     <Content Include="Models\MyImage.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MyImage.Context.cs</LastGenOutput>
       <DependentUpon>MyImage.edmx</DependentUpon>
+      <LastGenOutput>MyImage.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\MyImage.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
