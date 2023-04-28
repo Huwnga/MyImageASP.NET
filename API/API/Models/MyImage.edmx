@@ -81,6 +81,7 @@
           </Key>
           <Property Name="FunctionID" Type="int" Nullable="false" />
           <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Functions">
           <Key>
@@ -200,9 +201,9 @@
             <PropertyRef Name="UserID" />
             <PropertyRef Name="FunctionID" />
           </Key>
-          <Property Name="UserFunctionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="FunctionID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="UserGroups">
           <Key>
@@ -211,6 +212,7 @@
           </Key>
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -780,7 +782,6 @@
           </Key>
           <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerID" Type="Int32" />
-          <NavigationProperty Name="CartDetails" Relationship="Self.FK__CartDetai__CartI__778AC167" FromRole="Carts" ToRole="CartDetails" />
           <NavigationProperty Name="Customer" Relationship="Self.FK__Carts__CustomerI__6383C8BA" FromRole="Carts" ToRole="Customers" />
         </EntityType>
         <EntityType Name="Customer">
@@ -793,10 +794,6 @@
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Addresses" Relationship="Self.FK__Address__Custome__6477ECF3" FromRole="Customers" ToRole="Address" />
-          <NavigationProperty Name="Carts" Relationship="Self.FK__Carts__CustomerI__6383C8BA" FromRole="Customers" ToRole="Carts" />
-          <NavigationProperty Name="Feedbacks" Relationship="Self.FK__Feedbacks__Custo__68487DD7" FromRole="Customers" ToRole="Feedbacks" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Customer__6B24EA82" FromRole="Customers" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -817,12 +814,9 @@
           <Property Name="ManagerID" Type="Int32" />
           <Property Name="OrganizationID" Type="Int32" />
           <Property Name="PhotoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employees1" Relationship="Self.FK__Employees__Manag__5FB337D6" FromRole="Employees" ToRole="Employees1" />
-          <NavigationProperty Name="Employee1" Relationship="Self.FK__Employees__Manag__5FB337D6" FromRole="Employees1" ToRole="Employees" />
+          <NavigationProperty Name="Manager" Relationship="Self.FK__Employees__Manag__5FB337D6" FromRole="Employees1" ToRole="Employees" />
           <NavigationProperty Name="Organization" Relationship="Self.FK__Employees__Organ__60A75C0F" FromRole="Employees" ToRole="Organizations" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Employee__6A30C649" FromRole="Employees" ToRole="Orders" />
-          <NavigationProperty Name="Users" Relationship="Self.FK__Users__EmployeeI__619B8048" FromRole="Employees" ToRole="Users" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="Feedback">
           <Key>
             <PropertyRef Name="FeedbackID" />
@@ -834,6 +828,17 @@
           <NavigationProperty Name="Customer" Relationship="Self.FK__Feedbacks__Custo__68487DD7" FromRole="Feedbacks" ToRole="Customers" />
           <NavigationProperty Name="Product" Relationship="Self.FK__Feedbacks__Produ__693CA210" FromRole="Feedbacks" ToRole="Products" />
         </EntityType>
+        <EntityType Name="FunctionGroup">
+          <Key>
+            <PropertyRef Name="FunctionID" />
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="FunctionID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Function" Relationship="Self.FK__FunctionG__Funct__71D1E811" FromRole="FunctionGroups" ToRole="Functions" />
+          <NavigationProperty Name="Group" Relationship="Self.FK__FunctionG__Group__72C60C4A" FromRole="FunctionGroups" ToRole="Groups" />
+        </EntityType>
         <EntityType Name="Function">
           <Key>
             <PropertyRef Name="FunctionID" />
@@ -841,8 +846,6 @@
           <Property Name="FunctionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FunctionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="FunctionDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserFunctions" Relationship="Self.FK__UserFunct__Funct__70DDC3D8" FromRole="Functions" ToRole="UserFunctions" />
-          <NavigationProperty Name="Groups" Relationship="Self.FunctionGroups" FromRole="Functions" ToRole="Groups" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -851,8 +854,6 @@
           <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GroupName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="GroupDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Functions" Relationship="Self.FunctionGroups" FromRole="Groups" ToRole="Functions" />
-          <NavigationProperty Name="Users" Relationship="Self.UserGroups" FromRole="Groups" ToRole="Users" />
         </EntityType>
         <EntityType Name="Image">
           <Key>
@@ -864,9 +865,7 @@
           <Property Name="ImageSize" Type="Int32" />
           <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ImageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CartDetails" Relationship="Self.FK__CartDetai__Image__7A672E12" FromRole="Images" ToRole="CartDetails" />
           <NavigationProperty Name="Product" Relationship="Self.FK__Images__ProductI__66603565" FromRole="Images" ToRole="Products" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Image__76969D2E" FromRole="Images" ToRole="OrderDetails" />
         </EntityType>
         <EntityType Name="Material">
           <Key>
@@ -874,8 +873,6 @@
           </Key>
           <Property Name="MaterialID" Type="Int32" Nullable="false" />
           <Property Name="MaterialName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Materi__656C112C" FromRole="Materials" ToRole="Products" />
-          <NavigationProperty Name="Sizes" Relationship="Self.FK__Sizes__MaterialI__6754599E" FromRole="Materials" ToRole="Sizes" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -906,7 +903,6 @@
           <Property Name="ShipAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Customer" Relationship="Self.FK__Orders__Customer__6B24EA82" FromRole="Orders" ToRole="Customers" />
           <NavigationProperty Name="Employee" Relationship="Self.FK__Orders__Employee__6A30C649" FromRole="Orders" ToRole="Employees" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__73BA3083" FromRole="Orders" ToRole="OrderDetails" />
           <NavigationProperty Name="Payment" Relationship="Self.FK__Orders__PaymentI__6D0D32F4" FromRole="Orders" ToRole="Payments" />
           <NavigationProperty Name="StatusOrder" Relationship="Self.FK__Orders__StatusOr__6C190EBB" FromRole="Orders" ToRole="StatusOrders" />
         </EntityType>
@@ -922,9 +918,7 @@
           <Property Name="Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__Organ__60A75C0F" FromRole="Organizations" ToRole="Employees" />
-          <NavigationProperty Name="Organizations1" Relationship="Self.FK__Organizat__Paren__628FA481" FromRole="Organizations" ToRole="Organizations1" />
-          <NavigationProperty Name="Organization1" Relationship="Self.FK__Organizat__Paren__628FA481" FromRole="Organizations1" ToRole="Organizations" />
+          <NavigationProperty Name="Parent" Relationship="Self.FK__Organizat__Paren__628FA481" FromRole="Organizations1" ToRole="Organizations" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -932,7 +926,6 @@
           </Key>
           <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PaymentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__PaymentI__6D0D32F4" FromRole="Payments" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -944,13 +937,8 @@
           <Property Name="UnitsInStock" Type="Int16" />
           <Property Name="UnitsOnOrder" Type="Int16" />
           <Property Name="ReoderLevel" Type="Int16" />
-          <NavigationProperty Name="CartDetails" Relationship="Self.FK__CartDetai__Produ__787EE5A0" FromRole="Products" ToRole="CartDetails" />
-          <NavigationProperty Name="Feedbacks" Relationship="Self.FK__Feedbacks__Produ__693CA210" FromRole="Products" ToRole="Feedbacks" />
-          <NavigationProperty Name="Images" Relationship="Self.FK__Images__ProductI__66603565" FromRole="Products" ToRole="Images" />
           <NavigationProperty Name="Material" Relationship="Self.FK__Products__Materi__656C112C" FromRole="Products" ToRole="Materials" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__74AE54BC" FromRole="Products" ToRole="OrderDetails" />
-          <NavigationProperty Name="ProductSizes" Relationship="Self.FK__ProductSi__Produ__7C4F7684" FromRole="Products" ToRole="ProductSizes" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="ProductSize">
           <Key>
             <PropertyRef Name="ProductID" />
@@ -969,29 +957,36 @@
           <Property Name="SizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaterialID" Type="Int32" />
           <Property Name="SizeName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CartDetails" Relationship="Self.FK__CartDetai__SizeI__797309D9" FromRole="Sizes" ToRole="CartDetails" />
           <NavigationProperty Name="Material" Relationship="Self.FK__Sizes__MaterialI__6754599E" FromRole="Sizes" ToRole="Materials" />
-          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__SizeI__75A278F5" FromRole="Sizes" ToRole="OrderDetails" />
-          <NavigationProperty Name="ProductSizes" Relationship="Self.FK__ProductSi__SizeI__7B5B524B" FromRole="Sizes" ToRole="ProductSizes" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="StatusOrder">
           <Key>
             <PropertyRef Name="StatusOrderID" />
           </Key>
           <Property Name="StatusOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StatusOrderName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__StatusOr__6C190EBB" FromRole="StatusOrders" ToRole="Orders" />
         </EntityType>
         <EntityType Name="UserFunction">
           <Key>
             <PropertyRef Name="UserID" />
             <PropertyRef Name="FunctionID" />
           </Key>
-          <Property Name="UserFunctionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="FunctionID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Function" Relationship="Self.FK__UserFunct__Funct__70DDC3D8" FromRole="UserFunctions" ToRole="Functions" />
           <NavigationProperty Name="User" Relationship="Self.FK__UserFunct__UserI__6FE99F9F" FromRole="UserFunctions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Group" Relationship="Self.FK__UserGroup__Group__6EF57B66" FromRole="UserGroups" ToRole="Groups" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserGroup__UserI__6E01572D" FromRole="UserGroups" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1003,8 +998,6 @@
           <Property Name="EmployeeID" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Employee" Relationship="Self.FK__Users__EmployeeI__619B8048" FromRole="Users" ToRole="Employees" />
-          <NavigationProperty Name="UserFunctions" Relationship="Self.FK__UserFunct__UserI__6FE99F9F" FromRole="Users" ToRole="UserFunctions" />
-          <NavigationProperty Name="Groups" Relationship="Self.UserGroups" FromRole="Users" ToRole="Groups" />
         </EntityType>
         <Association Name="FK__Address__Custome__6477ECF3">
           <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
@@ -1162,6 +1155,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__FunctionG__Funct__71D1E811">
+          <End Role="Functions" Type="Self.Function" Multiplicity="1" />
+          <End Role="FunctionGroups" Type="Self.FunctionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Functions">
+              <PropertyRef Name="FunctionID" />
+            </Principal>
+            <Dependent Role="FunctionGroups">
+              <PropertyRef Name="FunctionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FunctionG__Group__72C60C4A">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="FunctionGroups" Type="Self.FunctionGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="FunctionGroups">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UserFunct__Funct__70DDC3D8">
           <End Role="Functions" Type="Self.Function" Multiplicity="1" />
           <End Role="UserFunctions" Type="Self.UserFunction" Multiplicity="*" />
@@ -1171,6 +1188,18 @@
             </Principal>
             <Dependent Role="UserFunctions">
               <PropertyRef Name="FunctionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserGroup__Group__6EF57B66">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="UserGroups" Type="Self.UserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="UserGroups">
+              <PropertyRef Name="GroupID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1330,13 +1359,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FunctionGroups">
-          <End Role="Functions" Type="Self.Function" Multiplicity="*" />
-          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
-        </Association>
-        <Association Name="UserGroups">
-          <End Role="Groups" Type="Self.Group" Multiplicity="*" />
-          <End Role="Users" Type="Self.User" Multiplicity="*" />
+        <Association Name="FK__UserGroup__UserI__6E01572D">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserGroups" Type="Self.UserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserGroups">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MyImageEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
@@ -1345,6 +1378,7 @@
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
           <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="FunctionGroups" EntityType="Self.FunctionGroup" />
           <EntitySet Name="Functions" EntityType="Self.Function" />
           <EntitySet Name="Groups" EntityType="Self.Group" />
           <EntitySet Name="Images" EntityType="Self.Image" />
@@ -1358,6 +1392,7 @@
           <EntitySet Name="Sizes" EntityType="Self.Size" />
           <EntitySet Name="StatusOrders" EntityType="Self.StatusOrder" />
           <EntitySet Name="UserFunctions" EntityType="Self.UserFunction" />
+          <EntitySet Name="UserGroups" EntityType="Self.UserGroup" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK__Address__Custome__6477ECF3" Association="Self.FK__Address__Custome__6477ECF3">
             <End Role="Customers" EntitySet="Customers" />
@@ -1411,9 +1446,21 @@
             <End Role="Products" EntitySet="Products" />
             <End Role="Feedbacks" EntitySet="Feedbacks" />
           </AssociationSet>
+          <AssociationSet Name="FK__FunctionG__Funct__71D1E811" Association="Self.FK__FunctionG__Funct__71D1E811">
+            <End Role="Functions" EntitySet="Functions" />
+            <End Role="FunctionGroups" EntitySet="FunctionGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FunctionG__Group__72C60C4A" Association="Self.FK__FunctionG__Group__72C60C4A">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="FunctionGroups" EntitySet="FunctionGroups" />
+          </AssociationSet>
           <AssociationSet Name="FK__UserFunct__Funct__70DDC3D8" Association="Self.FK__UserFunct__Funct__70DDC3D8">
             <End Role="Functions" EntitySet="Functions" />
             <End Role="UserFunctions" EntitySet="UserFunctions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserGroup__Group__6EF57B66" Association="Self.FK__UserGroup__Group__6EF57B66">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="UserGroups" EntitySet="UserGroups" />
           </AssociationSet>
           <AssociationSet Name="FK__Images__ProductI__66603565" Association="Self.FK__Images__ProductI__66603565">
             <End Role="Products" EntitySet="Products" />
@@ -1467,13 +1514,9 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserFunctions" EntitySet="UserFunctions" />
           </AssociationSet>
-          <AssociationSet Name="FunctionGroups" Association="Self.FunctionGroups">
-            <End Role="Functions" EntitySet="Functions" />
-            <End Role="Groups" EntitySet="Groups" />
-          </AssociationSet>
-          <AssociationSet Name="UserGroups" Association="Self.UserGroups">
-            <End Role="Groups" EntitySet="Groups" />
+          <AssociationSet Name="FK__UserGroup__UserI__6E01572D" Association="Self.FK__UserGroup__UserI__6E01572D">
             <End Role="Users" EntitySet="Users" />
+            <End Role="UserGroups" EntitySet="UserGroups" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1552,6 +1595,15 @@
                 <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FunctionGroups">
+            <EntityTypeMapping TypeName="MyImageModel.FunctionGroup">
+              <MappingFragment StoreEntitySet="FunctionGroups">
+                <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1682,9 +1734,18 @@
           <EntitySetMapping Name="UserFunctions">
             <EntityTypeMapping TypeName="MyImageModel.UserFunction">
               <MappingFragment StoreEntitySet="UserFunctions">
-                <ScalarProperty Name="UserFunctionID" ColumnName="UserFunctionID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroups">
+            <EntityTypeMapping TypeName="MyImageModel.UserGroup">
+              <MappingFragment StoreEntitySet="UserGroups">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1699,22 +1760,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="FunctionGroups" TypeName="MyImageModel.FunctionGroups" StoreEntitySet="FunctionGroups">
-            <EndProperty Name="Functions">
-              <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
-            </EndProperty>
-            <EndProperty Name="Groups">
-              <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="UserGroups" TypeName="MyImageModel.UserGroups" StoreEntitySet="UserGroups">
-            <EndProperty Name="Groups">
-              <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-            </EndProperty>
-            <EndProperty Name="Users">
-              <ScalarProperty Name="UserID" ColumnName="UserID" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

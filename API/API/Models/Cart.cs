@@ -14,17 +14,9 @@ namespace API.Models
     
     public partial class Cart
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cart()
-        {
-            this.CartDetails = new HashSet<CartDetail>();
-        }
-    
         public int CartID { get; set; }
         public Nullable<int> CustomerID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CartDetail> CartDetails { get; set; }
         public virtual Customer Customer { get; set; }
     }
 }

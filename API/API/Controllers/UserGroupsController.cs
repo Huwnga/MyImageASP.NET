@@ -45,7 +45,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != userGroup.UserGroupID)
+            if (id != userGroup.UserID)
             {
                 return BadRequest();
             }
@@ -81,9 +81,24 @@ namespace API.Controllers
             }
 
             db.UserGroups.Add(userGroup);
-            await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = userGroup.UserGroupID }, userGroup);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (UserGroupExists(userGroup.UserID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = userGroup.UserID }, userGroup);
         }
 
         // DELETE: api/UserGroups/5
@@ -113,7 +128,7 @@ namespace API.Controllers
 
         private bool UserGroupExists(int id)
         {
-            return db.UserGroups.Count(e => e.UserGroupID == id) > 0;
+            return db.UserGroups.Count(e => e.UserID == id) > 0;
         }
     }
 }

@@ -45,7 +45,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != productSize.ProductSizeID)
+            if (id != productSize.ProductID)
             {
                 return BadRequest();
             }
@@ -81,9 +81,24 @@ namespace API.Controllers
             }
 
             db.ProductSizes.Add(productSize);
-            await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = productSize.ProductSizeID }, productSize);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (ProductSizeExists(productSize.ProductID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = productSize.ProductID }, productSize);
         }
 
         // DELETE: api/ProductSizes/5
@@ -113,7 +128,7 @@ namespace API.Controllers
 
         private bool ProductSizeExists(int id)
         {
-            return db.ProductSizes.Count(e => e.ProductSizeID == id) > 0;
+            return db.ProductSizes.Count(e => e.ProductID == id) > 0;
         }
     }
 }

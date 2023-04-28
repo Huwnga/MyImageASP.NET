@@ -45,7 +45,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != functionGroup.FunctionGroupID)
+            if (id != functionGroup.FunctionID)
             {
                 return BadRequest();
             }
@@ -81,9 +81,24 @@ namespace API.Controllers
             }
 
             db.FunctionGroups.Add(functionGroup);
-            await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = functionGroup.FunctionGroupID }, functionGroup);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (FunctionGroupExists(functionGroup.FunctionID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = functionGroup.FunctionID }, functionGroup);
         }
 
         // DELETE: api/FunctionGroups/5
@@ -113,7 +128,7 @@ namespace API.Controllers
 
         private bool FunctionGroupExists(int id)
         {
-            return db.FunctionGroups.Count(e => e.FunctionGroupID == id) > 0;
+            return db.FunctionGroups.Count(e => e.FunctionID == id) > 0;
         }
     }
 }

@@ -14,24 +14,10 @@ namespace API.Models
     
     public partial class Size
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Size()
-        {
-            this.CartDetails = new HashSet<CartDetail>();
-            this.OrderDetails = new HashSet<OrderDetail>();
-            this.ProductSizes = new HashSet<ProductSize>();
-        }
-    
         public int SizeID { get; set; }
         public Nullable<int> MaterialID { get; set; }
         public string SizeName { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CartDetail> CartDetails { get; set; }
         public virtual Material Material { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductSize> ProductSizes { get; set; }
     }
 }

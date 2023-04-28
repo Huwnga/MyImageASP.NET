@@ -45,7 +45,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != userFunction.UserFunctionID)
+            if (id != userFunction.UserID)
             {
                 return BadRequest();
             }
@@ -81,9 +81,24 @@ namespace API.Controllers
             }
 
             db.UserFunctions.Add(userFunction);
-            await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = userFunction.UserFunctionID }, userFunction);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (UserFunctionExists(userFunction.UserID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = userFunction.UserID }, userFunction);
         }
 
         // DELETE: api/UserFunctions/5
@@ -113,7 +128,7 @@ namespace API.Controllers
 
         private bool UserFunctionExists(int id)
         {
-            return db.UserFunctions.Count(e => e.UserFunctionID == id) > 0;
+            return db.UserFunctions.Count(e => e.UserID == id) > 0;
         }
     }
 }

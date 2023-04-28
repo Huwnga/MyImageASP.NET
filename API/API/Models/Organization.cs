@@ -14,13 +14,6 @@ namespace API.Models
     
     public partial class Organization
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Organization()
-        {
-            this.Employees = new HashSet<Employee>();
-            this.Organizations1 = new HashSet<Organization>();
-        }
-    
         public int OrganizationID { get; set; }
         public Nullable<int> ParentID { get; set; }
         public string OrganizationName { get; set; }
@@ -30,10 +23,6 @@ namespace API.Models
         public string Fax { get; set; }
         public string Email { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> Employees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Organization> Organizations1 { get; set; }
-        public virtual Organization Organization1 { get; set; }
+        public virtual Organization Parent { get; set; }
     }
 }

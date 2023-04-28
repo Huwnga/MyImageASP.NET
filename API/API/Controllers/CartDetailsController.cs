@@ -45,7 +45,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != cartDetail.CartDetailID)
+            if (id != cartDetail.CartID)
             {
                 return BadRequest();
             }
@@ -81,9 +81,24 @@ namespace API.Controllers
             }
 
             db.CartDetails.Add(cartDetail);
-            await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = cartDetail.CartDetailID }, cartDetail);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (CartDetailExists(cartDetail.CartID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = cartDetail.CartID }, cartDetail);
         }
 
         // DELETE: api/CartDetails/5
@@ -113,7 +128,7 @@ namespace API.Controllers
 
         private bool CartDetailExists(int id)
         {
-            return db.CartDetails.Count(e => e.CartDetailID == id) > 0;
+            return db.CartDetails.Count(e => e.CartID == id) > 0;
         }
     }
 }

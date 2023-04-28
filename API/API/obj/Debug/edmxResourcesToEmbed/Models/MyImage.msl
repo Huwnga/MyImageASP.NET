@@ -15,7 +15,6 @@
     <EntitySetMapping Name="CartDetails">
       <EntityTypeMapping TypeName="MyImageModel.CartDetail">
         <MappingFragment StoreEntitySet="CartDetails">
-          <ScalarProperty Name="CartDetailID" ColumnName="CartDetailID" />
           <ScalarProperty Name="CartID" ColumnName="CartID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="SizeID" ColumnName="SizeID" />
@@ -79,9 +78,9 @@
     <EntitySetMapping Name="FunctionGroups">
       <EntityTypeMapping TypeName="MyImageModel.FunctionGroup">
         <MappingFragment StoreEntitySet="FunctionGroups">
-          <ScalarProperty Name="FunctionGroupID" ColumnName="FunctionGroupID" />
           <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
           <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -126,7 +125,6 @@
     <EntitySetMapping Name="OrderDetails">
       <EntityTypeMapping TypeName="MyImageModel.OrderDetail">
         <MappingFragment StoreEntitySet="OrderDetails">
-          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="SizeID" ColumnName="SizeID" />
@@ -144,8 +142,8 @@
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="StatusOrderID" ColumnName="StatusOrderID" />
           <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
-          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -186,7 +184,6 @@
     <EntitySetMapping Name="ProductSizes">
       <EntityTypeMapping TypeName="MyImageModel.ProductSize">
         <MappingFragment StoreEntitySet="ProductSizes">
-          <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="SizeID" ColumnName="SizeID" />
           <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
@@ -213,18 +210,18 @@
     <EntitySetMapping Name="UserFunctions">
       <EntityTypeMapping TypeName="MyImageModel.UserFunction">
         <MappingFragment StoreEntitySet="UserFunctions">
-          <ScalarProperty Name="UserFunctionID" ColumnName="UserFunctionID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="FunctionID" ColumnName="FunctionID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserGroups">
       <EntityTypeMapping TypeName="MyImageModel.UserGroup">
         <MappingFragment StoreEntitySet="UserGroups">
-          <ScalarProperty Name="UserGroupID" ColumnName="UserGroupID" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

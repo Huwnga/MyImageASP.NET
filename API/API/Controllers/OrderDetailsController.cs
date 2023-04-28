@@ -45,7 +45,7 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != orderDetail.OrderDetailID)
+            if (id != orderDetail.OrderID)
             {
                 return BadRequest();
             }
@@ -81,9 +81,24 @@ namespace API.Controllers
             }
 
             db.OrderDetails.Add(orderDetail);
-            await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = orderDetail.OrderDetailID }, orderDetail);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (OrderDetailExists(orderDetail.OrderID))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = orderDetail.OrderID }, orderDetail);
         }
 
         // DELETE: api/OrderDetails/5
@@ -113,7 +128,7 @@ namespace API.Controllers
 
         private bool OrderDetailExists(int id)
         {
-            return db.OrderDetails.Count(e => e.OrderDetailID == id) > 0;
+            return db.OrderDetails.Count(e => e.OrderID == id) > 0;
         }
     }
 }

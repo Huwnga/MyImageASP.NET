@@ -211,6 +211,9 @@
     <Compile Include="Models\Function.cs">
       <DependentUpon>MyImage.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FunctionGroup.cs">
+      <DependentUpon>MyImage.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Group.cs">
       <DependentUpon>MyImage.tt</DependentUpon>
     </Compile>
@@ -263,6 +266,9 @@
       <DependentUpon>MyImage.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserFunction.cs">
+      <DependentUpon>MyImage.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserGroup.cs">
       <DependentUpon>MyImage.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

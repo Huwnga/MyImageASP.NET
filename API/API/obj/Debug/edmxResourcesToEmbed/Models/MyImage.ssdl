@@ -12,11 +12,11 @@
   </EntityType>
   <EntityType Name="CartDetails">
     <Key>
-      <PropertyRef Name="CartDetailID" />
+      <PropertyRef Name="CartID" />
+      <PropertyRef Name="ProductID" />
     </Key>
-    <Property Name="CartDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CartID" Type="int" />
-    <Property Name="ProductID" Type="int" />
+    <Property Name="CartID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="SizeID" Type="int" />
     <Property Name="ImageID" Type="int" />
     <Property Name="UnitPrice" Type="money" />
@@ -71,11 +71,12 @@
   </EntityType>
   <EntityType Name="FunctionGroups">
     <Key>
-      <PropertyRef Name="FunctionGroupID" />
+      <PropertyRef Name="FunctionID" />
+      <PropertyRef Name="GroupID" />
     </Key>
-    <Property Name="FunctionGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FunctionID" Type="int" />
-    <Property Name="GroupID" Type="int" />
+    <Property Name="FunctionID" Type="int" Nullable="false" />
+    <Property Name="GroupID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Functions">
     <Key>
@@ -113,11 +114,11 @@
   </EntityType>
   <EntityType Name="OrderDetails">
     <Key>
-      <PropertyRef Name="OrderDetailID" />
+      <PropertyRef Name="OrderID" />
+      <PropertyRef Name="ProductID" />
     </Key>
-    <Property Name="OrderDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="OrderID" Type="int" />
-    <Property Name="ProductID" Type="int" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
     <Property Name="SizeID" Type="int" />
     <Property Name="ImageID" Type="int" />
     <Property Name="UnitPrice" Type="money" />
@@ -132,8 +133,8 @@
     <Property Name="CustomerID" Type="int" />
     <Property Name="StatusOrderID" Type="int" />
     <Property Name="PaymentID" Type="int" />
-    <Property Name="UnitPrice" Type="money" />
-    <Property Name="Quantity" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="255" />
+    <Property Name="ShipAddress" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Organizations">
     <Key>
@@ -168,11 +169,11 @@
   </EntityType>
   <EntityType Name="ProductSizes">
     <Key>
-      <PropertyRef Name="ProductSizeID" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="SizeID" />
     </Key>
-    <Property Name="ProductSizeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ProductID" Type="int" />
-    <Property Name="SizeID" Type="int" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="SizeID" Type="int" Nullable="false" />
     <Property Name="UnitPrice" Type="money" />
   </EntityType>
   <EntityType Name="Sizes">
@@ -192,19 +193,21 @@
   </EntityType>
   <EntityType Name="UserFunctions">
     <Key>
-      <PropertyRef Name="UserFunctionID" />
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="FunctionID" />
     </Key>
-    <Property Name="UserFunctionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserID" Type="int" />
-    <Property Name="FunctionID" Type="int" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="FunctionID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="UserGroups">
     <Key>
-      <PropertyRef Name="UserGroupID" />
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="GroupID" />
     </Key>
-    <Property Name="UserGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserID" Type="int" />
-    <Property Name="GroupID" Type="int" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="GroupID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -229,7 +232,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__CartDetai__CartI__778AC167">
-    <End Role="Carts" Type="Self.Carts" Multiplicity="0..1" />
+    <End Role="Carts" Type="Self.Carts" Multiplicity="1" />
     <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Carts">
@@ -253,7 +256,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__CartDetai__Produ__787EE5A0">
-    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Products">
@@ -337,7 +340,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__FunctionG__Funct__71D1E811">
-    <End Role="Functions" Type="Self.Functions" Multiplicity="0..1" />
+    <End Role="Functions" Type="Self.Functions" Multiplicity="1" />
     <End Role="FunctionGroups" Type="Self.FunctionGroups" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Functions">
@@ -349,7 +352,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__FunctionG__Group__72C60C4A">
-    <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+    <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
     <End Role="FunctionGroups" Type="Self.FunctionGroups" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Groups">
@@ -385,7 +388,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__OrderDeta__Order__73BA3083">
-    <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
     <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Orders">
@@ -397,7 +400,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__OrderDeta__Produ__74AE54BC">
-    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Products">
@@ -493,7 +496,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__ProductSi__Produ__7C4F7684">
-    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="ProductSizes" Type="Self.ProductSizes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Products">
@@ -505,7 +508,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__ProductSi__SizeI__7B5B524B">
-    <End Role="Sizes" Type="Self.Sizes" Multiplicity="0..1" />
+    <End Role="Sizes" Type="Self.Sizes" Multiplicity="1" />
     <End Role="ProductSizes" Type="Self.ProductSizes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Sizes">
@@ -529,7 +532,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__UserFunct__Funct__70DDC3D8">
-    <End Role="Functions" Type="Self.Functions" Multiplicity="0..1" />
+    <End Role="Functions" Type="Self.Functions" Multiplicity="1" />
     <End Role="UserFunctions" Type="Self.UserFunctions" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Functions">
@@ -541,7 +544,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__UserFunct__UserI__6FE99F9F">
-    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="UserFunctions" Type="Self.UserFunctions" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
@@ -553,7 +556,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__UserGroup__Group__6EF57B66">
-    <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+    <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
     <End Role="UserGroups" Type="Self.UserGroups" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Groups">
@@ -565,7 +568,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__UserGroup__UserI__6E01572D">
-    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="UserGroups" Type="Self.UserGroups" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Users">
