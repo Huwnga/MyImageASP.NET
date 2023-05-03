@@ -794,7 +794,7 @@
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -816,7 +816,7 @@
           <Property Name="PhotoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Manager" Relationship="Self.FK__Employees__Manag__5FB337D6" FromRole="Employees1" ToRole="Employees" />
           <NavigationProperty Name="Organization" Relationship="Self.FK__Employees__Organ__60A75C0F" FromRole="Employees" ToRole="Organizations" />
-          </EntityType>
+        </EntityType>
         <EntityType Name="Feedback">
           <Key>
             <PropertyRef Name="FeedbackID" />
@@ -846,7 +846,7 @@
           <Property Name="FunctionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FunctionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="FunctionDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="Group">
           <Key>
             <PropertyRef Name="GroupID" />
@@ -873,7 +873,7 @@
           </Key>
           <Property Name="MaterialID" Type="Int32" Nullable="false" />
           <Property Name="MaterialName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -938,7 +938,7 @@
           <Property Name="UnitsOnOrder" Type="Int16" />
           <Property Name="ReoderLevel" Type="Int16" />
           <NavigationProperty Name="Material" Relationship="Self.FK__Products__Materi__656C112C" FromRole="Products" ToRole="Materials" />
-          </EntityType>
+        </EntityType>
         <EntityType Name="ProductSize">
           <Key>
             <PropertyRef Name="ProductID" />

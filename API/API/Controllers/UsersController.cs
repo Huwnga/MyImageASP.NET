@@ -7,11 +7,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Http.Description;
-using API.Models;
+using Api.Models;
 
-namespace API.Controllers
+namespace Api.Controllers
 {
     public class UsersController : ApiController
     {
@@ -100,6 +101,81 @@ namespace API.Controllers
             await db.SaveChangesAsync();
 
             return Ok(user);
+        }
+
+        [HttpPost]
+        [Route("api/User/Login")]
+        [ResponseType(typeof(int))]
+        public async Task<IHttpActionResult> Login(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Ok(ModelState);
+            }
+
+            User userExists = await db.Users.SingleOrDefaultAsync(e => e.UserName == user.UserName);
+
+            if (userExists == null)
+            {
+                return Ok(0);
+            }
+
+            bool verified = BCrypt.Net.BCrypt.Verify(user.Password, userExists.Password);
+
+            if (!verified)
+            {
+                return Ok(0);
+            }
+
+            return Ok(userExists.UserID);
+        }
+
+        [HttpPost]
+        [Route("api/User/CheckFunction")]
+        public async Task<IHttpActionResult> CheckFunctionByUser(int functionID, int userID)
+        {
+            User userExists = await db.Users.SingleOrDefaultAsync(e => e.UserID == userID);
+
+            if (userExists == null)
+            {
+                return Ok(false);
+            }
+
+            Function funcExists = await db.Functions.SingleOrDefaultAsync(e => e.FunctionID == functionID);
+
+            if (funcExists == null)
+            {
+                return Ok(false);
+            }
+
+            UserFunction userFuncExists = await db.UserFunctions.SingleOrDefaultAsync(e => e.UserID == userID && e.FunctionID == functionID);
+
+            if (userFuncExists != null)
+            {
+                return Ok(true);
+            }
+
+            List<UserGroup> userGroups = db.UserGroups.Where(e => e.UserID == userID).ToList();
+
+            bool hadFunctionByGroup = false;
+            userGroups.ForEach(userGroup =>
+            {
+                bool groupFunctionExists = db.FunctionGroups.Count(e => e.FunctionID == functionID && e.GroupID == userGroup.GroupID) > 0;
+
+                if (groupFunctionExists)
+                {
+                    hadFunctionByGroup = true;
+
+                    return;
+                }
+            });
+
+            if (!hadFunctionByGroup)
+            {
+                return Ok(false);
+            }
+
+            return Ok(true);
         }
 
         protected override void Dispose(bool disposing)
