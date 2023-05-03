@@ -4,29 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c2ca20e8aa024158a0cb6320ab471681" Name="Diagram1">
-        <EntityTypeShape EntityType="MyImageModel.Address" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.CartDetail" Width="1.5" PointX="7.5" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Cart" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Customer" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Employee" Width="1.5" PointX="6" PointY="19.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Feedback" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.FunctionGroup" Width="1.5" PointX="10.5" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Function" Width="1.5" PointX="8.25" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Group" Width="1.5" PointX="8.25" PointY="26.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Image" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Material" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.OrderDetail" Width="1.5" PointX="10.5" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Order" Width="1.5" PointX="8.25" PointY="22" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Organization" Width="1.5" PointX="3.75" PointY="20" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Payment" Width="1.5" PointX="6" PointY="24.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Product" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.ProductSize" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.Size" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.StatusOrder" Width="1.5" PointX="6" PointY="26.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.UserFunction" Width="1.5" PointX="10.5" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.UserGroup" Width="1.5" PointX="10.5" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyImageModel.User" Width="1.5" PointX="8.25" PointY="18.25" IsExpanded="true" />
+      <Diagram DiagramId="8ed43917b9844eca84a2695cbf44aa32" Name="Diagram1">
+        <EntityTypeShape EntityType="MyImageModel.Address" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.CartDetail" Width="1.5" PointX="7.5" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Cart" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Customer" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Employee" Width="1.5" PointX="6" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Feedback" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.FunctionGroup" Width="1.5" PointX="10.5" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Function" Width="1.5" PointX="8.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Group" Width="1.5" PointX="8.25" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Image" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Material" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.OrderDetail" Width="1.5" PointX="10.5" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Order" Width="1.5" PointX="8.25" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Organization" Width="1.5" PointX="3.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Payment" Width="1.5" PointX="6" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Product" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.ProductSize" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.Size" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.StatusOrder" Width="1.5" PointX="6" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.UserFunction" Width="1.5" PointX="10.5" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.UserGroup" Width="1.5" PointX="10.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyImageModel.User" Width="1.5" PointX="8.25" PointY="18.125" IsExpanded="true" />
         <AssociationConnector Association="MyImageModel.FK__Address__Custome__6477ECF3" ManuallyRouted="false" />
         <AssociationConnector Association="MyImageModel.FK__CartDetai__CartI__778AC167" ManuallyRouted="false" />
         <AssociationConnector Association="MyImageModel.FK__CartDetai__Image__7A672E12" ManuallyRouted="false" />

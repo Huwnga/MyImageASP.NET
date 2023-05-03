@@ -1,14 +1,14 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace API
+namespace Api
 {
     public class BundleConfig
     {
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            /*bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -21,7 +21,7 @@ namespace API
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));*/
+                      "~/Content/site.css"));
         }
     }
 }

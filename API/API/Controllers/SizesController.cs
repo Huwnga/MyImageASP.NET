@@ -9,9 +9,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using API.Models;
+using Api.Models;
 
-namespace API.Controllers
+namespace Api.Controllers
 {
     public class SizesController : ApiController
     {
@@ -121,11 +121,6 @@ namespace API.Controllers
         private bool SizeExists(int id)
         {
             return db.Sizes.Count(e => e.SizeID == id) > 0;
-        }
-
-        private bool MaterialExists(int id)
-        {
-            return db.Materials.Count(e => e.MaterialID == id) > 0;
         }
     }
 }

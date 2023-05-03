@@ -9,9 +9,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using API.Models;
+using Api.Models;
 
-namespace API.Controllers
+namespace Api.Controllers
 {
     public class ProductsController : ApiController
     {
