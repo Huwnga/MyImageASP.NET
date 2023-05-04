@@ -12,17 +12,11 @@ namespace Api.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Category
     {
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public Nullable<int> MaterialID { get; set; }
-        public Nullable<int> CategoryID { get; set; }
-        public Nullable<short> UnitsInStock { get; set; }
-        public Nullable<short> UnitsOnOrder { get; set; }
-        public Nullable<short> ReoderLevel { get; set; }
-    
-        public virtual Category Category { get; set; }
-        public virtual Material Material { get; set; }
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
+        public string Description { get; set; }
+        public byte[] Picture { get; set; }
     }
 }

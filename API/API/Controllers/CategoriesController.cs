@@ -13,50 +13,44 @@ using Api.Models;
 
 namespace Api.Controllers
 {
-    public class ProductsController : ApiController
+    public class CategoriesController : ApiController
     {
         private MyImageEntities db = new MyImageEntities();
 
-        // GET: api/Products
-        public IQueryable<Product> GetProducts()
+        // GET: api/Categories
+        public IQueryable<Category> GetCategories()
         {
-            return db.Products;
+            return db.Categories;
         }
 
-        // GET: api/Products/5
-        [ResponseType(typeof(Product))]
-        public async Task<IHttpActionResult> GetProduct(int id)
+        // GET: api/Categories/5
+        [ResponseType(typeof(Category))]
+        public async Task<IHttpActionResult> GetCategory(int id)
         {
-            Product product = await db.Products.FindAsync(id);
-            if (product == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return Ok(product);
+            return Ok(category);
         }
 
-        // GET: api/Products
-        public IQueryable<Product> GetProductsByCategoryID(int categoryID)
-        {
-            return db.Products.Where(e => e.CategoryID == categoryID);
-        }
-
-        // PUT: api/Products/5
+        // PUT: api/Categories/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutProduct(int id, Product product)
+        public async Task<IHttpActionResult> PutCategory(int id, Category category)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != product.ProductID)
+            if (id != category.CategoryID)
             {
                 return BadRequest();
             }
 
-            db.Entry(product).State = EntityState.Modified;
+            db.Entry(category).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +58,7 @@ namespace Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!CategoryExists(id))
                 {
                     return NotFound();
                 }
@@ -77,35 +71,35 @@ namespace Api.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Products
-        [ResponseType(typeof(Product))]
-        public async Task<IHttpActionResult> PostProduct(Product product)
+        // POST: api/Categories
+        [ResponseType(typeof(Category))]
+        public async Task<IHttpActionResult> PostCategory(Category category)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Products.Add(product);
+            db.Categories.Add(category);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = product.ProductID }, product);
+            return CreatedAtRoute("DefaultApi", new { id = category.CategoryID }, category);
         }
 
-        // DELETE: api/Products/5
-        [ResponseType(typeof(Product))]
-        public async Task<IHttpActionResult> DeleteProduct(int id)
+        // DELETE: api/Categories/5
+        [ResponseType(typeof(Category))]
+        public async Task<IHttpActionResult> DeleteCategory(int id)
         {
-            Product product = await db.Products.FindAsync(id);
-            if (product == null)
+            Category category = await db.Categories.FindAsync(id);
+            if (category == null)
             {
                 return NotFound();
             }
 
-            db.Products.Remove(product);
+            db.Categories.Remove(category);
             await db.SaveChangesAsync();
 
-            return Ok(product);
+            return Ok(category);
         }
 
         protected override void Dispose(bool disposing)
@@ -117,9 +111,9 @@ namespace Api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ProductExists(int id)
+        private bool CategoryExists(int id)
         {
-            return db.Products.Count(e => e.ProductID == id) > 0;
+            return db.Categories.Count(e => e.CategoryID == id) > 0;
         }
     }
 }

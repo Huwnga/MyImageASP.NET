@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="MyImageModelStoreContainer" CdmEntityContainer="MyImageEntities">
+  <EntityContainerMapping StorageEntityContainer="MyImageModelStoreContainer" CdmEntityContainer="MyImageEntities1">
     <EntitySetMapping Name="Addresses">
       <EntityTypeMapping TypeName="MyImageModel.Address">
         <MappingFragment StoreEntitySet="Address">
@@ -29,6 +29,16 @@
         <MappingFragment StoreEntitySet="Carts">
           <ScalarProperty Name="CartID" ColumnName="CartID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="MyImageModel.Category">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -175,6 +185,7 @@
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
           <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
           <ScalarProperty Name="UnitsOnOrder" ColumnName="UnitsOnOrder" />
           <ScalarProperty Name="ReoderLevel" ColumnName="ReoderLevel" />

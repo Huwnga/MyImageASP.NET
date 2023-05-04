@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AddressesController.cs" />
     <Compile Include="Controllers\CartDetailsController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\FeedbacksController.cs" />
@@ -210,6 +211,9 @@
       <DependentUpon>MyImage.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CartDetail.cs">
+      <DependentUpon>MyImage.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
       <DependentUpon>MyImage.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
