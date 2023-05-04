@@ -23,6 +23,18 @@ namespace Api.Controllers
             return db.Feedbacks;
         }
 
+        [Route("api/Feedbacks/System")]
+        public IQueryable<Feedback> GetSystemFeedbacks()
+        {
+            return db.Feedbacks.Where(e => e.CustomerID == null);
+        }
+
+        [Route("api/Feedbacks/Product")]
+        public IQueryable<Feedback> GetProductFeedbacks(int productID)
+        {
+            return db.Feedbacks.Where(e => e.ProductID == productID);
+        }
+
         // GET: api/Feedbacks/5
         [ResponseType(typeof(Feedback))]
         public async Task<IHttpActionResult> GetFeedback(int id)
