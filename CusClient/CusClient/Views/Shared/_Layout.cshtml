@@ -66,15 +66,22 @@
                             @if (Session["UserID"] == null)
                             {
                                 <li>
-                                    <a class="d-flex flex-row btn mx-1 px-lg-2 borders align-items-center justify-content-center"
-                                       href="#"
+                                    <a class="d-flex flex-row btn mx-1 borders align-items-center justify-content-center"
+                                       href="/Users/SignIn"
                                        type="button">
                                         <small class="d-lg ms-2 fw-medium">Sign In</small>
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="d-flex flex-row btn btn-primary mx-1 align-items-center justify-content-center"
+                                       href="/Users/SignUp"
+                                       type="button">
+                                        <small class="d-lg ms-2 fw-medium">Sign Up</small>
+                                    </a>
+                                </li>
                             }
                             <li>
-                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="/Orders">Order Status</a>
                             </li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li><hr class="dropdown-divider"></li>
