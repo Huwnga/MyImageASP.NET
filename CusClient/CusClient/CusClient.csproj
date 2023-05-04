@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\CategoriesApi.cs" />
     <Compile Include="Api\MaterialApi.cs" />
     <Compile Include="Api\SizeApi.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Material.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductSize.cs" />

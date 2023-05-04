@@ -36,6 +36,12 @@ namespace Api.Controllers
             return Ok(product);
         }
 
+        // GET: api/Products
+        public IQueryable<Product> GetProductsByCategoryID(int categoryID)
+        {
+            return db.Products.Where(e => e.CategoryID == categoryID);
+        }
+
         // PUT: api/Products/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutProduct(int id, Product product)
