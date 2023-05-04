@@ -9,9 +9,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using API.Models;
+using Api.Models;
 
-namespace API.Controllers
+namespace Api.Controllers
 {
     public class ProductsController : ApiController
     {
@@ -34,6 +34,12 @@ namespace API.Controllers
             }
 
             return Ok(product);
+        }
+
+        // GET: api/Products
+        public IQueryable<Product> GetProductsByCategoryID(int categoryID)
+        {
+            return db.Products.Where(e => e.CategoryID == categoryID);
         }
 
         // PUT: api/Products/5

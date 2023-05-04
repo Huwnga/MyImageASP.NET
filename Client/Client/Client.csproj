@@ -147,6 +147,9 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\customer.css" />
+    <Content Include="Content\Images\embe.png" />
+    <Content Include="Content\Images\perfectgift.jpg" />
+    <Content Include="Content\Images\template.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -184,7 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\" />
     <Folder Include="Views\Material\" />
     <Folder Include="Views\Sizes\" />
   </ItemGroup>

@@ -1,0 +1,161 @@
+﻿.bg-transparent {
+    background-color: transparent;
+}
+
+.bg-purple2 {
+    background-color: #b4a7d6;
+}
+
+.bg-pink {
+    background-color: #fff4f4;
+}
+
+.bg-grayblue {
+    background-color: #889ca4;
+}
+
+.material-item {
+    --material-item-border-bottom: 2px;
+    margin-bottom: var(--material-item-border-bottom);
+}
+
+.material-item:hover {
+    margin-bottom: 0px;
+    border-bottom: var(--material-item-border-bottom) solid var(--bs-nav-link-hover-color);
+}
+
+.bd-layout {
+    display: grid;
+    grid-template-areas: "sidebar main";
+    grid-template-columns: 1fr 5fr;
+    gap: 1.5rem;
+}
+
+/* body */
+
+.part1 {
+    border: solid rgb(116, 238, 246) 1px;
+    background-color: rgb(157, 199, 200);
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.part2 {
+    margin: auto;
+    padding: 70px;
+}
+
+.part3 {
+    margin: auto;
+    margin-top: 50px;
+}
+
+.part4 {
+    background-color: rgb(227 230 245);
+    margin: auto;
+    margin-top: 50px;
+}
+
+.part5 {
+    background-color: #fdedef;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.part5-p {
+    margin-left: 5rem !important;
+    color: darkgrey;
+}
+
+.part5-p1 {
+    margin-left: 6rem !important;
+    color: #747474;
+}
+
+.part7 {
+    background-color: rgb(225, 217, 243);
+    padding-top: 3rem;
+}
+
+.h3 {
+    color: #11395c;
+}
+
+.ps-5 {
+    padding-left: 6rem !important;
+}
+
+.line-color {
+    border-top: 2px solid #0b131c !important;
+}
+
+.btn-border {
+    border-width: 1px;
+    border-bottom-width: 4px;
+    border-right-width: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.sign-in-up {
+    width: 300px;
+    margin-bottom: 30px;
+}
+
+.big-circle {
+    --size100px: 200px;
+    height: var(--size100px);
+    width: var(--size100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-circle {
+    --size70px: 70px;
+    height: var(--size70px);
+    width: var(--size70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mini-circle {
+    --size40px: 40px;
+    height: var(--size40px);
+    width: var(--size40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lable {
+    text-align: center;
+}
+
+.lb-sign-in-up {
+    color: rgb(36, 45, 168);
+    font-weight: 600;
+}
+
+.icon1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.icon2 {
+    font-size: 15px;
+}
+
+
+
+.description {
+    font-size: small;
+    font-weight: 700;
+    color: gray;
+}
+
+.dob {
+    font-family: monospace;
+}

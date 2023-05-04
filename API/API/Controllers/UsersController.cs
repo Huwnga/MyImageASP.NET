@@ -6,14 +6,13 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Http.Description;
-using API.Models;
-using Microsoft.Ajax.Utilities;
+using Api.Models;
 
-namespace API.Controllers
+namespace Api.Controllers
 {
     public class UsersController : ApiController
     {
@@ -52,9 +51,6 @@ namespace API.Controllers
                 return BadRequest();
             }
 
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
-            user.Password = passwordHash;
-
             db.Entry(user).State = EntityState.Modified;
 
             try
@@ -85,9 +81,6 @@ namespace API.Controllers
                 return BadRequest(ModelState);
             }
 
-            string passwordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
-            user.Password = passwordHash;
-
             db.Users.Add(user);
             await db.SaveChangesAsync();
 
@@ -115,7 +108,7 @@ namespace API.Controllers
         [ResponseType(typeof(int))]
         public async Task<IHttpActionResult> Login(User user)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Ok(ModelState);
             }
@@ -162,8 +155,8 @@ namespace API.Controllers
                 return Ok(true);
             }
 
-            List<UserGroup> userGroups = db.UserGroups.Where(e=> e.UserID == userID).ToList();
-            
+            List<UserGroup> userGroups = db.UserGroups.Where(e => e.UserID == userID).ToList();
+
             bool hadFunctionByGroup = false;
             userGroups.ForEach(userGroup =>
             {
