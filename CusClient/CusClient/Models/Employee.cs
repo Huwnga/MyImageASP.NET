@@ -23,7 +23,7 @@ namespace CusClient.Models
         public Nullable<int> OrganizationID { get; set; }
         public string PhotoPath { get; set; }
 
-        public virtual Employee Employee1 { get; set; }
+        public virtual Employee Manager { get; set; }
         public virtual Organization Organization { get; set; }
     }
 }

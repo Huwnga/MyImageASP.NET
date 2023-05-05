@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\CategoriesApi.cs" />
+    <Compile Include="Api\FeedbackApi.cs" />
     <Compile Include="Api\MaterialApi.cs" />
     <Compile Include="Api\SizeApi.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -125,11 +126,19 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Feedback.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductSize.cs" />
     <Compile Include="Models\ResClient.cs" />
     <Compile Include="Models\Size.cs" />
+    <Compile Include="Models\StatusOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
