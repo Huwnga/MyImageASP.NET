@@ -16,5 +16,7 @@ namespace Api.Models
     {
         public int MaterialID { get; set; }
         public string MaterialName { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
     }
 }

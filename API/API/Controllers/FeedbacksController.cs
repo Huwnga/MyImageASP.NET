@@ -26,13 +26,13 @@ namespace Api.Controllers
         [Route("api/Feedbacks/System")]
         public IQueryable<Feedback> GetSystemFeedbacks()
         {
-            return db.Feedbacks.Where(e => e.CustomerID == null);
+            return db.Feedbacks.Where(e => e.ProductID == null).OrderBy(e => e.CreatedAt);
         }
 
         [Route("api/Feedbacks/Product")]
         public IQueryable<Feedback> GetProductFeedbacks(int productID)
         {
-            return db.Feedbacks.Where(e => e.ProductID == productID);
+            return db.Feedbacks.Where(e => e.ProductID == productID).OrderBy(e => e.CreatedAt);
         }
 
         // GET: api/Feedbacks/5
@@ -92,6 +92,7 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            feedback.CreatedAt = DateTime.Now;
             db.Feedbacks.Add(feedback);
             await db.SaveChangesAsync();
 

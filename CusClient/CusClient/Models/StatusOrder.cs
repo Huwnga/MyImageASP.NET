@@ -5,10 +5,10 @@ using System.Web;
 
 namespace CusClient.Models
 {
-    public partial class Material
+    public partial class StatusOrder
     {
-        public int MaterialID { get; set; }
-        public string MaterialName { get; set; }
+        public int StatusOrderID { get; set; }
+        public string StatusOrderName { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
     }

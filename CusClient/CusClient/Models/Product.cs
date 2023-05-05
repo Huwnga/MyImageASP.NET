@@ -14,6 +14,8 @@ namespace CusClient.Models
         public Nullable<short> UnitsInStock { get; set; }
         public Nullable<short> UnitsOnOrder { get; set; }
         public Nullable<short> ReoderLevel { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public Nullable<System.DateTime> UpdatedAt { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual Material Material { get; set; }

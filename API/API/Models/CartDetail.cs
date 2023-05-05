@@ -20,6 +20,7 @@ namespace Api.Models
         public Nullable<int> ImageID { get; set; }
         public Nullable<decimal> UnitPrice { get; set; }
         public Nullable<int> Quantity { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
     
         public virtual Cart Cart { get; set; }
         public virtual Image Image { get; set; }
