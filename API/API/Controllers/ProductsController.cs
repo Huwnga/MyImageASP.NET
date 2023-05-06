@@ -36,8 +36,16 @@ namespace Api.Controllers
             return Ok(product);
         }
 
-        // GET: api/Products
+        // GET: api/Products/Category
+        [Route("api/Products/Category")]
         public IQueryable<Product> GetProductsByCategoryID(int categoryID)
+        {
+            return db.Products.Where(e => e.CategoryID == categoryID);
+        }
+
+        // GET: api/Products/BestSealer
+        [Route("api/Products/BestSealer")]
+        public IQueryable<Product> GetProductsBestSealer()
         {
             return db.Products.Where(e => e.CategoryID == categoryID);
         }

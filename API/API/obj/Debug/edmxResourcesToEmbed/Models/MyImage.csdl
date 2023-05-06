@@ -26,6 +26,7 @@
     <NavigationProperty Name="Image" Relationship="Self.FK__CartDetai__Image__7D439ABD" FromRole="CartDetails" ToRole="Images" />
     <NavigationProperty Name="Product" Relationship="Self.FK__CartDetai__Produ__7B5B524B" FromRole="CartDetails" ToRole="Products" />
     <NavigationProperty Name="Size" Relationship="Self.FK__CartDetai__SizeI__7C4F7684" FromRole="CartDetails" ToRole="Sizes" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>
@@ -54,6 +55,10 @@
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
@@ -87,6 +92,7 @@
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Customer" Relationship="Self.FK__Feedbacks__Custo__6B24EA82" FromRole="Feedbacks" ToRole="Customers" />
     <NavigationProperty Name="Product" Relationship="Self.FK__Feedbacks__Produ__6C190EBB" FromRole="Feedbacks" ToRole="Products" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="FunctionGroup">
     <Key>
@@ -126,6 +132,7 @@
     <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ImageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Product" Relationship="Self.FK__Images__ProductI__693CA210" FromRole="Images" ToRole="Products" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Material">
     <Key>
@@ -133,6 +140,8 @@
     </Key>
     <Property Name="MaterialID" Type="Int32" Nullable="false" />
     <Property Name="MaterialName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -165,6 +174,7 @@
     <NavigationProperty Name="Employee" Relationship="Self.FK__Orders__Employee__6D0D32F4" FromRole="Orders" ToRole="Employees" />
     <NavigationProperty Name="Payment" Relationship="Self.FK__Orders__PaymentI__6FE99F9F" FromRole="Orders" ToRole="Payments" />
     <NavigationProperty Name="StatusOrder" Relationship="Self.FK__Orders__StatusOr__6EF57B66" FromRole="Orders" ToRole="StatusOrders" />
+    <Property Name="OrderAt" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="Organization">
     <Key>
@@ -200,6 +210,8 @@
     <Property Name="ReoderLevel" Type="Int16" />
     <NavigationProperty Name="Category" Relationship="Self.FK__Products__Catego__68487DD7" FromRole="Products" ToRole="Categories" />
     <NavigationProperty Name="Material" Relationship="Self.FK__Products__Materi__6754599E" FromRole="Products" ToRole="Materials" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="ProductSize">
     <Key>
@@ -227,6 +239,8 @@
     </Key>
     <Property Name="StatusOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="StatusOrderName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="UserFunction">
     <Key>
@@ -256,7 +270,7 @@
     </Key>
     <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="EmployeeID" Type="Int32" />
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Employee" Relationship="Self.FK__Users__EmployeeI__6383C8BA" FromRole="Users" ToRole="Employees" />

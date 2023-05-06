@@ -15,6 +15,7 @@
     <EntitySetMapping Name="CartDetails">
       <EntityTypeMapping TypeName="MyImageModel.CartDetail">
         <MappingFragment StoreEntitySet="CartDetails">
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="CartID" ColumnName="CartID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="SizeID" ColumnName="SizeID" />
@@ -45,6 +46,10 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="MyImageModel.Customer">
         <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="ContactName" ColumnName="ContactName" />
           <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
@@ -78,6 +83,7 @@
     <EntitySetMapping Name="Feedbacks">
       <EntityTypeMapping TypeName="MyImageModel.Feedback">
         <MappingFragment StoreEntitySet="Feedbacks">
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
@@ -115,6 +121,7 @@
     <EntitySetMapping Name="Images">
       <EntityTypeMapping TypeName="MyImageModel.Image">
         <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="ImageID" ColumnName="ImageID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="ImageName" ColumnName="ImageName" />
@@ -127,6 +134,8 @@
     <EntitySetMapping Name="Materials">
       <EntityTypeMapping TypeName="MyImageModel.Material">
         <MappingFragment StoreEntitySet="Materials">
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
           <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
         </MappingFragment>
@@ -147,6 +156,7 @@
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="MyImageModel.Order">
         <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderAt" ColumnName="OrderAt" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
@@ -182,6 +192,8 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="MyImageModel.Product">
         <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
@@ -213,6 +225,8 @@
     <EntitySetMapping Name="StatusOrders">
       <EntityTypeMapping TypeName="MyImageModel.StatusOrder">
         <MappingFragment StoreEntitySet="StatusOrders">
+          <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="StatusOrderID" ColumnName="StatusOrderID" />
           <ScalarProperty Name="StatusOrderName" ColumnName="StatusOrderName" />
         </MappingFragment>

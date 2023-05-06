@@ -21,6 +21,7 @@
     <Property Name="ImageID" Type="int" />
     <Property Name="UnitPrice" Type="money" />
     <Property Name="Quantity" Type="int" />
+    <Property Name="CreatedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="Carts">
     <Key>
@@ -43,11 +44,15 @@
       <PropertyRef Name="CustomerID" />
     </Key>
     <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" />
     <Property Name="ContactName" Type="nvarchar" MaxLength="30" />
     <Property Name="ContactTitle" Type="nvarchar" MaxLength="30" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
     <Property Name="Fax" Type="nvarchar" MaxLength="50" />
     <Property Name="Email" Type="nvarchar" MaxLength="320" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="Employees">
     <Key>
@@ -77,6 +82,7 @@
     <Property Name="CustomerID" Type="int" />
     <Property Name="ProductID" Type="int" />
     <Property Name="Description" Type="varchar" MaxLength="255" />
+    <Property Name="CreatedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="FunctionGroups">
     <Key>
@@ -113,6 +119,7 @@
     <Property Name="ImageSize" Type="int" />
     <Property Name="ImagePath" Type="nvarchar" MaxLength="255" />
     <Property Name="ImageType" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="Materials">
     <Key>
@@ -120,6 +127,8 @@
     </Key>
     <Property Name="MaterialID" Type="int" Nullable="false" />
     <Property Name="MaterialName" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="OrderDetails">
     <Key>
@@ -144,6 +153,7 @@
     <Property Name="PaymentID" Type="int" />
     <Property Name="Description" Type="nvarchar" MaxLength="255" />
     <Property Name="ShipAddress" Type="nvarchar" MaxLength="255" />
+    <Property Name="OrderAt" Type="datetime" />
   </EntityType>
   <EntityType Name="Organizations">
     <Key>
@@ -176,6 +186,8 @@
     <Property Name="UnitsInStock" Type="smallint" />
     <Property Name="UnitsOnOrder" Type="smallint" />
     <Property Name="ReoderLevel" Type="smallint" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="ProductSizes">
     <Key>
@@ -200,6 +212,8 @@
     </Key>
     <Property Name="StatusOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StatusOrderName" Type="varchar" MaxLength="255" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedAt" Type="datetime" />
   </EntityType>
   <EntityType Name="UserFunctions">
     <Key>
@@ -225,7 +239,7 @@
     </Key>
     <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Password" Type="nvarchar" MaxLength="255" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" />
     <Property Name="EmployeeID" Type="int" />
     <Property Name="Description" Type="nvarchar" MaxLength="255" />
   </EntityType>
