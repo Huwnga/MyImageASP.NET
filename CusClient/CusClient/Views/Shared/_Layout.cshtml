@@ -13,11 +13,30 @@
     <link href="~/Content/Images/MyImage/IconBlackRb.png" rel="icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    @*Bootstrap*@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="~/Content/customer.css" rel="stylesheet" />
+    @*End Bootstrap*@
+
+    @*Font family*@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800;900&family=Tenor+Sans&display=swap" rel="stylesheet">
+    @*End font family*@
+
+    @*Carousel slick slide*@
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    @*End carousel slick slide*@
+
+    @* Font awesome icon *@
     <script src="https://kit.fontawesome.com/2818e3862b.js" crossorigin="anonymous"></script>
+    @* End font awesome icon *@
+
+    @* Customer css *@
+    <link href="~/Content/customer.css" rel="stylesheet" />
+    @* End customer css *@
 </head>
 
 <body style="overflow-x: hidden">
@@ -136,43 +155,45 @@
             </div>
         </div>
     </nav>
-    <div class="offcanvas offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebarFeauture" aria-labelledby="bdSidebarFeautureOffcanvasLabel">
-        <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title" id="bdSidebarFeautureOffcanvasLabel">MyImage</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarFeauture"></button>
-        </div>
-        <div class="offcanvas-body">
-            <nav class="bd-links w-100" id="bd-categories-nav" aria-label="Categories navigation">
-                <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
-                    <li class="bd-links-group py-2">
-                        <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
-                            Shop
-                        </strong>
-                        <ul class="list-unstyled fw-normal pb-2 small">
-                            @if (categories.Count < 1)
-                            {
-                                <li>
-                                    <p class="text-center text-secondary fw-semibold py-3 m-0">No category in this</p>
-                                </li>
-                            }
+    <div class="container-xxl bd-gutter mt-3 my-md-4 bd-layout">
+        <div class="offcanvas offcanvas-lg offcanvas-start" tabindex="-1" id="bdSidebarFeauture" aria-labelledby="bdSidebarFeautureOffcanvasLabel" aria-modal="true" role="dialog">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title" id="bdSidebarFeautureOffcanvasLabel">MyImage</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdSidebarFeauture"></button>
+            </div>
+            <div class="offcanvas-body">
+                <nav class="bd-links w-100" id="bd-categories-nav" aria-label="Categories navigation">
+                    <ul class="bd-links-nav list-unstyled mb-0 pb-3 pb-md-2 pe-lg-2">
+                        <li class="bd-links-group py-2">
+                            <strong class="bd-links-heading d-flex w-100 align-items-center fw-semibold">
+                                Categories
+                            </strong>
+                            <ul class="list-unstyled fw-normal pb-2 small">
+                                @if (categories.Count < 1)
+                                {
+                                    <li>
+                                        <p class="text-center text-secondary fw-semibold py-3 m-0">No category in this</p>
+                                    </li>
+                                }
 
-                            @foreach (Category c in categories)
-                            {
-                                <li>
-                                    <a class="nav-link text-center text-uppercase material-item py-1 px-2 fs-5 fw-semibold" href="/Products?CategoryID=@c.CategoryID" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        @c.CategoryName
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+                                @foreach (Category c in categories)
+                                {
+                                    <li>
+                                        <a class="nav-link text-center text-uppercase material-item py-1 px-2 fs-5 fw-semibold" href="/Products?CategoryID=@c.CategoryID" role="button"
+                                           data-bs-toggle="dropdown" aria-expanded="false">
+                                            @c.CategoryName
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 
-    <main class="bd-main">
+    <main class="bd-main order-1">
         @RenderBody()
     </main>
 
@@ -214,7 +235,7 @@
                 </div>
             </div>
 
-            <div class="d-flex border-top border-dark justify-content-center py-5">
+            <div class="d-flex border-2 border-top border-dark justify-content-center py-5">
                 <div class="mx-3">
                     <a href="">
                         <i class="fab fa-facebook-square text-black fs-2"></i>
@@ -248,11 +269,60 @@
         </div>
     </footer>
 
-    @Scripts.Render("~/bundles/jhttps://localhost:44332/query")
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
             crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.product__carousel').slick({
+                dots: true,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 5,
+                slidesToScroll: 3,
+                autoplay: false,
+                autoplaySpeed: 2000,
+                arrows: true,
+                prevArrow: "<button type='button' class='slick-prev slick-prev-primary pull-left'><i class='fa fa-solid fa-angle-left' aria-hidden='true'></i></button>",
+                nextArrow: "<button type='button' class='slick-next slick-prev-primary pull-right'><i class='fa fs-solid fa-angle-right' aria-hidden='true'></i></button>",
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 3
+                        }
+                    },
+                    {
+                        breakpoint: 1025,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
 </body>
 
 </html>

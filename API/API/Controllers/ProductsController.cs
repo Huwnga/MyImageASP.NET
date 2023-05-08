@@ -64,23 +64,15 @@ namespace Api.Controllers
         public IPagedList<ProductSize> GetProductsBestSealer(int? pageNumber, int? pageSize)
         {
 
-            List<ProductSize> lowerPriceProducts = new List<ProductSize>();
+            List<ProductSize> bestSealerProducts = new List<ProductSize>();
             var productSizes = db.ProductSizes
                 .Include(e => e.Product)
                 .OrderByDescending(e => e.Product.ReoderLevel)
                 .ToList();
 
-            foreach (ProductSize productSize in productSizes)
-            {
-                if (!lowerPriceProducts.Contains(productSize))
-                {
-                    lowerPriceProducts.Add(productSize);
-                }
-            }
-
             int number = (pageNumber ?? 1);
             int size = (pageSize ?? pageSizeDeffault);
-            return lowerPriceProducts.ToPagedList(number, size);
+            return bestSealerProducts.ToPagedList(number, size);
         }
 
         // GET: api/Products/LowerPrice
@@ -92,14 +84,6 @@ namespace Api.Controllers
                 .Include(e => e.Product)
                 .OrderBy(e => e.UnitPrice)
                 .ToList();
-
-            foreach (ProductSize productSize in productSizes)
-            {
-                if (!lowerPriceProducts.Contains(productSize))
-                {
-                    lowerPriceProducts.Add(productSize);
-                }
-            }
 
             int number = (pageNumber ?? 1);
             int size = (pageSize ?? pageSizeDeffault);
