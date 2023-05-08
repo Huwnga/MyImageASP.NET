@@ -1,7 +1,115 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿<main id="main">
+    <div class="container">
+        <section class="section edit-product-section">
+            <div class="row">
+                <div class="col-md-3 edit-product-section__select-img">
+                    <div class="select-img__item">
+                        <img src="~/Content/Images/product-section__img1.jpg" alt="">
+                    </div>
+                    <div class="select-img__item">
+                        <img src="~/Content/Images/product-section__img2.jpg" alt="">
+                    </div>
+                    <div class="select-img__item">
+                        <img src="~/Content/Images/product-section__img3.jpg" alt="">
+                    </div>
+                    <div class="select-img__item">
+                        <img src="~/Content/Images/product-section__img4.jpg" alt="">
+                    </div>
+                    <div class="select-img__item">
+                        <img src="~/Content/Images/product-section__img5.jpg" alt="">
+                    </div>
+                    <div class="select-img__item">
+                        <img src="~/Content/Images/product-section__img6.jpg" alt="">
+                    </div>
+                </div>
 
-<p>Use this area to provide additional information.</p>
+                <div class="col-md-5 edit-product-section__img">
+                    <div class="text-center edit-product-section__img-content">
+                        <img id="edit-product__img">
+                    </div>
+                </div>
+
+                <div class="col-md-4 edit-product-section__options">
+                    <div class="my-4 edit-product-section__heading">
+                        <h3 class="edit-product-section__title">
+                            Frames Prints
+                        </h3>
+                        <p class="edit-product-section__sub-title">
+                            Starting at 255,000vnd each
+                        </p>
+                    </div>
+
+                    <div class="my-4 edit-product-section__materials">
+                        <h5>Materials</h5>
+                        <select class="form-select" aria-label="Default select example">
+                            <option value="0" selected>Pine</option>
+                            <option value="1">Poplar</option>
+                            <option value="2">Staining</option>
+                        </select>
+                    </div>
+
+                    <div class="my-4 edit-product-section__size">
+                        <h5>Size</h5>
+                        <div class="d-flex gap-3 edit-product-section__size-buttons">
+                            <button type="button" class="btn btn-light">4x6</button>
+                            <button type="button" class="btn btn-light">4x6</button>
+                            <button type="button" class="btn btn-light">4x6</button>
+                            <button type="button" class="btn btn-light">4x6</button>
+                        </div>
+                    </div>
+
+                    <div class="edit-product-section__create">
+                        <button type="submit" class="btn btn-primary">Create Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section introduce-section">
+            <div class="row">
+                <div class="col-md-6 my-4 introduce-section__content">
+                    <h5>Feedback</h5>
+                    <div class="introduce-section__feedback-slider">
+                        <div class="d-flex align-items-center justify-content-center gap-3 introduce-section__feedback">
+                            <div class="introduce-section__feedback-icon">
+                                <i class="fas fa-user-circle fs-1"></i>
+                            </div>
+
+                            <div class="my-4 introduce-section__feedback-text">
+                                <p class="user-name"><b>Khac Duong</b></p>
+                                <p class="user-said">
+                                    Great experience. Nice service, on time and fair price. 2
+                                    thumbs up
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-center gap-3 introduce-section__feedback">
+                            <div class="introduce-section__feedback-icon">
+                                <i class="fas fa-user-circle fs-1"></i>
+                            </div>
+
+                            <div class="my-4 introduce-section__feedback-text">
+                                <p class="user-name"><b>Anh Lan</b></p>
+                                <p class="user-said">
+                                    Great experience. Nice service, on time and fair price. 2
+                                    thumbs up
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 my-4 introduce-section__content">
+                    <h5>Product Details</h5>
+                    <p>
+                        Printed on premium luster photo paper using archival-quality inks.<br>
+                        Premium wood frame in black, white, natural, ỏ walnut <br>
+                        Protective glass <br>
+                        Easel backing with option wall mount
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>

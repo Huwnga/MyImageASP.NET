@@ -1,5 +1,7 @@
 ﻿:root {
     --bs-body-font-family: 'Be Vietnam Pro', sans-serif;
+    --product-details__height: 400px;
+    --product-details__img-height: 350px;
 }
 
 .bg-transparent {
@@ -275,3 +277,97 @@ img {
 .slick-prev-primary::before {
     color: #0d6efd;
 }
+
+/*Product details*/
+/* Select image */
+.edit-product-section__select-img {
+    display: flex;
+    align-items: center;
+}
+
+    .edit-product-section__select-img .select-img__item {
+        cursor: pointer;
+    }
+
+.select__slick-next {
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: rotate(-90deg);
+    z-index: 2;
+}
+
+.select__slick-prev {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: rotate(-90deg);
+    z-index: 2;
+}
+
+.edit-product-section__img {
+    height: var(--product-details__height);
+}
+
+.edit-product-section__img-content {
+    padding: 12px;
+    width: 100%;
+    height: inherit;
+    border: 2px solid black;
+}
+
+    .edit-product-section__img-content img {
+        width: 100%;
+        max-width: 100%;
+        height: var(--product-details__img-height);
+        max-height: var(--product-details__img-height);
+        object-fit: cover;
+    }
+
+.edit-product-section__materials select {
+    width: 50%;
+}
+
+/* feedback slider */
+.introduce-section__content,
+.introduce-section__feedback-slider {
+    position: relative;
+}
+
+    .introduce-section__content::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        width: 80%;
+        height: 2px;
+        background-color: #ccc;
+    }
+
+.feedback__slick-prev {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.feedback__slick-next {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+}
+
+.slick-arrow {
+    font-size: 2rem;
+    padding: 11px 22px;
+    border: none;
+    border-radius: 50%;
+    background-color: transparent;
+    opacity: 0.6;
+}
+
+    .slick-arrow:hover {
+        opacity: 1;
+        transition: all 0.15s;
+    }
