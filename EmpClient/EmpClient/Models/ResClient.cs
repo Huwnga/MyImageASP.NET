@@ -23,24 +23,25 @@ namespace EmpClient.Models
 
         public string RestRequestAll()
         {
+            
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
 
             HttpResponseMessage response = client.GetAsync(EndPoint).Result;
-
+           
             return GetStrResValue(response);
         }
 
-        public string InsertData()
-        {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(BaseUrl);
-            HttpContent content = new StringContent("", Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(EndPoint, content).Result;
+        //public string InsertData()
+        //{
+        //    HttpClient client = new HttpClient();
+        //    client.BaseAddress = new Uri(BaseUrl);
+        //    HttpContent content = new StringContent("", Encoding.UTF8, "application/json");
+        //    HttpResponseMessage response = client.PostAsync(EndPoint, content).Result;
 
-            return GetStrResValue(response);
-        }
-        public string InsertData(Object obj)
+        //    return GetStrResValue(response);
+        //}
+        public int InsertData(Object obj)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
@@ -49,10 +50,11 @@ namespace EmpClient.Models
 
             HttpContent content = new StringContent(postBody, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PostAsync(EndPoint, content).Result;
-
-            return GetStrResValue(response);
+            
+            return CheckStatusCode(response);
         }
-        public string UpdateData(Object obj)
+        
+        public int UpdateData(Object obj)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
@@ -62,16 +64,16 @@ namespace EmpClient.Models
             HttpContent content = new StringContent(postBody, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PutAsync(EndPoint, content).Result;
 
-            return GetStrResValue(response);
+            return CheckStatusCode(response);
         }
-        public string DeleteData()
+        public int DeleteData()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
 
             HttpResponseMessage response = client.DeleteAsync(EndPoint).Result;
 
-            return GetStrResValue(response);
+            return CheckStatusCode(response);
         }
 
         private string GetStrResValue(HttpResponseMessage response)
