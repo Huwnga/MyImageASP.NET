@@ -79,3 +79,7 @@ D:\Documents\C#\MyImageASP.NET\Api\Api\bin\System.Buffers.xml
 D:\Documents\C#\MyImageASP.NET\Api\Api\bin\System.Memory.xml
 D:\Documents\C#\MyImageASP.NET\Api\Api\bin\System.Numerics.Vectors.xml
 D:\Documents\C#\MyImageASP.NET\Api\Api\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\Documents\C#\MyImageASP.NET\API\Api\bin\PagedList.dll
+D:\Documents\C#\MyImageASP.NET\API\Api\bin\PagedList.Mvc.dll
+D:\Documents\C#\MyImageASP.NET\API\Api\bin\PagedList.xml
+D:\Documents\C#\MyImageASP.NET\API\Api\bin\PagedList.Mvc.xml

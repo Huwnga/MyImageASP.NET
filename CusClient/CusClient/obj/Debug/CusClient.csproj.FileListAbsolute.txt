@@ -59,3 +59,7 @@ D:\Documents\C#\MyImageASP.NET\CusClient\CusClient\obj\Debug\CusClient.csproj.Co
 D:\Documents\C#\MyImageASP.NET\CusClient\CusClient\obj\Debug\CusClient.csproj.CopyComplete
 D:\Documents\C#\MyImageASP.NET\CusClient\CusClient\obj\Debug\CusClient.dll
 D:\Documents\C#\MyImageASP.NET\CusClient\CusClient\obj\Debug\CusClient.pdb
+D:\Documents\C#\MyImageASP.NET\CusClient\CusClient\bin\PagedList.dll
+D:\Documents\C#\MyImageASP.NET\CusClient\CusClient\bin\PagedList.Mvc.dll
+D:\Documents\C#\MyImageASP.NET\CusClient\CusClient\bin\PagedList.xml
+D:\Documents\C#\MyImageASP.NET\CusClient\CusClient\bin\PagedList.Mvc.xml
