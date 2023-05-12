@@ -36,14 +36,18 @@ namespace Api.Controllers
         [Route("api/EmployeesWithOrgAndManager")]
         public IQueryable<Employee> GetEmployeesWithOrgAndManager()
         {
-            return db.Employees.Include(e => e.Manager).Include(e => e.Organization).OrderByDescending(e => e.EmployeeID);
+            return db.Employees.Include(e => e.Manager).Include(e => e.Organization);
         }
 
         // GET: api/Employees/5
         [ResponseType(typeof(Employee))]
         public async Task<IHttpActionResult> GetEmployee(int id)
         {
-            Employee employee = await db.Employees.FindAsync(id);
+            var employee = await db.Employees
+                .Include(e => e.Manager)
+                .Include(e => e.Organization)
+                .SingleOrDefaultAsync(e => e.EmployeeID.Equals(id));
+
             if (employee == null)
             {
                 return NotFound();
@@ -62,6 +66,17 @@ namespace Api.Controllers
             }
 
             if (id != employee.EmployeeID)
+            {
+                return BadRequest();
+            }
+
+            if (employee.ManagerID != null &&
+                employee.ManagerID.Equals(id))
+            {
+                return BadRequest();
+            }
+
+            if (!RelationshipEmployee(employee))
             {
                 return BadRequest();
             }
@@ -96,6 +111,11 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (!RelationshipEmployee(employee))
+            {
+                return BadRequest();
+            }
+
             db.Employees.Add(employee);
             await db.SaveChangesAsync();
 
@@ -107,9 +127,15 @@ namespace Api.Controllers
         public async Task<IHttpActionResult> DeleteEmployee(int id)
         {
             Employee employee = await db.Employees.FindAsync(id);
+
             if (employee == null)
             {
                 return NotFound();
+            }
+
+            if (RelationshipEmployee(employee))
+            {
+                return BadRequest();
             }
 
             db.Employees.Remove(employee);
@@ -130,6 +156,37 @@ namespace Api.Controllers
         private bool EmployeeExists(int id)
         {
             return db.Employees.Count(e => e.EmployeeID == id) > 0;
+        }
+
+        private bool OrganizationExists(int id)
+        {
+            return db.Organizations.Count(e => e.OrganizationID == id) > 0;
+        }
+
+        private bool RelationshipEmployee(Employee employee)
+        {
+
+            if (employee.ManagerID != null)
+            {
+                var managerExists = EmployeeExists((int)employee.ManagerID);
+
+                if (!managerExists)
+                {
+                    return false;
+                }
+            }
+
+            if (employee.OrganizationID != null)
+            {
+                var orgExists = OrganizationExists((int)employee.OrganizationID);
+
+                if (!orgExists)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

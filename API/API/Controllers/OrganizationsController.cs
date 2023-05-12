@@ -23,11 +23,20 @@ namespace Api.Controllers
             return db.Organizations;
         }
 
+        [HttpGet]
+        [Route("api/OrganizationsWithParentOrg")]
+        public IQueryable<Organization> GetOrganizationsWithParentOrg()
+        {
+            return db.Organizations.Include(e => e.Parent);
+        }
+
         // GET: api/Organizations/5
         [ResponseType(typeof(Organization))]
         public async Task<IHttpActionResult> GetOrganization(int id)
         {
-            Organization organization = await db.Organizations.FindAsync(id);
+            var organization = await db.Organizations
+                .Include(e=> e.Parent)
+                .SingleOrDefaultAsync(e => e.OrganizationID.Equals(id));
             if (organization == null)
             {
                 return NotFound();
@@ -46,6 +55,11 @@ namespace Api.Controllers
             }
 
             if (id != organization.OrganizationID)
+            {
+                return BadRequest();
+            }
+
+            if (!RelationshipOrg(organization))
             {
                 return BadRequest();
             }
@@ -80,6 +94,11 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (!RelationshipOrg(organization))
+            {
+                return BadRequest();
+            }
+
             db.Organizations.Add(organization);
             await db.SaveChangesAsync();
 
@@ -94,6 +113,11 @@ namespace Api.Controllers
             if (organization == null)
             {
                 return NotFound();
+            }
+
+            if (RelationshipOrg(organization))
+            {
+                return BadRequest();
             }
 
             db.Organizations.Remove(organization);
@@ -114,6 +138,21 @@ namespace Api.Controllers
         private bool OrganizationExists(int id)
         {
             return db.Organizations.Count(e => e.OrganizationID == id) > 0;
+        }
+
+        private bool RelationshipOrg(Organization organization)
+        {
+            if (organization.ParentID != null)
+            {
+                var parentExists = OrganizationExists((int)organization.ParentID);
+
+                if (!parentExists)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

@@ -13,18 +13,28 @@ namespace EmpClient.Api
         {
             ResClient resClient = new ResClient();
             resClient.EndPoint = "api/Organizations";
-            string resStrCats = resClient.RestRequestAll();
-            List<Organization> orgs = JsonConvert.DeserializeObject<List<Organization>>(resStrCats);
+            string resStrOrgs = resClient.RestRequestAll();
+            List<Organization> orgs = JsonConvert.DeserializeObject<List<Organization>>(resStrOrgs);
 
             return orgs;
         }
 
-        public static List<Organization> GetOrganizationByID(int id)
+        public static List<Organization> GetOrganizationsWithParentOrg()
+        {
+            ResClient resClient = new ResClient();
+            resClient.EndPoint = "api/OrganizationsWithParentOrg";
+            string resStrOrgs = resClient.RestRequestAll();
+            List<Organization> orgs = JsonConvert.DeserializeObject<List<Organization>>(resStrOrgs);
+
+            return orgs;
+        }
+
+        public static Organization GetOrganizationByID(int id)
         {
             ResClient resClient = new ResClient();
             resClient.EndPoint = "api/Organizations?id=" + id;
-            string resStrCats = resClient.RestRequestAll();
-            List<Organization> orgs = JsonConvert.DeserializeObject<List<Organization>>(resStrCats);
+            string resStrOrgs = resClient.RestRequestAll();
+            Organization orgs = JsonConvert.DeserializeObject<Organization>(resStrOrgs);
 
             return orgs;
         }

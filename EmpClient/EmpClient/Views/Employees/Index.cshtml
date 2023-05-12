@@ -1,106 +1,116 @@
 ﻿@model IEnumerable<EmpClient.Models.Employee>
 
 @{
-    ViewBag.Title = "Employees Index";
+    ViewBag.Title = "Employees";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="d-flex align-items-center justify-content-between shadow-sm p-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item">
+                @Html.ActionLink("Home", "", "", new { area = "" }, null)
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Employees</li>
+        </ol>
+    </nav>
+    
+    <div class="d-flex align-items-center justify-content-between">
+        <a class="d-flex align-items-center btn btn-outline-primary rounded-0 p-0 p-1" href="/Employees/Create">
+            <i class="pe-1 bi bi-plus"></i>
+            <strong class="d-flex w-100 h-100 text-wrap fw-semibold text-break">
+                Create Now
+            </strong>
+        </a>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TitleOfCourtesy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HireDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Mobile)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Notes)
-        </th>
-        <th>
-            FullName's Manager
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Organization.OrganizationName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhotoPath)
-        </th>
-        <th></th>
-    </tr>
+<div class="mt-3 px-5 pt-5">
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <tr>
+                <th scope="col">
+                    FullName
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.TitleOfCourtesy)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.BirthDate)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.HireDate)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Mobile)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th scope="col">
+                    FullName's Manager
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Organization.OrganizationName)
+                </th>
+                <th class="col">
+                </th>
+            </tr>
+            @if (Model.Count() < 1)
+            {
+                <tr class="table-group-divider">
+                    <td colspan="11" class="text-center fw-semibold text-danger">
+                        Please add new employees!
+                    </td>
+                </tr>
+            }
+            @foreach (var item in Model)
+            {
+                <tr class="table-group-divider">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName + item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TitleOfCourtesy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HireDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mobile)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Manager.FirstName + item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Organization.OrganizationName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+                    </td>
+                </tr>
+            }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TitleOfCourtesy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BirthDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HireDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Mobile)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ManagerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Organization.OrganizationName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhotoPath)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EmployeeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EmployeeID })
-        </td>
-    </tr>
-}
-
-</table>
+        </table>
+    </div>
+</div>
