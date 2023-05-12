@@ -22,11 +22,13 @@
     <Property Name="ImageID" Type="Int32" />
     <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="Quantity" Type="Int32" />
-    <NavigationProperty Name="Cart" Relationship="Self.FK__CartDetai__CartI__7A672E12" FromRole="CartDetails" ToRole="Carts" />
-    <NavigationProperty Name="Image" Relationship="Self.FK__CartDetai__Image__7D439ABD" FromRole="CartDetails" ToRole="Images" />
-    <NavigationProperty Name="Product" Relationship="Self.FK__CartDetai__Produ__7B5B524B" FromRole="CartDetails" ToRole="Products" />
-    <NavigationProperty Name="Size" Relationship="Self.FK__CartDetai__SizeI__7C4F7684" FromRole="CartDetails" ToRole="Sizes" />
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK__CartDetai__CartI__797309D9" FromRole="CartDetails" ToRole="Carts" />
+    <NavigationProperty Name="Image" Relationship="Self.FK__CartDetai__Image__7C4F7684" FromRole="CartDetails" ToRole="Images" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__CartDetai__Produ__7A672E12" FromRole="CartDetails" ToRole="Products" />
+    <NavigationProperty Name="Size" Relationship="Self.FK__CartDetai__SizeI__7B5B524B" FromRole="CartDetails" ToRole="Sizes" />
+    <Property Name="MaterialID" Type="Int32" />
+    <NavigationProperty Name="Material" Relationship="MyImageModel.FK__CartDetai__Mater__7C4F7684" FromRole="CartDetail" ToRole="Material" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>
@@ -50,13 +52,13 @@
       <PropertyRef Name="CustomerID" />
     </Key>
     <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="ContactName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="ContactTitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="320" FixedLength="false" Unicode="true" />
-    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
   </EntityType>
@@ -90,9 +92,9 @@
     <Property Name="CustomerID" Type="Int32" />
     <Property Name="ProductID" Type="Int32" />
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK__Feedbacks__Custo__6B24EA82" FromRole="Feedbacks" ToRole="Customers" />
-    <NavigationProperty Name="Product" Relationship="Self.FK__Feedbacks__Produ__6C190EBB" FromRole="Feedbacks" ToRole="Products" />
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Feedbacks__Custo__6A30C649" FromRole="Feedbacks" ToRole="Customers" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Feedbacks__Produ__6B24EA82" FromRole="Feedbacks" ToRole="Products" />
   </EntityType>
   <EntityType Name="FunctionGroup">
     <Key>
@@ -102,8 +104,8 @@
     <Property Name="FunctionID" Type="Int32" Nullable="false" />
     <Property Name="GroupID" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Function" Relationship="Self.FK__FunctionG__Funct__74AE54BC" FromRole="FunctionGroups" ToRole="Functions" />
-    <NavigationProperty Name="Group" Relationship="Self.FK__FunctionG__Group__75A278F5" FromRole="FunctionGroups" ToRole="Groups" />
+    <NavigationProperty Name="Function" Relationship="Self.FK__FunctionG__Funct__73BA3083" FromRole="FunctionGroups" ToRole="Functions" />
+    <NavigationProperty Name="Group" Relationship="Self.FK__FunctionG__Group__74AE54BC" FromRole="FunctionGroups" ToRole="Groups" />
   </EntityType>
   <EntityType Name="Function">
     <Key>
@@ -131,17 +133,21 @@
     <Property Name="ImageSize" Type="Int32" />
     <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ImageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Product" Relationship="Self.FK__Images__ProductI__693CA210" FromRole="Images" ToRole="Products" />
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Images__ProductI__693CA210" FromRole="Images" ToRole="Products" />
   </EntityType>
   <EntityType Name="Material">
     <Key>
       <PropertyRef Name="MaterialID" />
     </Key>
     <Property Name="MaterialID" Type="Int32" Nullable="false" />
+    <Property Name="ProductID" Type="Int32" />
     <Property Name="MaterialName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__Materials__Produ__68487DD7" FromRole="Materials" ToRole="Products" />
+    <NavigationProperty Name="CartDetails" Relationship="MyImageModel.FK__CartDetai__Mater__7C4F7684" FromRole="Material" ToRole="CartDetail" />
+    <NavigationProperty Name="OrderDetails" Relationship="MyImageModel.FK__OrderDeta__Mater__778AC167" FromRole="Material" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="OrderDetail">
     <Key>
@@ -154,10 +160,13 @@
     <Property Name="ImageID" Type="Int32" />
     <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="Quantity" Type="Int32" />
-    <NavigationProperty Name="Image" Relationship="Self.FK__OrderDeta__Image__797309D9" FromRole="OrderDetails" ToRole="Images" />
-    <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeta__Order__76969D2E" FromRole="OrderDetails" ToRole="Orders" />
-    <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__Produ__778AC167" FromRole="OrderDetails" ToRole="Products" />
-    <NavigationProperty Name="Size" Relationship="Self.FK__OrderDeta__SizeI__787EE5A0" FromRole="OrderDetails" ToRole="Sizes" />
+    <NavigationProperty Name="Image" Relationship="Self.FK__OrderDeta__Image__787EE5A0" FromRole="OrderDetails" ToRole="Images" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeta__Order__75A278F5" FromRole="OrderDetails" ToRole="Orders" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__Produ__76969D2E" FromRole="OrderDetails" ToRole="Products" />
+    <NavigationProperty Name="Size" Relationship="Self.FK__OrderDeta__SizeI__778AC167" FromRole="OrderDetails" ToRole="Sizes" />
+    <Property Name="MaterialID" Type="Int32" />
+    <NavigationProperty Name="Material" Relationship="MyImageModel.FK__OrderDeta__Mater__778AC167" FromRole="OrderDetail" ToRole="Material" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -170,11 +179,11 @@
     <Property Name="PaymentID" Type="Int32" />
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ShipAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Customer" Relationship="Self.FK__Orders__Customer__6E01572D" FromRole="Orders" ToRole="Customers" />
-    <NavigationProperty Name="Employee" Relationship="Self.FK__Orders__Employee__6D0D32F4" FromRole="Orders" ToRole="Employees" />
-    <NavigationProperty Name="Payment" Relationship="Self.FK__Orders__PaymentI__6FE99F9F" FromRole="Orders" ToRole="Payments" />
-    <NavigationProperty Name="StatusOrder" Relationship="Self.FK__Orders__StatusOr__6EF57B66" FromRole="Orders" ToRole="StatusOrders" />
     <Property Name="OrderAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Orders__Customer__6D0D32F4" FromRole="Orders" ToRole="Customers" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Orders__Employee__6C190EBB" FromRole="Orders" ToRole="Employees" />
+    <NavigationProperty Name="Payment" Relationship="Self.FK__Orders__PaymentI__6EF57B66" FromRole="Orders" ToRole="Payments" />
+    <NavigationProperty Name="StatusOrder" Relationship="Self.FK__Orders__StatusOr__6E01572D" FromRole="Orders" ToRole="StatusOrders" />
   </EntityType>
   <EntityType Name="Organization">
     <Key>
@@ -203,15 +212,15 @@
     </Key>
     <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="MaterialID" Type="Int32" />
     <Property Name="CategoryID" Type="Int32" />
     <Property Name="UnitsInStock" Type="Int16" />
     <Property Name="UnitsOnOrder" Type="Int16" />
     <Property Name="ReoderLevel" Type="Int16" />
-    <NavigationProperty Name="Category" Relationship="Self.FK__Products__Catego__68487DD7" FromRole="Products" ToRole="Categories" />
-    <NavigationProperty Name="Material" Relationship="Self.FK__Products__Materi__6754599E" FromRole="Products" ToRole="Materials" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__Products__Catego__6754599E" FromRole="Products" ToRole="Categories" />
+    <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ProductSize">
     <Key>
@@ -221,17 +230,15 @@
     <Property Name="ProductID" Type="Int32" Nullable="false" />
     <Property Name="SizeID" Type="Int32" Nullable="false" />
     <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" />
-    <NavigationProperty Name="Product" Relationship="Self.FK__ProductSi__Produ__7F2BE32F" FromRole="ProductSizes" ToRole="Products" />
-    <NavigationProperty Name="Size" Relationship="Self.FK__ProductSi__SizeI__7E37BEF6" FromRole="ProductSizes" ToRole="Sizes" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ProductSi__Produ__7E37BEF6" FromRole="ProductSizes" ToRole="Products" />
+    <NavigationProperty Name="Size" Relationship="Self.FK__ProductSi__SizeI__7D439ABD" FromRole="ProductSizes" ToRole="Sizes" />
   </EntityType>
   <EntityType Name="Size">
     <Key>
       <PropertyRef Name="SizeID" />
     </Key>
     <Property Name="SizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaterialID" Type="Int32" />
     <Property Name="SizeName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Material" Relationship="Self.FK__Sizes__MaterialI__6A30C649" FromRole="Sizes" ToRole="Materials" />
   </EntityType>
   <EntityType Name="StatusOrder">
     <Key>
@@ -250,8 +257,8 @@
     <Property Name="UserID" Type="Int32" Nullable="false" />
     <Property Name="FunctionID" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Function" Relationship="Self.FK__UserFunct__Funct__73BA3083" FromRole="UserFunctions" ToRole="Functions" />
-    <NavigationProperty Name="User" Relationship="Self.FK__UserFunct__UserI__72C60C4A" FromRole="UserFunctions" ToRole="Users" />
+    <NavigationProperty Name="Function" Relationship="Self.FK__UserFunct__Funct__72C60C4A" FromRole="UserFunctions" ToRole="Functions" />
+    <NavigationProperty Name="User" Relationship="Self.FK__UserFunct__UserI__71D1E811" FromRole="UserFunctions" ToRole="Users" />
   </EntityType>
   <EntityType Name="UserGroup">
     <Key>
@@ -261,8 +268,8 @@
     <Property Name="UserID" Type="Int32" Nullable="false" />
     <Property Name="GroupID" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Group" Relationship="Self.FK__UserGroup__Group__71D1E811" FromRole="UserGroups" ToRole="Groups" />
-    <NavigationProperty Name="User" Relationship="Self.FK__UserGroup__UserI__70DDC3D8" FromRole="UserGroups" ToRole="Users" />
+    <NavigationProperty Name="Group" Relationship="Self.FK__UserGroup__Group__70DDC3D8" FromRole="UserGroups" ToRole="Groups" />
+    <NavigationProperty Name="User" Relationship="Self.FK__UserGroup__UserI__6FE99F9F" FromRole="UserGroups" ToRole="Users" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -287,7 +294,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CartDetai__CartI__7A672E12">
+  <Association Name="FK__CartDetai__CartI__797309D9">
     <End Role="Carts" Type="Self.Cart" Multiplicity="1" />
     <End Role="CartDetails" Type="Self.CartDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -299,7 +306,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CartDetai__Image__7D439ABD">
+  <Association Name="FK__CartDetai__Image__7C4F7684">
     <End Role="Images" Type="Self.Image" Multiplicity="0..1" />
     <End Role="CartDetails" Type="Self.CartDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -311,7 +318,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CartDetai__Produ__7B5B524B">
+  <Association Name="FK__CartDetai__Produ__7A672E12">
     <End Role="Products" Type="Self.Product" Multiplicity="1" />
     <End Role="CartDetails" Type="Self.CartDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -323,7 +330,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CartDetai__SizeI__7C4F7684">
+  <Association Name="FK__CartDetai__SizeI__7B5B524B">
     <End Role="Sizes" Type="Self.Size" Multiplicity="0..1" />
     <End Role="CartDetails" Type="Self.CartDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -347,7 +354,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Products__Catego__68487DD7">
+  <Association Name="FK__Products__Catego__6754599E">
     <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Products" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -359,7 +366,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Feedbacks__Custo__6B24EA82">
+  <Association Name="FK__Feedbacks__Custo__6A30C649">
     <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
     <End Role="Feedbacks" Type="Self.Feedback" Multiplicity="*" />
     <ReferentialConstraint>
@@ -371,7 +378,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Orders__Customer__6E01572D">
+  <Association Name="FK__Orders__Customer__6D0D32F4">
     <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -407,7 +414,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Orders__Employee__6D0D32F4">
+  <Association Name="FK__Orders__Employee__6C190EBB">
     <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -431,7 +438,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Feedbacks__Produ__6C190EBB">
+  <Association Name="FK__Feedbacks__Produ__6B24EA82">
     <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
     <End Role="Feedbacks" Type="Self.Feedback" Multiplicity="*" />
     <ReferentialConstraint>
@@ -443,7 +450,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__FunctionG__Funct__74AE54BC">
+  <Association Name="FK__FunctionG__Funct__73BA3083">
     <End Role="Functions" Type="Self.Function" Multiplicity="1" />
     <End Role="FunctionGroups" Type="Self.FunctionGroup" Multiplicity="*" />
     <ReferentialConstraint>
@@ -455,7 +462,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__FunctionG__Group__75A278F5">
+  <Association Name="FK__FunctionG__Group__74AE54BC">
     <End Role="Groups" Type="Self.Group" Multiplicity="1" />
     <End Role="FunctionGroups" Type="Self.FunctionGroup" Multiplicity="*" />
     <ReferentialConstraint>
@@ -467,7 +474,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserFunct__Funct__73BA3083">
+  <Association Name="FK__UserFunct__Funct__72C60C4A">
     <End Role="Functions" Type="Self.Function" Multiplicity="1" />
     <End Role="UserFunctions" Type="Self.UserFunction" Multiplicity="*" />
     <ReferentialConstraint>
@@ -479,7 +486,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserGroup__Group__71D1E811">
+  <Association Name="FK__UserGroup__Group__70DDC3D8">
     <End Role="Groups" Type="Self.Group" Multiplicity="1" />
     <End Role="UserGroups" Type="Self.UserGroup" Multiplicity="*" />
     <ReferentialConstraint>
@@ -503,7 +510,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderDeta__Image__797309D9">
+  <Association Name="FK__OrderDeta__Image__787EE5A0">
     <End Role="Images" Type="Self.Image" Multiplicity="0..1" />
     <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -515,31 +522,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Products__Materi__6754599E">
-    <End Role="Materials" Type="Self.Material" Multiplicity="0..1" />
-    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+  <Association Name="FK__Materials__Produ__68487DD7">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Materials" Type="Self.Material" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Materials">
-        <PropertyRef Name="MaterialID" />
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
       </Principal>
-      <Dependent Role="Products">
-        <PropertyRef Name="MaterialID" />
+      <Dependent Role="Materials">
+        <PropertyRef Name="ProductID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Sizes__MaterialI__6A30C649">
-    <End Role="Materials" Type="Self.Material" Multiplicity="0..1" />
-    <End Role="Sizes" Type="Self.Size" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Materials">
-        <PropertyRef Name="MaterialID" />
-      </Principal>
-      <Dependent Role="Sizes">
-        <PropertyRef Name="MaterialID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrderDeta__Order__76969D2E">
+  <Association Name="FK__OrderDeta__Order__75A278F5">
     <End Role="Orders" Type="Self.Order" Multiplicity="1" />
     <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -551,7 +546,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderDeta__Produ__778AC167">
+  <Association Name="FK__OrderDeta__Produ__76969D2E">
     <End Role="Products" Type="Self.Product" Multiplicity="1" />
     <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -563,7 +558,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderDeta__SizeI__787EE5A0">
+  <Association Name="FK__OrderDeta__SizeI__778AC167">
     <End Role="Sizes" Type="Self.Size" Multiplicity="0..1" />
     <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -575,7 +570,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Orders__PaymentI__6FE99F9F">
+  <Association Name="FK__Orders__PaymentI__6EF57B66">
     <End Role="Payments" Type="Self.Payment" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -587,7 +582,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Orders__StatusOr__6EF57B66">
+  <Association Name="FK__Orders__StatusOr__6E01572D">
     <End Role="StatusOrders" Type="Self.StatusOrder" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -611,7 +606,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductSi__Produ__7F2BE32F">
+  <Association Name="FK__ProductSi__Produ__7E37BEF6">
     <End Role="Products" Type="Self.Product" Multiplicity="1" />
     <End Role="ProductSizes" Type="Self.ProductSize" Multiplicity="*" />
     <ReferentialConstraint>
@@ -623,7 +618,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductSi__SizeI__7E37BEF6">
+  <Association Name="FK__ProductSi__SizeI__7D439ABD">
     <End Role="Sizes" Type="Self.Size" Multiplicity="1" />
     <End Role="ProductSizes" Type="Self.ProductSize" Multiplicity="*" />
     <ReferentialConstraint>
@@ -635,7 +630,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserFunct__UserI__72C60C4A">
+  <Association Name="FK__UserFunct__UserI__71D1E811">
     <End Role="Users" Type="Self.User" Multiplicity="1" />
     <End Role="UserFunctions" Type="Self.UserFunction" Multiplicity="*" />
     <ReferentialConstraint>
@@ -647,7 +642,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserGroup__UserI__70DDC3D8">
+  <Association Name="FK__UserGroup__UserI__6FE99F9F">
     <End Role="Users" Type="Self.User" Multiplicity="1" />
     <End Role="UserGroups" Type="Self.UserGroup" Multiplicity="*" />
     <ReferentialConstraint>
@@ -659,7 +654,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="MyImageEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="MyImageEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Addresses" EntityType="Self.Address" />
     <EntitySet Name="CartDetails" EntityType="Self.CartDetail" />
     <EntitySet Name="Carts" EntityType="Self.Cart" />
@@ -687,19 +682,19 @@
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Address" EntitySet="Addresses" />
     </AssociationSet>
-    <AssociationSet Name="FK__CartDetai__CartI__7A672E12" Association="Self.FK__CartDetai__CartI__7A672E12">
+    <AssociationSet Name="FK__CartDetai__CartI__797309D9" Association="Self.FK__CartDetai__CartI__797309D9">
       <End Role="Carts" EntitySet="Carts" />
       <End Role="CartDetails" EntitySet="CartDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__CartDetai__Image__7D439ABD" Association="Self.FK__CartDetai__Image__7D439ABD">
+    <AssociationSet Name="FK__CartDetai__Image__7C4F7684" Association="Self.FK__CartDetai__Image__7C4F7684">
       <End Role="Images" EntitySet="Images" />
       <End Role="CartDetails" EntitySet="CartDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__CartDetai__Produ__7B5B524B" Association="Self.FK__CartDetai__Produ__7B5B524B">
+    <AssociationSet Name="FK__CartDetai__Produ__7A672E12" Association="Self.FK__CartDetai__Produ__7A672E12">
       <End Role="Products" EntitySet="Products" />
       <End Role="CartDetails" EntitySet="CartDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__CartDetai__SizeI__7C4F7684" Association="Self.FK__CartDetai__SizeI__7C4F7684">
+    <AssociationSet Name="FK__CartDetai__SizeI__7B5B524B" Association="Self.FK__CartDetai__SizeI__7B5B524B">
       <End Role="Sizes" EntitySet="Sizes" />
       <End Role="CartDetails" EntitySet="CartDetails" />
     </AssociationSet>
@@ -707,15 +702,15 @@
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Carts" EntitySet="Carts" />
     </AssociationSet>
-    <AssociationSet Name="FK__Products__Catego__68487DD7" Association="Self.FK__Products__Catego__68487DD7">
+    <AssociationSet Name="FK__Products__Catego__6754599E" Association="Self.FK__Products__Catego__6754599E">
       <End Role="Categories" EntitySet="Categories" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
-    <AssociationSet Name="FK__Feedbacks__Custo__6B24EA82" Association="Self.FK__Feedbacks__Custo__6B24EA82">
+    <AssociationSet Name="FK__Feedbacks__Custo__6A30C649" Association="Self.FK__Feedbacks__Custo__6A30C649">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Feedbacks" EntitySet="Feedbacks" />
     </AssociationSet>
-    <AssociationSet Name="FK__Orders__Customer__6E01572D" Association="Self.FK__Orders__Customer__6E01572D">
+    <AssociationSet Name="FK__Orders__Customer__6D0D32F4" Association="Self.FK__Orders__Customer__6D0D32F4">
       <End Role="Customers" EntitySet="Customers" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
@@ -727,7 +722,7 @@
       <End Role="Organizations" EntitySet="Organizations" />
       <End Role="Employees" EntitySet="Employees" />
     </AssociationSet>
-    <AssociationSet Name="FK__Orders__Employee__6D0D32F4" Association="Self.FK__Orders__Employee__6D0D32F4">
+    <AssociationSet Name="FK__Orders__Employee__6C190EBB" Association="Self.FK__Orders__Employee__6C190EBB">
       <End Role="Employees" EntitySet="Employees" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
@@ -735,23 +730,23 @@
       <End Role="Employees" EntitySet="Employees" />
       <End Role="Users" EntitySet="Users" />
     </AssociationSet>
-    <AssociationSet Name="FK__Feedbacks__Produ__6C190EBB" Association="Self.FK__Feedbacks__Produ__6C190EBB">
+    <AssociationSet Name="FK__Feedbacks__Produ__6B24EA82" Association="Self.FK__Feedbacks__Produ__6B24EA82">
       <End Role="Products" EntitySet="Products" />
       <End Role="Feedbacks" EntitySet="Feedbacks" />
     </AssociationSet>
-    <AssociationSet Name="FK__FunctionG__Funct__74AE54BC" Association="Self.FK__FunctionG__Funct__74AE54BC">
+    <AssociationSet Name="FK__FunctionG__Funct__73BA3083" Association="Self.FK__FunctionG__Funct__73BA3083">
       <End Role="Functions" EntitySet="Functions" />
       <End Role="FunctionGroups" EntitySet="FunctionGroups" />
     </AssociationSet>
-    <AssociationSet Name="FK__FunctionG__Group__75A278F5" Association="Self.FK__FunctionG__Group__75A278F5">
+    <AssociationSet Name="FK__FunctionG__Group__74AE54BC" Association="Self.FK__FunctionG__Group__74AE54BC">
       <End Role="Groups" EntitySet="Groups" />
       <End Role="FunctionGroups" EntitySet="FunctionGroups" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserFunct__Funct__73BA3083" Association="Self.FK__UserFunct__Funct__73BA3083">
+    <AssociationSet Name="FK__UserFunct__Funct__72C60C4A" Association="Self.FK__UserFunct__Funct__72C60C4A">
       <End Role="Functions" EntitySet="Functions" />
       <End Role="UserFunctions" EntitySet="UserFunctions" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserGroup__Group__71D1E811" Association="Self.FK__UserGroup__Group__71D1E811">
+    <AssociationSet Name="FK__UserGroup__Group__70DDC3D8" Association="Self.FK__UserGroup__Group__70DDC3D8">
       <End Role="Groups" EntitySet="Groups" />
       <End Role="UserGroups" EntitySet="UserGroups" />
     </AssociationSet>
@@ -759,35 +754,31 @@
       <End Role="Products" EntitySet="Products" />
       <End Role="Images" EntitySet="Images" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderDeta__Image__797309D9" Association="Self.FK__OrderDeta__Image__797309D9">
+    <AssociationSet Name="FK__OrderDeta__Image__787EE5A0" Association="Self.FK__OrderDeta__Image__787EE5A0">
       <End Role="Images" EntitySet="Images" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__Products__Materi__6754599E" Association="Self.FK__Products__Materi__6754599E">
-      <End Role="Materials" EntitySet="Materials" />
+    <AssociationSet Name="FK__Materials__Produ__68487DD7" Association="Self.FK__Materials__Produ__68487DD7">
       <End Role="Products" EntitySet="Products" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Sizes__MaterialI__6A30C649" Association="Self.FK__Sizes__MaterialI__6A30C649">
       <End Role="Materials" EntitySet="Materials" />
-      <End Role="Sizes" EntitySet="Sizes" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderDeta__Order__76969D2E" Association="Self.FK__OrderDeta__Order__76969D2E">
+    <AssociationSet Name="FK__OrderDeta__Order__75A278F5" Association="Self.FK__OrderDeta__Order__75A278F5">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderDeta__Produ__778AC167" Association="Self.FK__OrderDeta__Produ__778AC167">
+    <AssociationSet Name="FK__OrderDeta__Produ__76969D2E" Association="Self.FK__OrderDeta__Produ__76969D2E">
       <End Role="Products" EntitySet="Products" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderDeta__SizeI__787EE5A0" Association="Self.FK__OrderDeta__SizeI__787EE5A0">
+    <AssociationSet Name="FK__OrderDeta__SizeI__778AC167" Association="Self.FK__OrderDeta__SizeI__778AC167">
       <End Role="Sizes" EntitySet="Sizes" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__Orders__PaymentI__6FE99F9F" Association="Self.FK__Orders__PaymentI__6FE99F9F">
+    <AssociationSet Name="FK__Orders__PaymentI__6EF57B66" Association="Self.FK__Orders__PaymentI__6EF57B66">
       <End Role="Payments" EntitySet="Payments" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK__Orders__StatusOr__6EF57B66" Association="Self.FK__Orders__StatusOr__6EF57B66">
+    <AssociationSet Name="FK__Orders__StatusOr__6E01572D" Association="Self.FK__Orders__StatusOr__6E01572D">
       <End Role="StatusOrders" EntitySet="StatusOrders" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
@@ -795,21 +786,53 @@
       <End Role="Organizations" EntitySet="Organizations" />
       <End Role="Organizations1" EntitySet="Organizations" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductSi__Produ__7F2BE32F" Association="Self.FK__ProductSi__Produ__7F2BE32F">
+    <AssociationSet Name="FK__ProductSi__Produ__7E37BEF6" Association="Self.FK__ProductSi__Produ__7E37BEF6">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductSizes" EntitySet="ProductSizes" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductSi__SizeI__7E37BEF6" Association="Self.FK__ProductSi__SizeI__7E37BEF6">
+    <AssociationSet Name="FK__ProductSi__SizeI__7D439ABD" Association="Self.FK__ProductSi__SizeI__7D439ABD">
       <End Role="Sizes" EntitySet="Sizes" />
       <End Role="ProductSizes" EntitySet="ProductSizes" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserFunct__UserI__72C60C4A" Association="Self.FK__UserFunct__UserI__72C60C4A">
+    <AssociationSet Name="FK__UserFunct__UserI__71D1E811" Association="Self.FK__UserFunct__UserI__71D1E811">
       <End Role="Users" EntitySet="Users" />
       <End Role="UserFunctions" EntitySet="UserFunctions" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserGroup__UserI__70DDC3D8" Association="Self.FK__UserGroup__UserI__70DDC3D8">
+    <AssociationSet Name="FK__UserGroup__UserI__6FE99F9F" Association="Self.FK__UserGroup__UserI__6FE99F9F">
       <End Role="Users" EntitySet="Users" />
       <End Role="UserGroups" EntitySet="UserGroups" />
     </AssociationSet>
+    <AssociationSet Name="FK__CartDetai__Mater__7C4F7684" Association="MyImageModel.FK__CartDetai__Mater__7C4F7684">
+      <End Role="Material" EntitySet="Materials" />
+      <End Role="CartDetail" EntitySet="CartDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Mater__778AC167" Association="MyImageModel.FK__OrderDeta__Mater__778AC167">
+      <End Role="Material" EntitySet="Materials" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK__CartDetai__Mater__7C4F7684">
+    <End Type="MyImageModel.Material" Role="Material" Multiplicity="0..1" />
+    <End Type="MyImageModel.CartDetail" Role="CartDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material">
+        <PropertyRef Name="MaterialID" />
+      </Principal>
+      <Dependent Role="CartDetail">
+        <PropertyRef Name="MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Mater__778AC167">
+    <End Type="MyImageModel.Material" Role="Material" Multiplicity="0..1" />
+    <End Type="MyImageModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material">
+        <PropertyRef Name="MaterialID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

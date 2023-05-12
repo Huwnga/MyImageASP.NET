@@ -1,0 +1,59 @@
+﻿:root {
+    --bs-body-font-family: 'Be Vietnam Pro', sans-serif;
+    --product-details__height: 400px;
+    --product-details__img-height: 350px;
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+.bg-purple2 {
+    background-color: #b4a7d6;
+}
+
+.bg-pink {
+    background-color: #fff4f4;
+}
+
+.bg-grayblue {
+    background-color: #a2c4c9;
+}
+
+.material-item {
+    --material-item-border-bottom: 2px;
+    margin-bottom: var(--material-item-border-bottom);
+}
+
+.material-item:hover {
+    margin-bottom: 0px;
+    border-bottom: var(--material-item-border-bottom) solid var(--bs-nav-link-hover-color);
+}
+
+.bd-layout {
+    display: grid;
+    grid-template-areas: "sidebar main";
+    grid-template-columns: 1fr 5fr;
+    gap: 1.5rem;
+}
+
+.bd-gutter {
+    --bs-gutter-x: 3rem;
+}
+
+.fs-regular {
+    font-size: 1rem;
+}
+
+@media (min-width: 992px) {
+    .bd-sidebar {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 5rem;
+        display: block !important;
+        height: calc(100vh - 6rem);
+        padding-left: 0.25rem;
+        margin-left: -0.25rem;
+        overflow-y: auto;
+    }
+}

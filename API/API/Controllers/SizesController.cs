@@ -25,9 +25,17 @@ namespace Api.Controllers
 
         // GET: api/Sizes/Material
         [Route("api/Sizes/Material")]
-        public IQueryable<Size> GetSizesByMaterialID(int materialID)
+        public IQueryable<Size> GetSizesByProductID(int productID)
         {
-            return db.Sizes.Where(e => e.MaterialID == materialID);
+            var productSizes = db.ProductSizes.Include(x => x.Size).OrderBy(x => x.ProductID).Where(x => x.Equals(productID)).ToList();
+            List<Size> sizes = new List<Size>();
+
+            foreach(var productSize in productSizes)
+            {
+                sizes.Add(productSize.Size);
+            }
+
+            return sizes.AsQueryable();
         }
 
         // GET: api/Sizes/5

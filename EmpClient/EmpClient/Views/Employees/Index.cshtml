@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<EmpClient.Models.Employee>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Employees Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
@@ -42,10 +43,10 @@
             @Html.DisplayNameFor(model => model.Notes)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ManagerID)
+            FullName's Manager
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OrganizationID)
+            @Html.DisplayNameFor(model => model.Organization.OrganizationName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PhotoPath)
@@ -89,7 +90,7 @@
             @Html.DisplayFor(modelItem => item.ManagerID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.OrganizationID)
+            @Html.DisplayFor(modelItem => item.Organization.OrganizationName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PhotoPath)

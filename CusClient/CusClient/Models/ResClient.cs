@@ -31,16 +31,17 @@ namespace CusClient.Models
             return GetStrResValue(response);
         }
 
-        public string InsertData()
+        public bool InsertData()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
             HttpContent content = new StringContent("", Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PostAsync(EndPoint, content).Result;
 
-            return GetStrResValue(response);
+            return CheckStatusCode(response);
         }
-        public string InsertData(Object obj)
+
+        public bool InsertData(Object obj)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
@@ -50,9 +51,10 @@ namespace CusClient.Models
             HttpContent content = new StringContent(postBody, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PostAsync(EndPoint, content).Result;
 
-            return GetStrResValue(response);
+            return CheckStatusCode(response);
         }
-        public string UpdateData(Object obj)
+
+        public bool UpdateData(Object obj)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
@@ -62,23 +64,24 @@ namespace CusClient.Models
             HttpContent content = new StringContent(postBody, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PutAsync(EndPoint, content).Result;
 
-            return GetStrResValue(response);
+            return CheckStatusCode(response);
         }
-        public string DeleteData()
+
+        public bool DeleteData()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
 
             HttpResponseMessage response = client.DeleteAsync(EndPoint).Result;
 
-            return GetStrResValue(response);
+            return CheckStatusCode(response);
         }
 
         private string GetStrResValue(HttpResponseMessage response)
         {
             string strResponseValue = String.Empty;
 
-            if (response.IsSuccessStatusCode)
+            if (CheckStatusCode(response))
             {
                 strResponseValue = response.Content.ReadAsStringAsync().Result;
             }
@@ -90,15 +93,15 @@ namespace CusClient.Models
             return strResponseValue;
         }
 
-        private int CheckStatusCode(HttpResponseMessage response)
+        private bool CheckStatusCode(HttpResponseMessage response)
         {
             if (response.IsSuccessStatusCode)
             {
-                return 1;
+                return true;
             }
             else
             {
-                return 0;
+                return false;
             }
         }
     }

@@ -4,91 +4,83 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 
 namespace EmpClient.Api
 {
     public class EmployeesApi
     {
-        public static List<Employee> GetAllEmployees()
+        public static List<Employee> GetEmployees()
         {
-            ResClient rClient = new ResClient();
-            rClient.EndPoint = "api/Employees";
-            string KetQua = rClient.RestRequestAll();
-            List<Employee> EmpList = JsonConvert.DeserializeObject<List<Employee>>(KetQua);
-            return EmpList;
+            ResClient resClient = new ResClient();
+            resClient.EndPoint = "api/Employees";
+            string resStrEmps = resClient.RestRequestAll();
+            List<Employee> emps = JsonConvert.DeserializeObject<List<Employee>>(resStrEmps);
+
+            return emps;
         }
 
-
-        // GET: Employees/Details/5
-        public static Employee GetEmployeesByID(int id)
+        public static List<Employee> GetEmployeesWithOrganization()
         {
-            ResClient rClient = new ResClient();
-            rClient.EndPoint = "api/Employees?EmployeeID=" + id;
-            string KetQua = rClient.RestRequestAll();
-            List<Employee> EmpId = JsonConvert.DeserializeObject<List<Employee>>(KetQua);
-            return EmpId[0];
+            ResClient resClient = new ResClient();
+            resClient.EndPoint = "api/EmployeesWithOrg";
+            string resStrEmps = resClient.RestRequestAll();
+            List<Employee> emps = JsonConvert.DeserializeObject<List<Employee>>(resStrEmps);
+
+            return emps;
         }
 
-        // POST: Employees/Create
-        
-        public static int CreateEmployee(Employee obj)
+        public static List<Employee> GetEmployeesWithOrgAndManager()
         {
-            ResClient rClient = new ResClient();
+            ResClient resClient = new ResClient();
+            resClient.EndPoint = "api/EmployeesWithOrgAndManager";
+            string resStrEmps = resClient.RestRequestAll();
+            List<Employee> emps = JsonConvert.DeserializeObject<List<Employee>>(resStrEmps);
 
-            //truyen qua obj
-            rClient.EndPoint = "api/Employees";
-            int KQ = rClient.InsertData(obj);
-
-            if (KQ == 1)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
+            return emps;
         }
 
-        // POST: Employees/Edit/5
-        
-        public static int UpdateEmployee(Employee obj, int id)
+        public static Employee GetEmployeeById(int id)
         {
-            ResClient rClient = new ResClient();
-            
-            //truyen qua obj
-            rClient.EndPoint = "api/Employees/" + id;
-            int KQ = rClient.UpdateData(obj);
+            ResClient resClient = new ResClient();
+            resClient.EndPoint = "api/Employees?id=" + id;
+            string resStrEmp = resClient.RestRequestAll();
+            Employee emp = JsonConvert.DeserializeObject<Employee>(resStrEmp);
 
-            if (KQ == 1)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
+            return emp;
         }
 
-        
-
-        // POST: Employees/Delete/5
-        public static int DeleteEmployee(int id)
+        public static Employee InsertEmployee(Employee emp)
         {
-            ResClient rClient = new ResClient();
+            ResClient resClient = new ResClient();
+            resClient.EndPoint = "api/Employees";
+            string resStrEmp = resClient.InsertData(emp);
 
-            //truyen qua obj
-            rClient.EndPoint = "api/Employees/" + id;
-            int KQ = rClient.DeleteData();
+            if(!resStrEmp.StartsWith("Error:"))
+            {
+                Employee nEmp = JsonConvert.DeserializeObject<Employee>(resStrEmp);
 
-            if (KQ == 1)
-            {
-                return 1;
+                return nEmp;
             }
-            else
-            {
-                return 0;
-            }
+
+            return null;
+        }
+
+        public static bool UpdateEmployee(int id, Employee emp)
+        {
+            ResClient resClient = new ResClient();
+            resClient.EndPoint = "api/Employees?id=" + id;
+            bool isSuccess = resClient.UpdateData(emp);
+
+            return isSuccess;
+        }
+
+        public static bool DeleteEmployee(int id)
+        {
+            ResClient resClient = new ResClient();
+            resClient.EndPoint = "api/Employees?id=" + id;
+            bool isSuccess = resClient.DeleteData();
+
+            return isSuccess;
         }
     }
 }

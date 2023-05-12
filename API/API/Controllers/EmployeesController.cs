@@ -23,6 +23,22 @@ namespace Api.Controllers
             return db.Employees;
         }
 
+        // GET: api/EmployeesWithOrg
+        [HttpGet]
+        [Route("api/EmployeesWithOrg")]
+        public IQueryable<Employee> GetEmployeesWithOrganization()
+        {
+            return db.Employees.Include(e => e.Organization);
+        }
+
+        // GET: api/EmployeesWithOrgAndManager
+        [HttpGet]
+        [Route("api/EmployeesWithOrgAndManager")]
+        public IQueryable<Employee> GetEmployeesWithOrgAndManager()
+        {
+            return db.Employees.Include(e => e.Manager).Include(e => e.Organization).OrderByDescending(e => e.EmployeeID);
+        }
+
         // GET: api/Employees/5
         [ResponseType(typeof(Employee))]
         public async Task<IHttpActionResult> GetEmployee(int id)

@@ -23,25 +23,25 @@ namespace EmpClient.Models
 
         public string RestRequestAll()
         {
-            
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
 
             HttpResponseMessage response = client.GetAsync(EndPoint).Result;
-           
+
             return GetStrResValue(response);
         }
 
-        //public string InsertData()
-        //{
-        //    HttpClient client = new HttpClient();
-        //    client.BaseAddress = new Uri(BaseUrl);
-        //    HttpContent content = new StringContent("", Encoding.UTF8, "application/json");
-        //    HttpResponseMessage response = client.PostAsync(EndPoint, content).Result;
+        public string InsertData()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(BaseUrl);
+            HttpContent content = new StringContent("", Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(EndPoint, content).Result;
 
-        //    return GetStrResValue(response);
-        //}
-        public int InsertData(Object obj)
+            return GetStrResValue(response);
+        }
+
+        public string InsertData(Object obj)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
@@ -50,11 +50,11 @@ namespace EmpClient.Models
 
             HttpContent content = new StringContent(postBody, Encoding.UTF8, "application/json");
             HttpResponseMessage response = client.PostAsync(EndPoint, content).Result;
-            
-            return CheckStatusCode(response);
+
+            return GetStrResValue(response);
         }
-        
-        public int UpdateData(Object obj)
+
+        public bool UpdateData(Object obj)
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
@@ -66,7 +66,8 @@ namespace EmpClient.Models
 
             return CheckStatusCode(response);
         }
-        public int DeleteData()
+
+        public bool DeleteData()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
@@ -80,7 +81,7 @@ namespace EmpClient.Models
         {
             string strResponseValue = String.Empty;
 
-            if (response.IsSuccessStatusCode)
+            if (CheckStatusCode(response))
             {
                 strResponseValue = response.Content.ReadAsStringAsync().Result;
             }
@@ -92,15 +93,15 @@ namespace EmpClient.Models
             return strResponseValue;
         }
 
-        private int CheckStatusCode(HttpResponseMessage response)
+        private bool CheckStatusCode(HttpResponseMessage response)
         {
             if (response.IsSuccessStatusCode)
             {
-                return 1;
+                return true;
             }
             else
             {
-                return 0;
+                return false;
             }
         }
     }
