@@ -42,7 +42,7 @@ namespace Api.Controllers
         public async Task<IHttpActionResult> GetOrganization(int id)
         {
             var organization = await db.Organizations
-                .Include(e=> e.Parent)
+                .Include(e => e.Parent)
                 .SingleOrDefaultAsync(e => e.OrganizationID.Equals(id));
             if (organization == null)
             {
@@ -66,7 +66,7 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
-            if (!RelationshipOrg(organization))
+            if (!RelationshipOrg(organization, "edit"))
             {
                 return BadRequest();
             }
@@ -102,7 +102,7 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!RelationshipOrg(organization))
+            if (!RelationshipOrg(organization, ""))
             {
                 return BadRequest();
             }
@@ -151,11 +151,11 @@ namespace Api.Controllers
             return db.Organizations.Count(e => e.OrganizationID == id) > 0;
         }
 
-        private bool RelationshipOrg(Organization organization)
+        private bool RelationshipOrg(Organization organization, string method)
         {
             if (organization.ParentID != null && organization.ParentID != 0)
             {
-                var parentExists = db.Organizations.SingleOrDefault(e => e.OrganizationID.Equals((int) organization.ParentID));
+                var parentExists = db.Organizations.SingleOrDefault(e => e.OrganizationID.Equals((int)organization.ParentID));
 
                 if (parentExists == null)
                 {
@@ -170,6 +170,21 @@ namespace Api.Controllers
                 if (organization.OrganizationID == parentExists.ParentID)
                 {
                     return false;
+                }
+
+                if (method.ToLower() == "edit")
+                {
+                    var childrens = GetChilrensByParentID(organization.OrganizationID);
+
+                    if (childrens.Count() > 0)
+                    {
+                        var hasSoChild = childrens.Where(e => e.OrganizationID == parentExists.ParentID);
+
+                        if (hasSoChild.Count() > 0)
+                        {
+                            return false;
+                        }
+                    }
                 }
             }
 

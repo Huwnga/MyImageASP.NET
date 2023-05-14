@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Api.Models; 
+using Api.Models;
 
 namespace Api.Controllers
 {
@@ -100,7 +100,7 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
-            if (!RelationshipEmployee(employee))
+            if (!RelationshipEmployee(employee, "edit"))
             {
                 return BadRequest();
             }
@@ -138,7 +138,7 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!RelationshipEmployee(employee))
+            if (!RelationshipEmployee(employee, ""))
             {
                 return BadRequest();
             }
@@ -195,13 +195,14 @@ namespace Api.Controllers
             return db.Organizations.Count(e => e.OrganizationID == id) > 0;
         }
 
-        private bool RelationshipEmployee(Employee employee)
+        private bool RelationshipEmployee(Employee employee, string method)
         {
+
             if (employee.ManagerID != null && employee.ManagerID != 0)
             {
-                var managerExists = db.Employees.SingleOrDefault(e => e.EmployeeID.Equals((int) employee.ManagerID));
+                var managerExists = db.Employees.SingleOrDefault(e => e.EmployeeID.Equals((int)employee.ManagerID));
 
-                if (managerExists != null)
+                if (managerExists == null)
                 {
                     return false;
                 }
@@ -214,6 +215,21 @@ namespace Api.Controllers
                 if (employee.EmployeeID == managerExists.ManagerID)
                 {
                     return false;
+                }
+
+                if (method.ToLower() == "edit")
+                {
+                    var childrensEmployee = GetChilrensByManagerID(employee.EmployeeID);
+
+                    if (childrensEmployee.Count() > 0)
+                    {
+                        var hasSoChild = childrensEmployee.Where(e => e.EmployeeID == managerExists.ManagerID);
+
+                        if (hasSoChild.Count() > 0)
+                        {
+                            return false;
+                        }
+                    }
                 }
             }
 

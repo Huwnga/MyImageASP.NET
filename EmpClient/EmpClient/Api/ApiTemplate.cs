@@ -9,7 +9,7 @@ namespace EmpClient.Api
 {
     public class ApiTemplate
     {
-        public static List<T> GetListByEndPoint<T>(string endPoint)
+        public static T GetByEndPoint<T>(string endPoint)
         {
             ResClient resClient = new ResClient();
             resClient.EndPoint = endPoint;
@@ -17,12 +17,12 @@ namespace EmpClient.Api
 
             if (!resStrObjs.StartsWith("Error:"))
             {
-                List<T> nObj = JsonConvert.DeserializeObject<List<T>>(resStrObjs);
+                T nObj = JsonConvert.DeserializeObject<T>(resStrObjs);
 
                 return nObj;
             }
 
-            return new List<T>();
+            return default(T);
         }
 
         public static T InserObjByEndPoint<T>(string endPoint, T obj)

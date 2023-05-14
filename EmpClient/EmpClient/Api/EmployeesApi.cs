@@ -13,7 +13,7 @@ namespace EmpClient.Api
         public static List<Employee> GetEmployees()
         {
             string endPoint = "api/Employees";
-            List<Employee> emps = ApiTemplate.GetListByEndPoint<Employee>(endPoint);
+            List<Employee> emps = ApiTemplate.GetByEndPoint<List<Employee>>(endPoint);
 
             return emps;
         }
@@ -21,7 +21,7 @@ namespace EmpClient.Api
         public static List<Employee> GetEmployeesWithManager()
         {
             string endPoint = "api/EmployeesWithManager";
-            List<Employee> emps = ApiTemplate.GetListByEndPoint<Employee>(endPoint);
+            List<Employee> emps = ApiTemplate.GetByEndPoint<List<Employee>>(endPoint);
 
             return emps;
         }
@@ -29,7 +29,7 @@ namespace EmpClient.Api
         public static List<Employee> GetEmployeesWithOrganization()
         {
             string endPoint = "api/EmployeesWithOrg";
-            List<Employee> emps = ApiTemplate.GetListByEndPoint<Employee>(endPoint);
+            List<Employee> emps = ApiTemplate.GetByEndPoint<List<Employee>>(endPoint);
 
             return emps;
         }
@@ -37,7 +37,7 @@ namespace EmpClient.Api
         public static List<Employee> GetEmployeesWithOrgAndManager()
         {
             string endPoint = "api/EmployeesWithOrgAndManager";
-            List<Employee> emps = ApiTemplate.GetListByEndPoint<Employee>(endPoint);
+            List<Employee> emps = ApiTemplate.GetByEndPoint<List<Employee>>(endPoint);
 
             return emps;
         }
@@ -45,17 +45,15 @@ namespace EmpClient.Api
         public static List<Employee> GetChilrensByManagerID(int ManagerID)
         {
             string endPoint = "api/EmployeesWithManager?managerID=" + ManagerID;
-            List<Employee> emps = ApiTemplate.GetListByEndPoint<Employee>(endPoint);
+            List<Employee> emps = ApiTemplate.GetByEndPoint<List<Employee>>(endPoint);
 
             return emps;
         }
 
         public static Employee GetEmployeeById(int id)
         {
-            ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/Employees?id=" + id;
-            string resStrEmp = resClient.RestRequestAll();
-            Employee emp = JsonConvert.DeserializeObject<Employee>(resStrEmp);
+            string endPoint = "api/Employees?id=" + id;
+            Employee emp = ApiTemplate.GetByEndPoint<Employee>(endPoint);
 
             return emp;
         }

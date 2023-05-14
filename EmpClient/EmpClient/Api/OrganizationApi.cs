@@ -13,7 +13,7 @@ namespace EmpClient.Api
         public static List<Organization> GetOrganizations()
         {
             string endPoint = "api/Organizations";
-            List<Organization> orgs = ApiTemplate.GetListByEndPoint<Organization>(endPoint);
+            List<Organization> orgs = ApiTemplate.GetByEndPoint<List<Organization>>(endPoint);
 
             return orgs;
         }
@@ -21,7 +21,7 @@ namespace EmpClient.Api
         public static List<Organization> GetOrganizationsWithParentOrg()
         {
             string endPoint = "api/OrganizationsWithParentOrg";
-            List<Organization> orgs = ApiTemplate.GetListByEndPoint<Organization>(endPoint);
+            List<Organization> orgs = ApiTemplate.GetByEndPoint<List<Organization>>(endPoint);
 
             return orgs;
         }
@@ -29,17 +29,15 @@ namespace EmpClient.Api
         public static List<Organization> GetChilrensByParentID(int ParentID)
         {
             string endPoint = "api/OrganizationsWithParentOrg?parentID=" + ParentID;
-            List<Organization> orgs = ApiTemplate.GetListByEndPoint<Organization>(endPoint);
+            List<Organization> orgs = ApiTemplate.GetByEndPoint<List<Organization>>(endPoint);
 
             return orgs;
         }
 
         public static Organization GetOrganizationByID(int id)
         {
-            ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/Organizations?id=" + id;
-            string resStrOrgs = resClient.RestRequestAll();
-            Organization orgs = JsonConvert.DeserializeObject<Organization>(resStrOrgs);
+            string endPoint = "api/Organizations?id=" + id;
+            Organization orgs = ApiTemplate.GetByEndPoint<Organization>(endPoint);
 
             return orgs;
         }

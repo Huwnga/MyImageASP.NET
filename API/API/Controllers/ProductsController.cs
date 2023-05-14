@@ -32,11 +32,27 @@ namespace Api.Controllers
             return db.Products.ToPagedList(number, size);
         }
 
+        [Route("api/ProductsWithAll")]
+        // GET: api/Products
+        public IPagedList<Product> GetProductsWithAll(int? pageNumber, int? pageSize)
+        {
+            int number = (pageNumber ?? 1);
+            int size = (pageSize ?? pageSizeDeffault);
+
+            return db.Products
+                .Include(e => e.CategoryID)
+                .OrderBy(e => e.UpdatedAt)
+                .ToPagedList(number, size);
+        }
+
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
         public async Task<IHttpActionResult> GetProduct(int id)
         {
-            Product product = await db.Products.FindAsync(id);
+            Product product = await db.Products
+                .Include(e => e.CategoryID)
+                .SingleOrDefaultAsync(e => e.ProductID == id);
+
             if (product == null)
             {
                 return NotFound();
