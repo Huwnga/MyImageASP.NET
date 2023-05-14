@@ -1,0 +1,80 @@
+﻿@model EmpClient.Models.Organization
+@{
+    SelectList orgSelectList = ViewBag.Organizations;
+}
+
+<div class="form-horizontal">
+    <h4>Organization</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.OrganizationID, null)
+
+    <div class="form-group my-2">
+        @Html.LabelFor(model => model.OrganizationName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="w-100">
+            @Html.EditorFor(model => model.OrganizationName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.OrganizationName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group my-2">
+        @Html.LabelFor(model => model.Code, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="w-100">
+            @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group my-2">
+        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="w-100">
+            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group my-2">
+        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="w-100">
+            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group my-2">
+        @Html.LabelFor(model => model.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="w-100">
+            @Html.EditorFor(model => model.Fax, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group my-2">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="w-100">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    @if (orgSelectList != null)
+    {
+        <div class="form-group my-2">
+            @Html.LabelFor(model => model.ParentID, htmlAttributes: new { @class = "control-label" })
+            <div class="w-100">
+                @if (orgSelectList.Count() > 1)
+                {
+                    @Html.DropDownListFor(model => model.ParentID, orgSelectList, htmlAttributes: new { @class = "form-select" })
+                    @Html.ValidationMessageFor(model => model.ParentID, "", new { @class = "text-danger" })
+                }
+                else
+                {
+                    <p class="text-center fw-semibold text-danger">
+                        Please add new Parent Organization!
+                    </p>
+                }
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,117 @@
+﻿@using System.Configuration;
+
+@model EmpClient.Models.Employee
+@{
+    string mid = ConfigurationManager.ConnectionStrings["MyImageDomain"].ConnectionString;
+    string avatarLink = mid + Model.PhotoPath;
+}
+
+<dl class="dl-horizontal row">
+    <div class="col-md-7">
+        <dt>
+            Avatar
+        </dt>
+
+        <dd>
+            <img class="img-fuild" src="@avatarLink" />
+        </dd>
+    </div>
+
+    <div class="col-md-5">
+        <dt>
+            Employee's FullName
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TitleOfCourtesy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitleOfCourtesy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+        <dt>
+            Manager's FullName
+        </dt>
+
+        <dd>
+            @if (Model.Manager != null)
+            {
+                @Html.ActionLink(Model.Manager.FirstName + Model.Manager.LastName, "Details", "Employees", new { id = Model.Manager.ManagerID }, null);
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Organization.OrganizationName)
+        </dt>
+
+        <dd>
+            @if (Model.Organization != null)
+            {
+                @Html.ActionLink(Model.Organization.OrganizationName, "Details", "Organizations", new { id = Model.Organization.OrganizationID }, null);
+            }
+        </dd>
+
+    </div>
+</dl>

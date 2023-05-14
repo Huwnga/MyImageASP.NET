@@ -1,0 +1,78 @@
+﻿@model IEnumerable<EmpClient.Models.Organization>
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.OrganizationName)
+                </th>
+                <th scope="col">
+                    Parent Organization Name
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Code)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Fax)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th scope="col">
+
+                </th>
+            </tr>
+        </thead>
+
+        <tbody class="table-group-divider">
+            @if (Model.Count() < 1)
+            {
+                <tr>
+                    <td colspan="11" class="text-center fw-semibold text-danger">
+                        Please add new organizations!
+                    </td>
+                </tr>
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrganizationName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parent.OrganizationName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fax)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.OrganizationID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.OrganizationID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.OrganizationID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

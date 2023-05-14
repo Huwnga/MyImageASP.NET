@@ -1,0 +1,61 @@
+﻿@model EmpClient.Models.Organization
+
+
+<dl class="dl-horizontal">
+    <dt>
+        Parent Organization Name
+    </dt>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.OrganizationName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Parent.OrganizationName)
+    </dd>
+
+    <dd>
+        @Html.DisplayFor(model => model.OrganizationName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Code)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Code)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Address)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Address)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Phone)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Phone)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Fax)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Fax)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+
+</dl>

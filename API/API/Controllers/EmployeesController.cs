@@ -23,12 +23,24 @@ namespace Api.Controllers
             return db.Employees;
         }
 
+        // GET: api/EmployeesWithManager
+        [HttpGet]
+        [Route("api/EmployeesWithManager")]
+        public IQueryable<Employee> GetEmployeesWithManager()
+        {
+            var lEmps = db.Employees.Include(e => e.Manager);
+
+            return lEmps;
+        }
+
         // GET: api/EmployeesWithOrg
         [HttpGet]
         [Route("api/EmployeesWithOrg")]
         public IQueryable<Employee> GetEmployeesWithOrganization()
         {
-            return db.Employees.Include(e => e.Organization);
+            var lEmps = db.Employees.Include(e => e.Organization);
+
+            return lEmps;
         }
 
         // GET: api/EmployeesWithOrgAndManager
@@ -36,7 +48,19 @@ namespace Api.Controllers
         [Route("api/EmployeesWithOrgAndManager")]
         public IQueryable<Employee> GetEmployeesWithOrgAndManager()
         {
-            return db.Employees.Include(e => e.Manager).Include(e => e.Organization);
+            var lEmps = db.Employees.Include(e => e.Manager).Include(e => e.Organization);
+
+            return lEmps;
+        }
+
+        // GET: api/EmployeesWithOrgAndManager
+        [HttpGet]
+        [Route("api/EmployeesWithManager")]
+        public IQueryable<Employee> GetChilrensByManagerID(int managerID)
+        {
+            var lEmps = db.Employees.Include(e => e.Manager).Where(e => e.ManagerID == managerID);
+
+            return lEmps;
         }
 
         // GET: api/Employees/5
@@ -81,6 +105,9 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
+            employee.ManagerID = employee.ManagerID == 0 ? null : employee.ManagerID;
+            employee.OrganizationID = employee.OrganizationID == 0 ? null : employee.OrganizationID;
+
             db.Entry(employee).State = EntityState.Modified;
 
             try
@@ -116,6 +143,9 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
+            employee.ManagerID = employee.ManagerID == 0 ? null : employee.ManagerID;
+            employee.OrganizationID = employee.OrganizationID == 0 ? null : employee.OrganizationID;
+
             db.Employees.Add(employee);
             await db.SaveChangesAsync();
 
@@ -133,7 +163,9 @@ namespace Api.Controllers
                 return NotFound();
             }
 
-            if (RelationshipEmployee(employee))
+            var childrens = GetChilrensByManagerID(id);
+
+            if (childrens.Count() > 0)
             {
                 return BadRequest();
             }
@@ -165,18 +197,27 @@ namespace Api.Controllers
 
         private bool RelationshipEmployee(Employee employee)
         {
-
-            if (employee.ManagerID != null)
+            if (employee.ManagerID != null && employee.ManagerID != 0)
             {
-                var managerExists = EmployeeExists((int)employee.ManagerID);
+                var managerExists = db.Employees.SingleOrDefault(e => e.EmployeeID.Equals((int) employee.ManagerID));
 
-                if (!managerExists)
+                if (managerExists != null)
+                {
+                    return false;
+                }
+
+                if (employee.ManagerID == employee.EmployeeID)
+                {
+                    return false;
+                }
+
+                if (employee.EmployeeID == managerExists.ManagerID)
                 {
                     return false;
                 }
             }
 
-            if (employee.OrganizationID != null)
+            if (employee.OrganizationID != null && employee.ManagerID != 0)
             {
                 var orgExists = OrganizationExists((int)employee.OrganizationID);
 

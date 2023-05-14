@@ -1,12 +1,14 @@
 ﻿using EmpClient.Api;
 using EmpClient.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace EmpClient.Controllers
 {
@@ -18,6 +20,16 @@ namespace EmpClient.Controllers
         public ActionResult Index()
         {
             return View(EmployeesApi.GetEmployeesWithOrgAndManager());
+        }
+
+        public ActionResult IndexChildren(int? ManagerID)
+        {
+            if (ManagerID == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(EmployeesApi.GetChilrensByManagerID((int) ManagerID));
         }
 
         // GET: Employees/Details/5
@@ -34,8 +46,7 @@ namespace EmpClient.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            List<Organization> lOrgs = OrganizationApi.GetOrganizations();
-            ViewBag.Organization = new SelectList(lOrgs, "OrganizationID", "OrganizationName");
+            AddAllViewBagSelectList(new Employee(), "");
 
             return View();
         }
@@ -44,10 +55,11 @@ namespace EmpClient.Controllers
         [HttpPost]
         public ActionResult Create(Employee obj)
         {
+            AddAllViewBagSelectList(obj, "");
             try
             {
                 Employee nEmp = EmployeesApi.InsertEmployee(obj);
-                if (nEmp != null)
+                if (!nEmp.Equals(new Employee()))
                 {
                     TempData["SuccessMessage"] = "Add new employee with id: " + nEmp.EmployeeID + " successfully!";
                     return RedirectToAction("Index");
@@ -68,10 +80,15 @@ namespace EmpClient.Controllers
         // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
         {
-            List<Organization> lOrgs = OrganizationApi.GetOrganizations();
-            ViewBag.Organization = new SelectList(lOrgs, "OrganizationID", "OrganizationName");
+            var emloyee = EmployeesApi.GetEmployeeById((int)id);
+            AddAllViewBagSelectList(emloyee, "");
 
-            return Details(id);
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(emloyee);
         }
 
         // POST: Employees/Edit/5
@@ -82,6 +99,7 @@ namespace EmpClient.Controllers
             {
                 return RedirectToAction("Index");
             }
+            AddAllViewBagSelectList(obj, "edit");
 
             try
             {
@@ -136,6 +154,58 @@ namespace EmpClient.Controllers
             {
                 return RedirectToAction("Delete", id);
             }
+        }
+
+        private void AddAllViewBagSelectList (Employee employee, string method)
+        {
+            Employee emp = new Employee();
+            emp.FirstName = "Choose manager for this employee!";
+
+            var lEmps = EmployeesApi.GetEmployees();
+            lEmps.Reverse();
+            lEmps.Add(emp);
+            lEmps.Reverse();
+
+            var newSelectLEmps = lEmps.AsQueryable().Select(s =>
+            new
+            {
+                Text = s.FirstName + " " + s.LastName,
+                Value = s.EmployeeID,
+                Selected = s.EmployeeID == employee.EmployeeID ? true : false
+            }).ToList();
+
+            if (method == "edit")
+            {
+                newSelectLEmps = lEmps.AsQueryable().Where(w => w.EmployeeID != employee.EmployeeID && w.ManagerID != employee.EmployeeID).Select(s =>
+                new
+                {
+                    Text = s.FirstName + " " + s.LastName,
+                    Value = s.EmployeeID,
+                    Selected = s.EmployeeID == employee.EmployeeID ? true : false
+                }).ToList();
+            }
+
+            SelectList empSelectList = new SelectList(newSelectLEmps, "Value", "Text", "Selected");
+            ViewBag.Employees = empSelectList;
+
+            Organization org = new Organization();
+            org.OrganizationName = "Choose organization for this employee!";
+
+            List<Organization> lOrgs = OrganizationApi.GetOrganizations();
+            lOrgs.Reverse();
+            lOrgs.Add(org);
+            lOrgs.Reverse();
+
+            var newSelectLOrgs = lOrgs.AsQueryable().Select(s =>
+            new
+            {
+                Text = s.OrganizationName,
+                Value = s.OrganizationID,
+                Selected = s.OrganizationID == employee.OrganizationID ? true : false
+            }).ToList();
+
+            SelectList orgSelectList = new SelectList(newSelectLOrgs, "Value", "Text", "Selected");
+            ViewBag.Organizations = orgSelectList;
         }
     }
 }

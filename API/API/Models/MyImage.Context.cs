@@ -18,6 +18,8 @@ namespace Api.Models
         public MyImageEntities()
             : base("name=MyImageEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

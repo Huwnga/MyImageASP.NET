@@ -23,11 +23,55 @@ namespace Api.Controllers
             return db.Orders;
         }
 
+        [Route("api/OrdersWithAll")]
+        public IQueryable<Order> GetOrdersWithAll()
+        {
+            var orders = db.Orders
+                .Include(e => e.Customer)
+                .Include(e => e.Employee)
+                .Include(e => e.Payment)
+                .Include(e => e.StatusOrder);
+
+            return orders;
+        }
+
+        [Route("api/OrdersWithAll")]
+        public IQueryable<Order> GetOrdersWithAllByCustomerID(int customerID)
+        {
+            var orders = db.Orders
+                .Include(e => e.Customer)
+                .Include(e => e.Employee)
+                .Include(e => e.Payment)
+                .Include(e => e.StatusOrder)
+                .Where(e => e.CustomerID == customerID);
+
+            return orders;
+        }
+
+        [Route("api/OrdersWithAll")]
+        public IQueryable<Order> GetOrdersWithAllByEmployeeID(int employeeID)
+        {
+            var orders = db.Orders
+                .Include(e => e.Customer)
+                .Include(e => e.Employee)
+                .Include(e => e.Payment)
+                .Include(e => e.StatusOrder)
+                .Where(e => e.EmployeeID == employeeID);
+
+            return orders;
+        }
+
         // GET: api/Orders/5
         [ResponseType(typeof(Order))]
         public async Task<IHttpActionResult> GetOrder(int id)
         {
-            Order order = await db.Orders.FindAsync(id);
+            Order order = await db.Orders
+                .Include(e => e.Customer)
+                .Include(e => e.Employee)
+                .Include(e => e.Payment)
+                .Include(e => e.StatusOrder)
+                .SingleOrDefaultAsync(e => e.OrderID == id);
+
             if (order == null)
             {
                 return NotFound();

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace EmpClient.Api
@@ -11,30 +12,40 @@ namespace EmpClient.Api
     {
         public static List<Employee> GetEmployees()
         {
-            ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/Employees";
-            string resStrEmps = resClient.RestRequestAll();
-            List<Employee> emps = JsonConvert.DeserializeObject<List<Employee>>(resStrEmps);
+            string endPoint = "api/Employees";
+            List<Employee> emps = ApiTemplate.GetListByEndPoint<Employee>(endPoint);
+
+            return emps;
+        }
+
+        public static List<Employee> GetEmployeesWithManager()
+        {
+            string endPoint = "api/EmployeesWithManager";
+            List<Employee> emps = ApiTemplate.GetListByEndPoint<Employee>(endPoint);
 
             return emps;
         }
 
         public static List<Employee> GetEmployeesWithOrganization()
         {
-            ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/EmployeesWithOrg";
-            string resStrEmps = resClient.RestRequestAll();
-            List<Employee> emps = JsonConvert.DeserializeObject<List<Employee>>(resStrEmps);
+            string endPoint = "api/EmployeesWithOrg";
+            List<Employee> emps = ApiTemplate.GetListByEndPoint<Employee>(endPoint);
 
             return emps;
         }
 
         public static List<Employee> GetEmployeesWithOrgAndManager()
         {
-            ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/EmployeesWithOrgAndManager";
-            string resStrEmps = resClient.RestRequestAll();
-            List<Employee> emps = JsonConvert.DeserializeObject<List<Employee>>(resStrEmps);
+            string endPoint = "api/EmployeesWithOrgAndManager";
+            List<Employee> emps = ApiTemplate.GetListByEndPoint<Employee>(endPoint);
+
+            return emps;
+        }
+
+        public static List<Employee> GetChilrensByManagerID(int ManagerID)
+        {
+            string endPoint = "api/EmployeesWithManager?managerID=" + ManagerID;
+            List<Employee> emps = ApiTemplate.GetListByEndPoint<Employee>(endPoint);
 
             return emps;
         }
@@ -51,18 +62,10 @@ namespace EmpClient.Api
 
         public static Employee InsertEmployee(Employee emp)
         {
-            ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/Employees";
-            string resStrEmp = resClient.InsertData(emp);
+            string endPoint = "api/Employees";
+            Employee employee = ApiTemplate.InserObjByEndPoint<Employee>(endPoint, emp);
 
-            if(!resStrEmp.StartsWith("Error:"))
-            {
-                Employee nEmp = JsonConvert.DeserializeObject<Employee>(resStrEmp);
-
-                return nEmp;
-            }
-
-            return null;
+            return employee;
         }
 
         public static bool UpdateEmployee(int id, Employee emp)

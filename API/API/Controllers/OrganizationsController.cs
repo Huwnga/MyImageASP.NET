@@ -25,6 +25,13 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("api/OrganizationsWithParentOrg")]
+        public IQueryable<Organization> GetChilrensByParentID(int parentID)
+        {
+            return db.Organizations.Include(e => e.Parent).Where(e => e.ParentID == parentID);
+        }
+
+        [HttpGet]
+        [Route("api/OrganizationsWithParentOrg")]
         public IQueryable<Organization> GetOrganizationsWithParentOrg()
         {
             return db.Organizations.Include(e => e.Parent);
@@ -64,6 +71,7 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
+            organization.ParentID = organization.ParentID == 0 ? null : organization.ParentID;
             db.Entry(organization).State = EntityState.Modified;
 
             try
@@ -99,6 +107,7 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
+            organization.ParentID = organization.ParentID == 0 ? null : organization.ParentID;
             db.Organizations.Add(organization);
             await db.SaveChangesAsync();
 
@@ -115,7 +124,9 @@ namespace Api.Controllers
                 return NotFound();
             }
 
-            if (RelationshipOrg(organization))
+            var childrens = GetChilrensByParentID(id);
+
+            if (childrens.Count() > 0)
             {
                 return BadRequest();
             }
@@ -142,11 +153,21 @@ namespace Api.Controllers
 
         private bool RelationshipOrg(Organization organization)
         {
-            if (organization.ParentID != null)
+            if (organization.ParentID != null && organization.ParentID != 0)
             {
-                var parentExists = OrganizationExists((int)organization.ParentID);
+                var parentExists = db.Organizations.SingleOrDefault(e => e.OrganizationID.Equals((int) organization.ParentID));
 
-                if (!parentExists)
+                if (parentExists == null)
+                {
+                    return false;
+                }
+
+                if (organization.ParentID == organization.OrganizationID)
+                {
+                    return false;
+                }
+
+                if (organization.OrganizationID == parentExists.ParentID)
                 {
                     return false;
                 }

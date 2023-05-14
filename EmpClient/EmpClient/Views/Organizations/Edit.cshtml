@@ -1,9 +1,10 @@
-﻿@model EmpClient.Models.Employee
+﻿@model EmpClient.Models.Organization
 
 @{
-    ViewBag.Title = "Employees";
+    ViewBag.Title = "Organizations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <div class="d-flex align-items-center justify-content-between shadow-sm p-3">
     <nav aria-label="breadcrumb">
@@ -12,9 +13,9 @@
                 @Html.ActionLink("Home", "", "", new { area = "" }, null)
             </li>
             <li class="breadcrumb-item">
-                @Html.ActionLink("Employees", "Index", "Employees", new { area = "" }, null)
+                @Html.ActionLink("Organizations", "Index", "Organizations", new { area = "" }, null)
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Create</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit</li>
         </ol>
     </nav>
 </div>
@@ -28,7 +29,7 @@
         @Html.Partial("_fields", Model)
 
         <div class="d-flex align-items-center my-3">
-            <input type="submit" value="Create" class="btn btn-primary me-2" />
+            <input type="submit" value="Save" class="btn btn-primary me-2" />
             @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-outline-secondary ms-2" })
         </div>
     }

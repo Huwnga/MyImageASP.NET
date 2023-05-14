@@ -41,17 +41,17 @@
     --bs-gutter-x: 3rem;
 }
 
-.fs-regular {
-    font-size: 1rem;
+.fs-sosmall {
+    font-size: 0.5rem;
 }
 
 @media (min-width: 992px) {
     .bd-sidebar {
         position: -webkit-sticky;
         position: sticky;
-        top: 3rem;
+        top: 4rem;
         display: block !important;
-        height: calc(100vh);
+        height: calc(100vh - 4rem);
         padding-left: 0.25rem;
         margin-left: -0.25rem;
         overflow-y: auto;
@@ -60,4 +60,13 @@
 
 .bd-sidebar {
     grid-area: sidebar;
+}
+
+@media (max-width: 992px) {
+    .sticky-under-lg-top {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
 }

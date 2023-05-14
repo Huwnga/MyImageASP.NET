@@ -117,6 +117,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\ApiTemplate.cs" />
     <Compile Include="Api\EmployeesApi.cs" />
     <Compile Include="Api\FunctionApi.cs" />
     <Compile Include="Api\FunctionGroupApi.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -147,11 +149,14 @@
     <Compile Include="Models\Group.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductSize.cs" />
     <Compile Include="Models\ResClient.cs" />
     <Compile Include="Models\Size.cs" />
+    <Compile Include="Models\StatusOrder.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserFunction.cs" />
     <Compile Include="Models\UserGroup.cs" />
@@ -196,10 +201,26 @@
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Organizations\Index.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\_details.cshtml" />
+    <Content Include="Views\Employees\_fields.cshtml" />
+    <Content Include="Views\Employees\_tables.cshtml" />
+    <Content Include="Views\Employees\IndexChildren.cshtml" />
+    <Content Include="Views\Organizations\IndexChildren.cshtml" />
+    <Content Include="Views\Organizations\_tables.cshtml" />
+    <Content Include="Views\Organizations\_details.cshtml" />
+    <Content Include="Views\Organizations\Details.cshtml" />
+    <Content Include="Views\Organizations\Delete.cshtml" />
+    <Content Include="Views\Organizations\Create.cshtml" />
+    <Content Include="Views\Organizations\Edit.cshtml" />
+    <Content Include="Views\Organizations\_fields.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Auth\" />
+    <Folder Include="Views\Orders\" />
     <Folder Include="Views\SizeApi\" />
   </ItemGroup>
   <ItemGroup>
