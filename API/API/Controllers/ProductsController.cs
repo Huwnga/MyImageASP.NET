@@ -24,25 +24,19 @@ namespace Api.Controllers
         private MyImageEntities db = new MyImageEntities();
 
         // GET: api/Products
-        public IPagedList<Product> GetProducts(int? pageNumber, int? pageSize)
+        public IQueryable<Product> GetProducts()
         {
-            int number = (pageNumber ?? 1);
-            int size = (pageSize ?? pageSizeDeffault);
-
-            return db.Products.ToPagedList(number, size);
+            return db.Products;
         }
 
+        [HttpGet]
         [Route("api/ProductsWithAll")]
         // GET: api/Products
-        public IPagedList<Product> GetProductsWithAll(int? pageNumber, int? pageSize)
+        public IQueryable<Product> GetProductsWithAll()
         {
-            int number = (pageNumber ?? 1);
-            int size = (pageSize ?? pageSizeDeffault);
-
             return db.Products
                 .Include(e => e.CategoryID)
-                .OrderBy(e => e.UpdatedAt)
-                .ToPagedList(number, size);
+                .OrderBy(e => e.UpdatedAt);
         }
 
         // GET: api/Products/5

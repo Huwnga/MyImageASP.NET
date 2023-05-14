@@ -11,6 +11,7 @@ namespace EmpClient.Models
         public int OrganizationID { get; set; }
         [Display(Name = "Parent Organization")]
         public Nullable<int> ParentID { get; set; }
+        [Required]
         [StringLength(255)]
         [Display(Name = "Organization Name")]
         public string OrganizationName { get; set; }

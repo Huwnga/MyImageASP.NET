@@ -1,0 +1,96 @@
+﻿@using PagedList.Mvc;
+@using EmpClient.Models;
+@using System.Configuration;
+
+@model  PagedList.IPagedList<Product>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].ProductName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].Category.CategoryName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].UnitsInStock)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].UnitsOnOrder)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].ReoderLevel)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].Description)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].CreatedAt)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].UpdatedAt)
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @if (Model.Count() < 1)
+            {
+                <tr>
+                    <td colspan="11" class="text-center fw-semibold text-danger">
+                        Please add new products!
+                    </td>
+                </tr>
+            }
+
+            @foreach (var item in Model)
+            {
+                string mid = ConfigurationManager.ConnectionStrings["MyImageDomain"].ConnectionString;
+                string avatarLink = mid + item.ImagePath;
+                string classImageToolTip = "rounded-0 bg-dark";
+                string imgToolTip = "<img class=\"" + classImageToolTip + "\" src=\"" + avatarLink + "\" height=\"" + 100 + "\" width=\"" + 100 + "\" />";
+
+                <tr data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="@imgToolTip">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitsInStock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReoderLevel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UpdatedAt)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        });
+    </script>
+}

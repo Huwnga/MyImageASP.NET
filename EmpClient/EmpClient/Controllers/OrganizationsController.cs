@@ -1,29 +1,50 @@
 ﻿using EmpClient.Api;
 using EmpClient.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace EmpClient.Controllers
 {
     public class OrganizationsController : Controller
     {
+        private int deffaultSize = 25;
         // GET: Organizations
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(OrganizationApi.GetOrganizationsWithParentOrg());
+            int number = (page ?? 1);
+            var organizations = OrganizationApi.GetOrganizationsWithParentOrg();
+
+            if (organizations == null || organizations.Count == 0)
+            {
+                organizations = new List<Organization>();
+            }
+
+            return View(organizations.ToPagedList(number, deffaultSize));
         }
 
-        public ActionResult IndexChildren(int? ParentID)
+        public ActionResult IndexChildren(int? page, int? ParentID)
         {
             if (ParentID == null)
             {
                 return RedirectToAction("Index");
             }
 
-            return View(OrganizationApi.GetChilrensByParentID((int) ParentID));
+            ViewBag.ParentID = ParentID;
+
+            int number = (page ?? 1);
+            var organizations = OrganizationApi.GetChilrensByParentID((int)ParentID);
+
+            if (organizations == null || organizations.Count == 0)
+            {
+                organizations = new List<Organization>();
+            }
+
+            return View(organizations.ToPagedList(number, deffaultSize));
         }
 
         // GET: Organizations/Details/5

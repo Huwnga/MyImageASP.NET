@@ -1,4 +1,8 @@
-﻿@model IEnumerable<EmpClient.Models.Employee>
+﻿@using PagedList.Mvc;
+@using EmpClient.Models;
+@using System.Configuration;
+
+@model  PagedList.IPagedList<Employee>
 
 @{
     ViewBag.Title = "Employees";
@@ -26,5 +30,13 @@
 </div>
 
 <div class="mt-3 px-5 pt-3">
-    @Html.Partial("_tables", Model)
+    @Html.Partial("_tablesPagedList", Model)
+
+    <div class="d-flex justify-content-between align-items-center container-fluid">
+        <div class="text-center">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        </div>
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
 </div>

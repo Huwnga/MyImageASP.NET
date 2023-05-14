@@ -9,9 +9,11 @@ namespace EmpClient.Models
     public partial class Employee
     {
         public int EmployeeID { get; set; }
+        [Required]
         [StringLength(50)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        [Required]
         [StringLength(50)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
@@ -30,6 +32,7 @@ namespace EmpClient.Models
         public string Address { get; set; }
         [StringLength(59)]
         public string Mobile { get; set; }
+        [DataType(DataType.EmailAddress)]
         [StringLength(320)]
         public string Email { get; set; }
         public byte[] Photo { get; set; }

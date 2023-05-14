@@ -2,34 +2,54 @@
 using EmpClient.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace EmpClient.Controllers
 {
     public class EmployeesController : Controller
     {
-        
+        private int deffaultSize = 1;
         // GET: Employees
-        
-        public ActionResult Index()
+
+        public ActionResult Index(int? page)
         {
-            return View(EmployeesApi.GetEmployeesWithOrgAndManager());
+            int number = (page ?? 1);
+            var emps = EmployeesApi.GetEmployeesWithOrgAndManager();
+
+            if (emps == null || emps.Count == 0)
+            {
+                emps = new List<Employee>();
+            }
+
+            return View(emps.ToPagedList(number, deffaultSize));
         }
 
-        public ActionResult IndexChildren(int? ManagerID)
+        public ActionResult IndexChildren(int? page, int? ManagerID)
         {
             if (ManagerID == null)
             {
                 return RedirectToAction("Index");
             }
 
-            return View(EmployeesApi.GetChilrensByManagerID((int) ManagerID));
+            ViewBag.ManagerID = ManagerID;
+
+            int number = (page ?? 1);
+            var emps = EmployeesApi.GetChilrensByManagerID((int)ManagerID);
+
+            if (emps == null || emps.Count == 0)
+            {
+                emps = new List<Employee>();
+            }
+
+            return View(emps.ToPagedList(number, deffaultSize));
         }
 
         // GET: Employees/Details/5

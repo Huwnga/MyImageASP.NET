@@ -77,3 +77,7 @@ D:\Documents\C#\MyImageASP.NET\EmpClient\EmpClient\obj\Debug\EmpClient.csproj.Co
 D:\Documents\C#\MyImageASP.NET\EmpClient\EmpClient\obj\Debug\EmpClient.csproj.CopyComplete
 D:\Documents\C#\MyImageASP.NET\EmpClient\EmpClient\obj\Debug\EmpClient.dll
 D:\Documents\C#\MyImageASP.NET\EmpClient\EmpClient\obj\Debug\EmpClient.pdb
+D:\Documents\C#\MyImageASP.NET\EmpClient\EmpClient\bin\PagedList.dll
+D:\Documents\C#\MyImageASP.NET\EmpClient\EmpClient\bin\PagedList.Mvc.dll
+D:\Documents\C#\MyImageASP.NET\EmpClient\EmpClient\bin\PagedList.xml
+D:\Documents\C#\MyImageASP.NET\EmpClient\EmpClient\bin\PagedList.Mvc.xml
