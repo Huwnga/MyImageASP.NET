@@ -124,12 +124,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\ApiTemplate.cs" />
+    <Compile Include="Api\CategoryApi.cs" />
+    <Compile Include="Api\CustomerApi.cs" />
     <Compile Include="Api\EmployeesApi.cs" />
+    <Compile Include="Api\FeedbackApi.cs" />
     <Compile Include="Api\FunctionApi.cs" />
     <Compile Include="Api\FunctionGroupApi.cs" />
     <Compile Include="Api\GroupApi.cs" />
     <Compile Include="Api\GroupFunctionApi.cs" />
     <Compile Include="Api\MaterialApi.cs" />
+    <Compile Include="Api\OrderApi.cs" />
     <Compile Include="Api\OrganizationApi.cs" />
     <Compile Include="Api\ProductApi.cs" />
     <Compile Include="Api\SizeApi.cs" />
@@ -137,12 +141,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SizesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,6 +165,7 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Material.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Organization.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Product.cs" />
@@ -229,12 +237,34 @@
     <Content Include="Views\Products\_tablesPagedList.cshtml" />
     <Content Include="Views\Organizations\_tablesPagedList.cshtml" />
     <Content Include="Views\Employees\_tablesPagedList.cshtml" />
+    <Content Include="Views\Products\_fields.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\_details.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Categories\_tablesPagedList.cshtml" />
+    <Content Include="Views\Categories\_fields.cshtml" />
+    <Content Include="Views\Categories\_details.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Sizes\Index.cshtml" />
+    <Content Include="Views\Sizes\Details.cshtml" />
+    <Content Include="Views\Sizes\Create.cshtml" />
+    <Content Include="Views\Sizes\Edit.cshtml" />
+    <Content Include="Views\Sizes\Delete.cshtml" />
+    <Content Include="Views\Sizes\_fields.cshtml" />
+    <Content Include="Views\Sizes\_tablesPagedList.cshtml" />
+    <Content Include="Views\Sizes\_details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Accounts\" />
     <Folder Include="Views\Auth\" />
     <Folder Include="Views\Orders\" />
-    <Folder Include="Views\SizeApi\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

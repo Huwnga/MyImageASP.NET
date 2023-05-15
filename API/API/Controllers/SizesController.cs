@@ -23,8 +23,6 @@ namespace Api.Controllers
             return db.Sizes;
         }
 
-        // GET: api/Sizes/Material
-        [Route("api/Sizes/Material")]
         public IQueryable<Size> GetSizesByProductID(int productID)
         {
             var productSizes = db.ProductSizes.Include(x => x.Size).OrderBy(x => x.ProductID).Where(x => x.Equals(productID)).ToList();

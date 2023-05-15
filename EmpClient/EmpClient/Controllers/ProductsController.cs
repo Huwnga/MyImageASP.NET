@@ -12,7 +12,7 @@ namespace EmpClient.Controllers
     public class ProductsController : Controller
     {
         private int deffaultSize = 25;
-        // GET: Organizations
+        // GET: Products
         public ActionResult Index(int? page)
         {
             int number = (page ?? 1);
@@ -26,17 +26,7 @@ namespace EmpClient.Controllers
             return View(products.ToPagedList(number, deffaultSize));
         }
 
-        public ActionResult IndexChildren(int? ParentID)
-        {
-            if (ParentID == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            return View(OrganizationApi.GetChilrensByParentID((int)ParentID));
-        }
-
-        // GET: Organizations/Details/5
+        // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,28 +34,28 @@ namespace EmpClient.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(OrganizationApi.GetOrganizationByID((int)id));
+            return View(ProductApi.GetProductByID((int)id));
         }
 
-        // GET: Organizations/Create
+        // GET: Products/Create
         public ActionResult Create()
         {
-            AddAllViewBagSelectList(new Organization(), "");
+            AddAllViewBagSelectList(new Product());
 
             return View();
         }
 
-        // POST: Organizations/Create
+        // POST: Products/Create
         [HttpPost]
-        public ActionResult Create(Organization obj)
+        public ActionResult Create(Product obj)
         {
-            AddAllViewBagSelectList(obj, "");
+            AddAllViewBagSelectList(obj);
             try
             {
-                Organization nOrg = OrganizationApi.InsertOrganization(obj);
+                Product nOrg = ProductApi.InsertProduct(obj);
                 if (nOrg != null)
                 {
-                    TempData["SuccessMessage"] = "Add new Organization with id: " + nOrg.OrganizationID + " successfully!";
+                    TempData["SuccessMessage"] = "Add new Product with id: " + nOrg.ProductID + " successfully!";
                     return RedirectToAction("Index");
                 }
                 else
@@ -81,33 +71,33 @@ namespace EmpClient.Controllers
 
         }
 
-        // GET: Organizations/Edit/5
+        // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
-            var emloyee = OrganizationApi.GetOrganizationByID((int)id);
-            AddAllViewBagSelectList(emloyee, "edit");
-
             if (id == null)
             {
                 return RedirectToAction("Index");
             }
 
-            return View(emloyee);
+            var product = ProductApi.GetProductByID((int)id);
+            AddAllViewBagSelectList(product);
+
+            return View(product);
         }
 
-        // POST: Organizations/Edit/5
+        // POST: Products/Edit/5
         [HttpPost]
-        public ActionResult Edit(Organization obj, int? id)
+        public ActionResult Edit(Product obj, int? id)
         {
             if (id == null)
             {
                 return RedirectToAction("Index");
             }
-            AddAllViewBagSelectList(obj, "edit");
+            AddAllViewBagSelectList(obj);
 
             try
             {
-                if (OrganizationApi.UpdateOrganization((int)id, obj))
+                if (ProductApi.UpdateProduct((int)id, obj))
                 {
                     TempData["SuccessMessage"] = "Updated successfully!";
                     return RedirectToAction("Index");
@@ -125,13 +115,13 @@ namespace EmpClient.Controllers
             }
         }
 
-        // GET: Organizations/Delete/5
+        // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
             return Details(id);
         }
 
-        // POST: Organizations/Delete/5
+        // POST: Products/Delete/5
         [HttpPost]
         public ActionResult Delete(int? id, FormCollection collection)
         {
@@ -142,7 +132,7 @@ namespace EmpClient.Controllers
 
             try
             {
-                if (OrganizationApi.DeleteOrganization((int)id))
+                if (ProductApi.DeleteProduct((int)id))
                 {
                     TempData["SuccessMessage"] = "Deleted successfully!";
                     return RedirectToAction("Index");
@@ -160,37 +150,26 @@ namespace EmpClient.Controllers
             }
         }
 
-        private void AddAllViewBagSelectList(Organization organization, string method)
+        private void AddAllViewBagSelectList(Product product)
         {
-            Organization org = new Organization();
-            org.OrganizationName = "Choose parent organization for this organization!";
+            Category cat = new Category();
+            cat.CategoryName = "Choose category for this product!";
 
-            List<Organization> lOrgs = OrganizationApi.GetOrganizations();
-            lOrgs.Reverse();
-            lOrgs.Add(org);
-            lOrgs.Reverse();
+            List<Category> lCats = CategoryApi.GetCategorys();
+            lCats.Reverse();
+            lCats.Add(cat);
+            lCats.Reverse();
 
-            var newSelectLOrgs = lOrgs.AsQueryable().Select(s =>
+            var newSelectLCats = lCats.AsQueryable().Select(s =>
             new
             {
-                Text = s.OrganizationName,
-                Value = s.OrganizationID,
-                Selected = s.OrganizationID == organization.OrganizationID ? true : false
+                Text = s.CategoryName,
+                Value = cat.CategoryID,
+                Selected = cat.CategoryID == product.CategoryID ? true : false
             }).ToList();
 
-            if (method == "edit")
-            {
-                newSelectLOrgs = lOrgs.AsQueryable().Where(w => w.OrganizationID != organization.OrganizationID && w.ParentID != organization.OrganizationID).Select(s =>
-                new
-                {
-                    Text = s.OrganizationName,
-                    Value = s.OrganizationID,
-                    Selected = s.OrganizationID == organization.OrganizationID ? true : false
-                }).ToList();
-            }
-
-            SelectList orgSelectList = new SelectList(newSelectLOrgs, "Value", "Text", "Selected");
-            ViewBag.Organizations = orgSelectList;
+            SelectList catSelectList = new SelectList(newSelectLCats, "Value", "Text", "Selected");
+            ViewBag.Categories = catSelectList;
         }
     }
 }

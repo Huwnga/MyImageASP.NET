@@ -11,7 +11,7 @@ namespace Api.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class Employee
     {
         public int EmployeeID { get; set; }
@@ -29,7 +29,7 @@ namespace Api.Models
         public Nullable<int> ManagerID { get; set; }
         public Nullable<int> OrganizationID { get; set; }
         public string PhotoPath { get; set; }
-
+    
         public virtual Employee Manager { get; set; }
         public virtual Organization Organization { get; set; }
     }

@@ -24,11 +24,20 @@ namespace Api.Controllers
             return db.Users;
         }
 
+        [Route("api/UsersWithAll")]
+        public IQueryable<User> GetUsersWithAll()
+        {
+            return db.Users.Include(e => e.Employee);
+        }
+
         // GET: api/Users/5
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> GetUser(int id)
         {
-            User user = await db.Users.FindAsync(id);
+            User user = await db.Users
+                .Include(e => e.Employee)
+                .SingleOrDefaultAsync(e => e.UserID == id);
+
             if (user == null)
             {
                 return NotFound();
@@ -47,6 +56,11 @@ namespace Api.Controllers
             }
 
             if (id != user.UserID)
+            {
+                return BadRequest();
+            }
+
+            if (!Validated(user))
             {
                 return BadRequest();
             }
@@ -81,6 +95,11 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (!Validated(user))
+            {
+                return BadRequest();
+            }
+
             db.Users.Add(user);
             await db.SaveChangesAsync();
 
@@ -105,7 +124,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("api/User/Login")]
-        [ResponseType(typeof(int))]
+        [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> Login(User user)
         {
             if (!ModelState.IsValid)
@@ -117,17 +136,17 @@ namespace Api.Controllers
 
             if (userExists == null)
             {
-                return Ok(0);
+                return BadRequest();
             }
 
             bool verified = BCrypt.Net.BCrypt.Verify(user.Password, userExists.Password);
 
             if (!verified)
             {
-                return Ok(0);
+                return BadRequest();
             }
 
-            return Ok(userExists.UserID);
+            return Ok(userExists);
         }
 
         [HttpPost]
@@ -150,29 +169,27 @@ namespace Api.Controllers
 
             UserFunction userFuncExists = await db.UserFunctions.SingleOrDefaultAsync(e => e.UserID == userID && e.FunctionID == functionID);
 
-            if (userFuncExists != null)
+            if (userFuncExists == null)
             {
-                return Ok(true);
-            }
+                List<UserGroup> userGroups = db.UserGroups.Where(e => e.UserID == userID).ToList();
 
-            List<UserGroup> userGroups = db.UserGroups.Where(e => e.UserID == userID).ToList();
-
-            bool hadFunctionByGroup = false;
-            userGroups.ForEach(userGroup =>
-            {
-                bool groupFunctionExists = db.FunctionGroups.Count(e => e.FunctionID == functionID && e.GroupID == userGroup.GroupID) > 0;
-
-                if (groupFunctionExists)
+                bool hadFunctionByGroup = false;
+                userGroups.ForEach(userGroup =>
                 {
-                    hadFunctionByGroup = true;
+                    bool groupFunctionExists = db.FunctionGroups.Count(e => e.FunctionID == functionID && e.GroupID == userGroup.GroupID) > 0;
 
-                    return;
+                    if (groupFunctionExists)
+                    {
+                        hadFunctionByGroup = true;
+
+                        return;
+                    }
+                });
+
+                if (!hadFunctionByGroup)
+                {
+                    return Ok(false);
                 }
-            });
-
-            if (!hadFunctionByGroup)
-            {
-                return Ok(false);
             }
 
             return Ok(true);
@@ -190,6 +207,23 @@ namespace Api.Controllers
         private bool UserExists(int id)
         {
             return db.Users.Count(e => e.UserID == id) > 0;
+        }
+
+        public bool Validated (User user)
+        {
+            if (user.EmployeeID == null)
+            {
+                return false;
+            }
+
+            var empExists = db.Employees.SingleOrDefaultAsync(e => e.EmployeeID == user.EmployeeID);
+
+            if (empExists == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

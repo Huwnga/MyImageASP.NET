@@ -1,7 +1,12 @@
-﻿@model EmpClient.Models.Employee
-@{ 
+﻿@using System.Configuration;
+
+@model EmpClient.Models.Employee
+@{
     SelectList empSelectList = ViewBag.Employees;
     SelectList orgSelectList = ViewBag.Organizations;
+
+    string mid = ConfigurationManager.ConnectionStrings["MyImageDomain"].ConnectionString;
+    string avatarLink = mid + Model.PhotoPath;
 }
 
 <div class="form-horizontal">
@@ -89,46 +94,48 @@
         </div>
     </div>
 
-    @if (empSelectList != null)
-    {
-        <div class="form-group my-2">
-            @Html.LabelFor(model => model.ManagerID, htmlAttributes: new { @class = "control-label" })
-            <div class="w-100">
-                @if (empSelectList.Count() > 1)
-                {
-                    @Html.DropDownListFor(model => model.ManagerID, empSelectList, htmlAttributes: new { @class = "form-select" })
-                    @Html.ValidationMessageFor(model => model.ManagerID, "", new { @class = "text-danger" })
-                }
-                else
-                {
-                    <p class="text-center fw-semibold text-danger">
-                        Please add new Manager!
-                    </p>
-                }
-            </div>
+    <div class="form-group my-2">
+        @Html.LabelFor(model => model.ManagerID, htmlAttributes: new { @class = "control-label" })
+        <div class="w-100">
+            @if (empSelectList != null && empSelectList.Count() > 1)
+            {
+                @Html.DropDownListFor(model => model.ManagerID, empSelectList, htmlAttributes: new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.ManagerID, "", new { @class = "text-danger" })
+            }
+            else
+            {
+                <p class="text-center fw-semibold text-danger">
+                    Please add new Manager!
+                </p>
+            }
         </div>
-    }
+    </div>
 
-    @if (orgSelectList != null)
-    {
-        <div class="form-group my-2">
-            @Html.LabelFor(model => model.OrganizationID, htmlAttributes: new { @class = "control-label" })
-            <div class="w-100">
-                @if (orgSelectList.Count() > 1)
-                {
-                    @Html.DropDownListFor(model => model.OrganizationID, orgSelectList, htmlAttributes: new { @class = "form-select" })
-                    @Html.ValidationMessageFor(model => model.OrganizationID, "", new { @class = "text-danger" })
-                } 
-                else
-                {
-                    <p class="text-center fw-semibold text-danger">
-                        Please add new Organization!
-                    </p>
-                }
-            </div>
+    <div class="form-group my-2">
+        @Html.LabelFor(model => model.OrganizationID, htmlAttributes: new { @class = "control-label" })
+        <div class="w-100">
+            @if (orgSelectList != null && orgSelectList.Count() > 1)
+            {
+                @Html.DropDownListFor(model => model.OrganizationID, orgSelectList, htmlAttributes: new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.OrganizationID, "", new { @class = "text-danger" })
+            }
+            else
+            {
+                <p class="text-center fw-semibold text-danger">
+                    Please add new Organization!
+                </p>
+            }
         </div>
-    }
+    </div>
 
+    <div class="form-group my-2">
+        <label class="control-label col-md-2">
+            Avatar
+        </label>
+        <div class="w-100">
+            <img class="rounded-0 h-auto" width="100" min-width="100%" src="@avatarLink" alt="Avatar" />
+        </div>
+    </div>
 
     @Html.HiddenFor(model => model.PhotoPath, null)
 </div>

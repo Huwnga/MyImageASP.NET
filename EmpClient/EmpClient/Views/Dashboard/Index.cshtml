@@ -1,6 +1,19 @@
-﻿@{
+﻿@using EmpClient.Models;
+@using EmpClient.Api;
+
+@{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var accNum = UserApi.GetUsers().Count();
+    var empNum = EmployeesApi.GetEmployees().Count();
+    var orgNum = OrganizationApi.GetOrganizations().Count();
+    var cusNum = CustomerApi.GetCustomers().Count();
+    var catNum = CategoryApi.GetCategorys().Count();
+    var matNum = MaterialApi.GetMaterials().Count();
+    var prdNum = ProductApi.GetProducts().Count();
+    var ordNum = OrderApi.GetOrders().Count();
+    var fdbNum = FeedbackApi.GetFeedbacks().Count();
 }
 
 <div class="d-flex align-items-center justify-content-between shadow-sm p-3">
@@ -21,8 +34,8 @@
                 <i class="bi bi-person-fill-gear"></i>
             </div>
             <div class="d-flex flex-column container-fluid">
-                <span class="fs-5 fw-medium">Employees Account</span>
-                <span class="fs-6 fw-semibolder">3</span>
+                <span class="fs-5 fw-medium text-break">Employee Accounts</span>
+                <span class="fs-6 fw-semibolder">@accNum</span>
             </div>
         </div>
     </div>
@@ -32,8 +45,8 @@
                 <i class="bi bi-person-vcard-fill"></i>
             </div>
             <div class="d-flex flex-column container-fluid">
-                <span class="fs-5 fw-medium">Employees</span>
-                <span class="fs-6 fw-semibolder">3</span>
+                <span class="fs-5 fw-medium text-break">Employees</span>
+                <span class="fs-6 fw-semibolder">@empNum</span>
             </div>
         </div>
     </div>
@@ -43,8 +56,8 @@
                 <i class="bi bi-buildings-fill"></i>
             </div>
             <div class="d-flex flex-column container-fluid">
-                <span class="fs-5 fw-medium">Organizations</span>
-                <span class="fs-6 fw-semibolder">1</span>
+                <span class="fs-5 fw-medium text-break">Organizations</span>
+                <span class="fs-6 fw-semibolder">@orgNum</span>
             </div>
         </div>
     </div>
@@ -54,8 +67,8 @@
                 <i class="bi bi-person-fill"></i>
             </div>
             <div class="d-flex flex-column container-fluid">
-                <span class="fs-5 fw-medium">Customers</span>
-                <span class="fs-6 fw-semibolder">3</span>
+                <span class="fs-5 fw-medium text-break">Customers</span>
+                <span class="fs-6 fw-semibolder">@cusNum</span>
             </div>
         </div>
     </div>
@@ -65,8 +78,8 @@
                 <i class="bi bi-grid-fill"></i>
             </div>
             <div class="d-flex flex-column container-fluid">
-                <span class="fs-5 fw-medium">Categories</span>
-                <span class="fs-6 fw-semibolder">5</span>
+                <span class="fs-5 fw-medium text-break">Categories</span>
+                <span class="fs-6 fw-semibolder">@catNum</span>
             </div>
         </div>
     </div>
@@ -76,8 +89,8 @@
                 <i class="bi bi-stack"></i>
             </div>
             <div class="d-flex flex-column container-fluid">
-                <span class="fs-5 fw-medium">Materials</span>
-                <span class="fs-6 fw-semibolder">12</span>
+                <span class="fs-5 fw-medium text-break">Materials</span>
+                <span class="fs-6 fw-semibolder">@matNum</span>
             </div>
         </div>
     </div>
@@ -87,8 +100,8 @@
                 <i class="bi bi-box-fill"></i>
             </div>
             <div class="d-flex flex-column container-fluid">
-                <span class="fs-5 fw-medium">Products</span>
-                <span class="fs-6 fw-semibolder">251</span>
+                <span class="fs-5 fw-medium text-break">Products</span>
+                <span class="fs-6 fw-semibolder">@prdNum</span>
             </div>
         </div>
     </div>
@@ -98,8 +111,19 @@
                 <i class="bi bi-cart4"></i>
             </div>
             <div class="d-flex flex-column container-fluid">
-                <span class="fs-5 fw-medium">Orders</span>
-                <span class="fs-6 fw-semibolder">3</span>
+                <span class="fs-5 fw-medium text-break">Orders</span>
+                <span class="fs-6 fw-semibolder">@ordNum</span>
+            </div>
+        </div>
+    </div>
+    <div class="shadow-sm p-3 mb-5 mx-3 bg-body-tertiary rounded col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="d-flex align-items-center container-fluid">
+            <div class="px-2 fs-3">
+                <i class="bi bi-star-half"></i>
+            </div>
+            <div class="d-flex flex-column container-fluid">
+                <span class="fs-5 fw-medium text-break">Feedbacks</span>
+                <span class="fs-6 fw-semibolder">@fdbNum</span>
             </div>
         </div>
     </div>

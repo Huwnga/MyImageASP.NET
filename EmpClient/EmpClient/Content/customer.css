@@ -51,7 +51,7 @@
         position: sticky;
         top: 4rem;
         display: block !important;
-        height: calc(100vh - 4rem);
+        height: calc(100vh - 5rem);
         padding-left: 0.25rem;
         margin-left: -0.25rem;
         overflow-y: auto;

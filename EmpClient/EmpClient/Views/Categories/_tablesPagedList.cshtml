@@ -1,0 +1,60 @@
+﻿@using PagedList.Mvc;
+@using EmpClient.Models;
+@using System.Configuration;
+
+@model  PagedList.IPagedList<Category>
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].CategoryName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].Description)
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @if (Model.Count() < 1)
+            {
+                <tr>
+                    <td colspan="11" class="text-center fw-semibold text-danger">
+                        Please add new Categories!
+                    </td>
+                </tr>
+            }
+
+            @foreach (var item in Model)
+            {
+                string mid = ConfigurationManager.ConnectionStrings["MyImageDomain"].ConnectionString;
+                string avatarLink = mid + item.PicturePath;
+                string classImageToolTip = "rounded-0 bg-dark";
+                string imgToolTip = "<img class=\"" + classImageToolTip + "\" src=\"" + avatarLink + "\" height=\"" + 100 + "\" width=\"" + 300 + "\" />";
+
+                <tr data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="@imgToolTip">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        });
+    </script>
+}

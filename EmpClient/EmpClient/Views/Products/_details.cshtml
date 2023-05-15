@@ -1,0 +1,85 @@
+﻿@using System.Configuration
+@model EmpClient.Models.Product
+
+@{
+    string mid = ConfigurationManager.ConnectionStrings["MyImageDomain"].ConnectionString;
+    string productLink = mid + Model.ImagePath;
+}
+
+<dl class="dl-horizontal row">
+    <div class="col-md-7">
+        <dt>
+            Product Image
+        </dt>
+
+        <dd class="d-flex align-items-center justify-content-center w-100">
+            <img class="img-fuild" src="@productLink" />
+        </dd>
+    </div>
+
+    <div class="col-md-5">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitsInStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitsInStock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitsOnOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitsOnOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReoderLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReoderLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </dd>
+    </div>
+</dl>

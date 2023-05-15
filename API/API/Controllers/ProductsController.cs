@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Drawing;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -114,6 +112,11 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
+            if (!Validated(product))
+            {
+                return BadRequest();
+            }
+
             product.UpdatedAt = DateTime.Now;
 
             db.Entry(product).State = EntityState.Modified;
@@ -146,6 +149,11 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (!Validated(product))
+            {
+                return BadRequest();
+            }
+
             product.CreatedAt = DateTime.Now;
             product.UpdatedAt = DateTime.Now;
 
@@ -165,6 +173,30 @@ namespace Api.Controllers
                 return NotFound();
             }
 
+            List<Material> materials = db.Materials.Where(e => e.ProductID == id).ToList();
+
+            if (materials.Count > 0)
+            {
+                return BadRequest();
+            }
+
+            var productSizes = db.ProductSizes.Where(e => e.ProductID == id).ToList();
+            var feedbacks = db.Feedbacks.Where(e => e.ProductID == id).ToList();
+            var cartDetails = db.CartDetails.Where(e => e.ProductID == id).ToList();
+            var orderDetails = db.OrderDetails.Where(e => e.ProductID == id).ToList();
+            var images = db.Images.Where(e => e.ProductID == id).ToList();
+
+            db.ProductSizes.RemoveRange(productSizes);
+            await db.SaveChangesAsync();
+            db.Feedbacks.RemoveRange(feedbacks);
+            await db.SaveChangesAsync();
+            db.CartDetails.RemoveRange(cartDetails);
+            await db.SaveChangesAsync();
+            db.OrderDetails.RemoveRange(orderDetails);
+            await db.SaveChangesAsync();
+            db.Images.RemoveRange(images);
+            await db.SaveChangesAsync();
+
             db.Products.Remove(product);
             await db.SaveChangesAsync();
 
@@ -183,6 +215,26 @@ namespace Api.Controllers
         private bool ProductExists(int id)
         {
             return db.Products.Count(e => e.ProductID == id) > 0;
+        }
+
+        private bool Validated (Product product)
+        {
+            if (product.CategoryID != null)
+            {
+                product.CategoryID = product.CategoryID == 0 ? null : product.CategoryID;
+
+                if (product.CategoryID != null)
+                {
+                    var catExists = db.Categories.Where(e => e.CategoryID == product.CategoryID).Count();
+
+                    if (catExists > 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

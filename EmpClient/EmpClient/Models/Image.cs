@@ -13,6 +13,7 @@ namespace EmpClient.Models
         public Nullable<int> ImageSize { get; set; }
         public string ImagePath { get; set; }
         public string ImageType { get; set; }
+        public Nullable<System.DateTime> CreatedAt { get; set; }
 
         public virtual Product Product { get; set; }
     }

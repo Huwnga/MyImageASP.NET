@@ -11,9 +11,11 @@ namespace EmpClient.Models
     {
         public int CategoryID { get; set; }
         [StringLength(255)]
-        [Display(Name = "Product Name")]
+        [Display(Name = "Category Name")]
         public string CategoryName { get; set; }
         public string Description { get; set; }
         public byte[] Picture { get; set; }
+        [StringLength(255)]
+        public string PicturePath { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using EmpClient.Models;
+﻿using EmpClient.Api;
+using EmpClient.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,23 +12,52 @@ namespace Client.Api
     {
         public static List<Size> GetSizes()
         {
-            ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/Sizes";
-            string resStrSizes = resClient.RestRequestAll();
-            List<Size> sizes = JsonConvert.DeserializeObject<List<Size>>(resStrSizes);
+            string endPoint = "api/Sizes";
+            List<Size> sizes = ApiTemplate.GetByEndPoint<List<Size>>(endPoint);
 
             return sizes;
         }
 
+        public static List<Size> GetSizesByProductID (int productID)
+        {
+            string endPoint = "api/Sizes?productID=" + productID;
+            List<Size> sizes = ApiTemplate.GetByEndPoint<List<Size>>(endPoint);
 
-        public static List<Size> GetSizesByMaterialID(int materialID)
+            return sizes;
+        }
+
+        public static List<Size> GetSize(int id)
+        {
+            string endPoint = "api/Sizes?id=" + id;
+            List<Size> sizes = ApiTemplate.GetByEndPoint<List<Size>>(endPoint);
+
+            return sizes;
+        }
+
+        public static Size InsSize(Size size)
+        {
+            string endPoint = "api/Sizes";
+            Size nSize = ApiTemplate.InserObjByEndPoint<Size>(endPoint, size);
+
+            return nSize;
+        }
+
+        public static bool UpdSize (int id, Size size)
         {
             ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/Sizes/Material?materialID" + materialID;
-            string resStrSizesByMaterial = resClient.RestRequestAll();
-            List<Size> sizesByMaterial = JsonConvert.DeserializeObject<List<Size>>(resStrSizesByMaterial);
+            resClient.EndPoint = "api/Sizes?id=" + id;
+            bool isSuccess = resClient.UpdateData(size);
 
-            return sizesByMaterial;
+            return isSuccess;
+        }
+
+        public static bool DelSize(int id)
+        {
+            ResClient resClient = new ResClient();
+            resClient.EndPoint = "api/Sizes?id=" + id;
+            bool isSuccess = resClient.DeleteData();
+
+            return isSuccess;
         }
     }
 }

@@ -9,11 +9,10 @@ namespace EmpClient.Api
 {
     public class ProductApi
     {
-        public static IPagedList<Product> GetProducts(int? pageNumber, int? pageSize)
+        public static List<Product> GetProducts()
         {
-            string endPoint = "api/Products?pageNumber=" + pageNumber
-                    + "&pageSize=" + pageSize;
-            IPagedList<Product> products = ApiTemplate.GetByEndPoint<IPagedList<Product>>(endPoint);
+            string endPoint = "api/Products";
+            List<Product> products = ApiTemplate.GetByEndPoint<List<Product>>(endPoint);
 
             return products;
         }
@@ -26,7 +25,7 @@ namespace EmpClient.Api
             return products;
         }
 
-        public static Product GetProductsWithAll(int id)
+        public static Product GetProductByID(int id)
         {
             string endPoint = "api/Products?id=" + id;
             Product products = ApiTemplate.GetByEndPoint<Product>(endPoint);
@@ -34,35 +33,27 @@ namespace EmpClient.Api
             return products;
         }
 
-        public static Organization GetOrganizationByID(int id)
+        public static Product InsertProduct(Product prd)
         {
-            string endPoint = "api/Organizations?id=" + id;
-            Organization orgs = ApiTemplate.GetByEndPoint<Organization>(endPoint);
+            string endPoint = "api/Products";
+            Product product = ApiTemplate.InserObjByEndPoint<Product>(endPoint, prd);
 
-            return orgs;
+            return product;
         }
 
-        public static Organization InsertOrganization(Organization org)
-        {
-            string endPoint = "api/Organizations";
-            Organization organization = ApiTemplate.InserObjByEndPoint<Organization>(endPoint, org);
-
-            return organization;
-        }
-
-        public static bool UpdateOrganization(int id, Organization org)
+        public static bool UpdateProduct(int id, Product prd)
         {
             ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/Organizations?id=" + id;
-            bool isSuccess = resClient.UpdateData(org);
+            resClient.EndPoint = "api/Products?id=" + id;
+            bool isSuccess = resClient.UpdateData(prd);
 
             return isSuccess;
         }
 
-        public static bool DeleteOrganization(int id)
+        public static bool DeleteProduct(int id)
         {
             ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/Organizations?id=" + id;
+            resClient.EndPoint = "api/Products?id=" + id;
             bool isSuccess = resClient.DeleteData();
 
             return isSuccess;

@@ -100,13 +100,20 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
-            if (!RelationshipEmployee(employee, "edit"))
+            if (!Validated(employee, "edit"))
             {
                 return BadRequest();
             }
 
-            employee.ManagerID = employee.ManagerID == 0 ? null : employee.ManagerID;
-            employee.OrganizationID = employee.OrganizationID == 0 ? null : employee.OrganizationID;
+            if (employee.ManagerID != null)
+            {
+                employee.ManagerID = employee.ManagerID == 0 ? null : employee.ManagerID;
+            }
+
+            if (employee.OrganizationID != null)
+            {
+                employee.OrganizationID = employee.OrganizationID == 0 ? null : employee.OrganizationID;
+            }
 
             db.Entry(employee).State = EntityState.Modified;
 
@@ -138,7 +145,7 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!RelationshipEmployee(employee, ""))
+            if (!Validated(employee, ""))
             {
                 return BadRequest();
             }
@@ -164,8 +171,20 @@ namespace Api.Controllers
             }
 
             var childrens = GetChilrensByManagerID(id);
+            var user = await db.Users.SingleOrDefaultAsync(e => e.EmployeeID == id);
+            var orders = db.Orders.Where(e => e.EmployeeID == id);
 
             if (childrens.Count() > 0)
+            {
+                return BadRequest();
+            }
+
+            if (user != null)
+            {
+                return BadRequest();
+            }
+
+            if (orders.Count() > 0)
             {
                 return BadRequest();
             }
@@ -195,7 +214,7 @@ namespace Api.Controllers
             return db.Organizations.Count(e => e.OrganizationID == id) > 0;
         }
 
-        private bool RelationshipEmployee(Employee employee, string method)
+        private bool Validated (Employee employee, string method)
         {
 
             if (employee.ManagerID != null && employee.ManagerID != 0)

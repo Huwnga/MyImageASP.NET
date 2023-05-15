@@ -66,7 +66,7 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
-            if (!RelationshipOrg(organization, "edit"))
+            if (!Validated(organization, "edit"))
             {
                 return BadRequest();
             }
@@ -102,12 +102,16 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (!RelationshipOrg(organization, ""))
+            if (!Validated(organization, ""))
             {
                 return BadRequest();
             }
 
-            organization.ParentID = organization.ParentID == 0 ? null : organization.ParentID;
+            if (organization.ParentID != null)
+            {
+                organization.ParentID = organization.ParentID == 0 ? null : organization.ParentID;
+            }
+
             db.Organizations.Add(organization);
             await db.SaveChangesAsync();
 
@@ -125,8 +129,14 @@ namespace Api.Controllers
             }
 
             var childrens = GetChilrensByParentID(id);
+            var employees = db.Employees.Where(e => e.OrganizationID == id);
 
             if (childrens.Count() > 0)
+            {
+                return BadRequest();
+            }
+
+            if (employees.Count() > 0)
             {
                 return BadRequest();
             }
@@ -151,7 +161,7 @@ namespace Api.Controllers
             return db.Organizations.Count(e => e.OrganizationID == id) > 0;
         }
 
-        private bool RelationshipOrg(Organization organization, string method)
+        private bool Validated (Organization organization, string method)
         {
             if (organization.ParentID != null && organization.ParentID != 0)
             {

@@ -39,6 +39,7 @@
     <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
     <Property Name="Description" Type="ntext" />
     <Property Name="Picture" Type="image" />
+    <Property Name="PicturePath" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="Customers">
     <Key>

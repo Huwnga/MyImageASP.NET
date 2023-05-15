@@ -23,23 +23,44 @@ namespace Api.Controllers
             return db.Feedbacks;
         }
 
+        [Route("api/FeedbacksWithAll")]
+        public IQueryable<Feedback> GetFeedbacksWithAll()
+        {
+            return db.Feedbacks
+                .Include(e => e.CustomerID)
+                .Include(e => e.ProductID)
+                .OrderBy(e => e.CreatedAt);
+        }
+
         [Route("api/Feedbacks/System")]
         public IQueryable<Feedback> GetSystemFeedbacks()
         {
-            return db.Feedbacks.Where(e => e.ProductID == null).OrderBy(e => e.CreatedAt);
+            return db.Feedbacks
+                .Include(e => e.CustomerID)
+                .Include(e => e.ProductID)
+                .OrderBy(e => e.CreatedAt)
+                .Where(e => e.ProductID == null);
         }
 
         [Route("api/Feedbacks/Product")]
         public IQueryable<Feedback> GetProductFeedbacks(int productID)
         {
-            return db.Feedbacks.Where(e => e.ProductID == productID).OrderBy(e => e.CreatedAt);
+            return db.Feedbacks
+                .Include(e => e.CustomerID)
+                .Include(e => e.ProductID)
+                .OrderBy(e => e.CreatedAt)
+                .Where(e => e.ProductID == productID);
         }
 
         // GET: api/Feedbacks/5
         [ResponseType(typeof(Feedback))]
         public async Task<IHttpActionResult> GetFeedback(int id)
         {
-            Feedback feedback = await db.Feedbacks.FindAsync(id);
+            Feedback feedback = await db.Feedbacks
+                .Include(e => e.CustomerID)
+                .Include(e => e.ProductID)
+                .SingleOrDefaultAsync(e => e.FeedbackID == id);
+
             if (feedback == null)
             {
                 return NotFound();
@@ -58,6 +79,11 @@ namespace Api.Controllers
             }
 
             if (id != feedback.FeedbackID)
+            {
+                return BadRequest();
+            }
+
+            if (!Validated(feedback))
             {
                 return BadRequest();
             }
@@ -90,6 +116,11 @@ namespace Api.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            if (!Validated(feedback))
+            {
+                return BadRequest();
             }
 
             feedback.CreatedAt = DateTime.Now;
@@ -127,6 +158,42 @@ namespace Api.Controllers
         private bool FeedbackExists(int id)
         {
             return db.Feedbacks.Count(e => e.FeedbackID == id) > 0;
+        }
+
+        private bool Validated (Feedback feedback)
+        {
+            if (feedback.CustomerID != null)
+            {
+                feedback.CustomerID = feedback.CustomerID == 0 ? null : feedback.CustomerID;
+
+
+                if (feedback.CustomerID != null)
+                {
+                    var cusExists = db.Customers.Where(e => e.CustomerID == feedback.CustomerID).Count();
+
+                    if (cusExists > 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (feedback.ProductID != null)
+            {
+                feedback.ProductID = feedback.ProductID == 0 ? null : feedback.ProductID;
+
+                if (feedback.ProductID != null)
+                {
+                    var prdExists = db.Products.Where(e => e.ProductID == feedback.ProductID).Count();
+
+                    if (prdExists > 0)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

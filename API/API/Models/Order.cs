@@ -11,7 +11,7 @@ namespace Api.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Order
     {
         public int OrderID { get; set; }
@@ -22,7 +22,7 @@ namespace Api.Models
         public string Description { get; set; }
         public string ShipAddress { get; set; }
         public Nullable<System.DateTime> OrderAt { get; set; }
-    
+
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Payment Payment { get; set; }
