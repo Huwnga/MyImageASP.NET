@@ -1,6 +1,15 @@
-﻿@model EmpClient.Models.Product
+﻿@using System.Configuration
+
+@model EmpClient.Models.Product
 @{
     SelectList catSelectList = ViewBag.Categories;
+
+    string mid = ConfigurationManager.ConnectionStrings["MyImageDomain"].ConnectionString;
+    string imagePath = "";
+    if (Model != null && Model.ImagePath != null)
+    {
+        imagePath = mid + Model.ImagePath;
+    }
 }
 
 
@@ -8,15 +17,16 @@
     <h4>Product</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
+    @Html.HiddenFor(model => model.ProductID, null)
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="w-100">
             @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
             @if (catSelectList != null && catSelectList.Count() > 1)
@@ -33,41 +43,53 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.UnitsInStock, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="w-100">
             @Html.EditorFor(model => model.UnitsInStock, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.UnitsInStock, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.UnitsOnOrder, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="w-100">
             @Html.EditorFor(model => model.UnitsOnOrder, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.UnitsOnOrder, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.ReoderLevel, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="w-100">
             @Html.EditorFor(model => model.ReoderLevel, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.ReoderLevel, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="w-100">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @type = "textarea" } })
             @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="control-label col-md-2">
+            Image product demo
+        </label>
+        <div class="w-100">
+            <div class="w-100 d-flex align-items-center justify-content-between input-group">
+                <input class="form-control" type="file" id="ImageUpload" name="ImageUpload">
+                <button type="button" id="uploadImage" name="uploadImage" class="btn btn-primary">
+                    Upload
+                </button>
+            </div>
+
+            <img class="rounded-0 border border-2 p-2 justify-content-center mt-3" id="displayImage" src="@imagePath" alt="Image product demo" accept="image/jpeg" />
         </div>
     </div>
 
     @Html.HiddenFor(model => model.ImagePath)
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

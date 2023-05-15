@@ -68,7 +68,7 @@ namespace EmpClient.Controllers
         {
             AddAllViewBagSelectList(new Employee(), "");
 
-            return View();
+            return View(new Employee());
         }
 
         // POST: Employees/Create

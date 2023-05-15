@@ -1,0 +1,88 @@
+﻿@using PagedList.Mvc;
+@using EmpClient.Models;
+@using System.Configuration;
+
+@model  PagedList.IPagedList<Order>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].OrderAt)
+                </th>
+                <th scope="col">
+                    Employee's FullName
+                </th>
+                <th scope="col">
+                    Customer's Contact Name
+                </th>
+                <th scope="col">
+                    Customer's Phone Number
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].StatusOrder.StatusOrderName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].Payment.PaymentName)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].Description)
+                </th>
+                <th scope="col">
+                    @Html.DisplayNameFor(model => model[0].ShipAddress)
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @if (Model.Count() < 1)
+            {
+                <tr class="table-group-divider">
+                    <td colspan="11" class="text-center fw-semibold text-danger">
+                        Please wait new orders!
+                    </td>
+                </tr>
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                        @Html.DisplayFor(modelItem => item.Employee.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.ContactName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.ContactName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StatusOrder.StatusOrderName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Payment.PaymentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipAddress)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.OrderID }) |
+                        @Html.ActionLink("Edit Status", "EditOrderStatus", new { id = item.OrderID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.OrderID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

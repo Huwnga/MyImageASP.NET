@@ -36,4 +36,48 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+            function sendFile(file) {
+                var formData = new FormData();
+                formData.append('file', file);
+                $.ajax({
+                    type: 'post',
+                    url: 'fileUploader.ashx',
+                    data: formData,
+                    success: function (status) {
+                        if (status != 'error') {
+                            var my_path = "/Images/Employees/Avatar/" + status;
+                            $("#avatarImage").attr("src", my_path);
+                            alert("Upload success!");
+                        }
+                    },
+                    processData: false,
+                    contentType: false,
+                    error: function () {
+                        alert("Whoops something went wrong!");
+                    }
+                });
+            }
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#avatarImage').attr('src', e.target.result).width(50).height(50);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $('#ProfileImage').on('change', function () {
+                readURL(this);
+            })
+
+            $('#uploadAvatar').on('click', function () {
+
+            })
+    </script>
 }

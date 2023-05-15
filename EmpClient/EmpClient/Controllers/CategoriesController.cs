@@ -38,7 +38,7 @@ namespace EmpClient.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View(new Category());
         }
 
         [HttpPost]

@@ -63,7 +63,7 @@ namespace EmpClient.Controllers
         {
             AddAllViewBagSelectList(new Organization(), "");
 
-            return View();
+            return View(new Organization());
         }
 
         // POST: Organizations/Create

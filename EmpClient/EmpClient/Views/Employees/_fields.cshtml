@@ -6,7 +6,11 @@
     SelectList orgSelectList = ViewBag.Organizations;
 
     string mid = ConfigurationManager.ConnectionStrings["MyImageDomain"].ConnectionString;
-    string avatarLink = mid + Model.PhotoPath;
+    string avatarLink = "";
+    if (Model != null && Model.PhotoPath != null)
+    {
+        avatarLink = mid + Model.PhotoPath;
+    }
 }
 
 <div class="form-horizontal">
@@ -14,7 +18,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.EmployeeID, null)
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
             @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
@@ -22,7 +26,7 @@
         </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
             @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
@@ -30,7 +34,7 @@
         </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
@@ -38,7 +42,7 @@
         </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.TitleOfCourtesy, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
             @Html.EditorFor(model => model.TitleOfCourtesy, new { htmlAttributes = new { @class = "form-control" } })
@@ -46,23 +50,23 @@
         </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
-            @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control", @type = "datetime" } })
             @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.HireDate, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
-            @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.HireDate, new { htmlAttributes = new { @class = "form-control", @type = "datetime" } })
             @Html.ValidationMessageFor(model => model.HireDate, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
             @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
@@ -70,7 +74,7 @@
         </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.Mobile, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
             @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control" } })
@@ -78,7 +82,7 @@
         </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
@@ -86,15 +90,7 @@
         </div>
     </div>
 
-    <div class="form-group my-2">
-        @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label" })
-        <div class="w-100">
-            @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
         @Html.LabelFor(model => model.ManagerID, htmlAttributes: new { @class = "control-label" })
         <div class="w-100">
             @if (empSelectList != null && empSelectList.Count() > 1)
@@ -128,12 +124,27 @@
         </div>
     </div>
 
-    <div class="form-group my-2">
+    <div class="form-group mb-3">
+        @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label" })
+        <div class="w-100">
+            @Html.TextAreaFor(model => model.Notes, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group mb-3">
         <label class="control-label col-md-2">
             Avatar
         </label>
         <div class="w-100">
-            <img class="rounded-0 h-auto" width="100" min-width="100%" src="@avatarLink" alt="Avatar" />
+            <div class="w-100 d-flex align-items-center justify-content-between input-group">
+                <input class="form-control" type="file" id="ProfileImage" name="ProfileImage">
+                <button type="button" id="uploadAvatar" name="uploadAvatar" class="btn btn-primary">
+                    Upload
+                </button>
+            </div>
+
+            <img class="rounded-0 border border-2 p-2 justify-content-center mt-3" id="avatarImage" src="@avatarLink" alt="Avatar" accept="image/jpeg"/>
         </div>
     </div>
 

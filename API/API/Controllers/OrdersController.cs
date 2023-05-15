@@ -94,6 +94,11 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
+            if (!Validated(order))
+            {
+                return BadRequest();
+            }
+
             db.Entry(order).State = EntityState.Modified;
 
             try
@@ -123,6 +128,13 @@ namespace Api.Controllers
             {
                 return BadRequest(ModelState);
             }
+
+            if (!Validated(order))
+            {
+                return BadRequest();
+            }
+
+            order.OrderAt = DateTime.Now;
 
             db.Orders.Add(order);
             await db.SaveChangesAsync();
@@ -158,6 +170,59 @@ namespace Api.Controllers
         private bool OrderExists(int id)
         {
             return db.Orders.Count(e => e.OrderID == id) > 0;
+        }
+
+        private bool Validated (Order order)
+        {
+            if (order.EmployeeID == null)
+            {
+                return false;
+            }
+
+            var empExists = db.Employees.SingleOrDefault(e => e.EmployeeID == order.EmployeeID);
+
+            if (empExists == null)
+            {
+                return false;
+            }
+
+            if (order.CustomerID == null)
+            {
+                return false;
+            }
+
+            var cusExists = db.Customers.SingleOrDefault(e => e.CustomerID == order.CustomerID);
+
+            if (cusExists == null)
+            {
+                return false;
+            }
+
+            if (order.StatusOrderID == null)
+            {
+                return false;
+            }
+
+            var sOrdExists = db.StatusOrders.SingleOrDefault(e => e.StatusOrderID == order.StatusOrderID);
+
+            if (sOrdExists == null)
+            {
+                return false;
+            }
+
+            if (order.PaymentID == null)
+            {
+                return false;
+            }
+
+            var pmExists = db.Payments.SingleOrDefault(e => e.PaymentID == order.PaymentID);
+
+            if (pmExists== null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

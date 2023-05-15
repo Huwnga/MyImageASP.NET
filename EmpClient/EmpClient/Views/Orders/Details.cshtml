@@ -1,0 +1,80 @@
+﻿@model EmpClient.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrderDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Employee's FullName
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.FirstName)
+            @Html.DisplayFor(model => model.Employee.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.ContactName)
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.Customer.ContactName)
+        </dd>
+
+        <dt>
+            Customer's Phone Number
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.Customer.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusOrder.StatusOrderName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusOrder.StatusOrderName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Payment.PaymentName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Payment.PaymentName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderAt)
+        </dt>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

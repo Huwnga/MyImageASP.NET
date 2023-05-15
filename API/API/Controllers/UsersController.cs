@@ -151,6 +151,7 @@ namespace Api.Controllers
 
         [HttpPost]
         [Route("api/User/CheckFunction")]
+        [ResponseType(typeof(bool))]
         public async Task<IHttpActionResult> CheckFunctionByUser(int functionID, int userID)
         {
             User userExists = await db.Users.SingleOrDefaultAsync(e => e.UserID == userID);

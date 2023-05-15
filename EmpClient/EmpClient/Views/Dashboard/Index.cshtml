@@ -4,16 +4,6 @@
 @{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    var accNum = UserApi.GetUsers().Count();
-    var empNum = EmployeesApi.GetEmployees().Count();
-    var orgNum = OrganizationApi.GetOrganizations().Count();
-    var cusNum = CustomerApi.GetCustomers().Count();
-    var catNum = CategoryApi.GetCategorys().Count();
-    var matNum = MaterialApi.GetMaterials().Count();
-    var prdNum = ProductApi.GetProducts().Count();
-    var ordNum = OrderApi.GetOrders().Count();
-    var fdbNum = FeedbackApi.GetFeedbacks().Count();
 }
 
 <div class="d-flex align-items-center justify-content-between shadow-sm p-3">
@@ -35,7 +25,7 @@
             </div>
             <div class="d-flex flex-column container-fluid">
                 <span class="fs-5 fw-medium text-break">Employee Accounts</span>
-                <span class="fs-6 fw-semibolder">@accNum</span>
+                <span class="fs-6 fw-semibolder">@ViewBag.AccNum</span>
             </div>
         </div>
     </div>
@@ -46,7 +36,7 @@
             </div>
             <div class="d-flex flex-column container-fluid">
                 <span class="fs-5 fw-medium text-break">Employees</span>
-                <span class="fs-6 fw-semibolder">@empNum</span>
+                <span class="fs-6 fw-semibolder">@ViewBag.EmpNum</span>
             </div>
         </div>
     </div>
@@ -57,7 +47,7 @@
             </div>
             <div class="d-flex flex-column container-fluid">
                 <span class="fs-5 fw-medium text-break">Organizations</span>
-                <span class="fs-6 fw-semibolder">@orgNum</span>
+                <span class="fs-6 fw-semibolder">@ViewBag.OrgNum</span>
             </div>
         </div>
     </div>
@@ -68,7 +58,7 @@
             </div>
             <div class="d-flex flex-column container-fluid">
                 <span class="fs-5 fw-medium text-break">Customers</span>
-                <span class="fs-6 fw-semibolder">@cusNum</span>
+                <span class="fs-6 fw-semibolder">@ViewBag.CusNum</span>
             </div>
         </div>
     </div>
@@ -79,7 +69,7 @@
             </div>
             <div class="d-flex flex-column container-fluid">
                 <span class="fs-5 fw-medium text-break">Categories</span>
-                <span class="fs-6 fw-semibolder">@catNum</span>
+                <span class="fs-6 fw-semibolder">@ViewBag.CatNum</span>
             </div>
         </div>
     </div>
@@ -90,7 +80,7 @@
             </div>
             <div class="d-flex flex-column container-fluid">
                 <span class="fs-5 fw-medium text-break">Materials</span>
-                <span class="fs-6 fw-semibolder">@matNum</span>
+                <span class="fs-6 fw-semibolder">@ViewBag.MatNum</span>
             </div>
         </div>
     </div>
@@ -101,7 +91,7 @@
             </div>
             <div class="d-flex flex-column container-fluid">
                 <span class="fs-5 fw-medium text-break">Products</span>
-                <span class="fs-6 fw-semibolder">@prdNum</span>
+                <span class="fs-6 fw-semibolder">@ViewBag.PrdNum</span>
             </div>
         </div>
     </div>
@@ -112,7 +102,7 @@
             </div>
             <div class="d-flex flex-column container-fluid">
                 <span class="fs-5 fw-medium text-break">Orders</span>
-                <span class="fs-6 fw-semibolder">@ordNum</span>
+                <span class="fs-6 fw-semibolder">@ViewBag.OrdNum</span>
             </div>
         </div>
     </div>
@@ -123,7 +113,7 @@
             </div>
             <div class="d-flex flex-column container-fluid">
                 <span class="fs-5 fw-medium text-break">Feedbacks</span>
-                <span class="fs-6 fw-semibolder">@fdbNum</span>
+                <span class="fs-6 fw-semibolder">@ViewBag.FdbNum</span>
             </div>
         </div>
     </div>

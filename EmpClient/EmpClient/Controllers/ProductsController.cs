@@ -42,7 +42,7 @@ namespace EmpClient.Controllers
         {
             AddAllViewBagSelectList(new Product());
 
-            return View();
+            return View(new Product());
         }
 
         // POST: Products/Create

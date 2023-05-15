@@ -42,7 +42,7 @@ namespace EmpClient.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Size());
         }
 
         // POST: Products/Create
