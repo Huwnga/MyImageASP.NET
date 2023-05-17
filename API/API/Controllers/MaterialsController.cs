@@ -17,17 +17,24 @@ namespace Api.Controllers
     {
         private MyImageEntities db = new MyImageEntities();
 
-        // GET: api/Materials
         public IQueryable<Material> GetMaterials()
         {
             return db.Materials;
         }
 
-        // GET: api/Materials/5
+        [Route("api/MaterialsWithAll")]
+        public IQueryable<Material> GetMaterialsWithAll()
+        {
+            return db.Materials.Include(e => e.Product);
+        }
+
         [ResponseType(typeof(Material))]
         public async Task<IHttpActionResult> GetMaterial(int id)
         {
-            Material material = await db.Materials.FindAsync(id);
+            Material material = await db.Materials
+                .Include(e => e.Product)
+                .SingleOrDefaultAsync(e=>e.MaterialID == id);
+
             if (material == null)
             {
                 return NotFound();
@@ -50,6 +57,7 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
+            material.UpdatedAt = DateTime.Now;
             db.Entry(material).State = EntityState.Modified;
 
             try
@@ -80,6 +88,8 @@ namespace Api.Controllers
                 return BadRequest(ModelState);
             }
 
+            material.CreatedAt = DateTime.Now;
+            material.UpdatedAt = DateTime.Now;
             db.Materials.Add(material);
 
             try

@@ -35,6 +35,8 @@
         <h4>Category</h4>
         <hr />
 
+        @Html.Partial("~/Views/Shared/_SuccessMessage.cshtml")
+        @Html.Partial("~/Views/Shared/_ErrorMessage.cshtml")
         @Html.Partial("_details", Model)
 
         @using (Html.BeginForm())

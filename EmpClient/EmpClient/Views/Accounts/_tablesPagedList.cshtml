@@ -1,0 +1,64 @@
+﻿@using PagedList.Mvc;
+@using EmpClient.Models;
+@using System.Configuration;
+
+@model  PagedList.IPagedList<User>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Password)
+                </th>
+                <th>
+                    Employee's FullName
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Description)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @if (Model.Count() < 1)
+            {
+                <tr class="table-group-divider">
+                    <td colspan="11" class="text-center fw-semibold text-danger">
+                        Please add new employees!
+                    </td>
+                </tr>
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        @if (item.Employee != null)
+                        {
+                            @Html.ActionLink(item.Employee.FirstName + item.Employee.LastName, "Details", "Employees", new { id = item.EmployeeID }, null);
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

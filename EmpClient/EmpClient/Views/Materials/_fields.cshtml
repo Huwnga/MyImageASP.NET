@@ -1,0 +1,38 @@
+﻿@model EmpClient.Models.Material
+@{
+    SelectList prdSelectList = ViewBag.Products;
+}
+<div class="form-horizontal">
+    <h4>Material</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.MaterialID, null)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaterialName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MaterialName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MaterialName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group mb-3">
+        @Html.LabelFor(model => model.ProductID, htmlAttributes: new { @class = "control-label" })
+        <div class="w-100">
+            @if (prdSelectList != null && prdSelectList.Count() > 1)
+            {
+                @Html.DropDownListFor(model => model.ProductID, prdSelectList, htmlAttributes: new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
+            }
+            else
+            {
+                <p class="text-center fw-semibold text-danger">
+                    Please choose a Product!
+                </p>
+            }
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.CreatedAt, null)
+    @Html.HiddenFor(model => model.UpdatedAt, null)
+</div>

@@ -12,6 +12,11 @@ namespace EmpClient.Controllers
         // GET: Dashboard
         public ActionResult Index()
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             ViewBag.AccNum = UserApi.GetUsers().Count();
             ViewBag.EmpNum = EmployeesApi.GetEmployees().Count();
             ViewBag.OrgNum = OrganizationApi.GetOrganizations().Count();

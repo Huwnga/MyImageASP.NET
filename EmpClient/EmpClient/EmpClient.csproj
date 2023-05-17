@@ -180,6 +180,7 @@
     <Compile Include="Api\GroupFunctionApi.cs" />
     <Compile Include="Api\MaterialApi.cs" />
     <Compile Include="Api\OrderApi.cs" />
+    <Compile Include="Api\OrderDetailApi.cs" />
     <Compile Include="Api\OrganizationApi.cs" />
     <Compile Include="Api\ProductApi.cs" />
     <Compile Include="Api\SizeApi.cs" />
@@ -193,13 +194,16 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\MaterialsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OrganizationsController.cs" />
+    <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SizesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartDetail.cs" />
     <Compile Include="Models\Category.cs" />
@@ -313,12 +317,30 @@
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\EmployeeOrder.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Shared\_AuthLayout.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\Accounts\_tablesPagedList.cshtml" />
+    <Content Include="Views\Accounts\Create.cshtml" />
+    <Content Include="Views\Accounts\_fields.cshtml" />
+    <Content Include="Views\Accounts\Details.cshtml" />
+    <Content Include="Views\Accounts\Delete.cshtml" />
+    <Content Include="Views\Materials\Index.cshtml" />
+    <Content Include="Views\Materials\Create.cshtml" />
+    <Content Include="Views\Materials\Details.cshtml" />
+    <Content Include="Views\Materials\Edit.cshtml" />
+    <Content Include="Views\Materials\Delete.cshtml" />
+    <Content Include="Views\Accounts\_details.cshtml" />
+    <Content Include="Views\Materials\_details.cshtml" />
+    <Content Include="Views\Materials\_fields.cshtml" />
+    <Content Include="Views\Materials\_tablesPagedList.cshtml" />
+    <Content Include="Views\Shared\_ErrorMessage.cshtml" />
+    <Content Include="Views\Shared\_SuccessMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\Employees\Avatar\" />
-    <Folder Include="Views\Accounts\" />
-    <Folder Include="Views\Auth\" />
+    <Folder Include="Views\Payments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

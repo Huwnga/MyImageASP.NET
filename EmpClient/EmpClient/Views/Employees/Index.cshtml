@@ -30,6 +30,8 @@
 </div>
 
 <div class="mt-3 px-5 pt-3">
+    @Html.Partial("~/Views/Shared/_SuccessMessage.cshtml")
+    @Html.Partial("~/Views/Shared/_ErrorMessage.cshtml")
     @Html.Partial("_tablesPagedList", Model)
 
     <div class="d-flex justify-content-between align-items-center container-fluid">

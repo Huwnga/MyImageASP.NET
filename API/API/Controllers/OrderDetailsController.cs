@@ -23,6 +23,18 @@ namespace Api.Controllers
             return db.OrderDetails;
         }
 
+        // GET: api/OrderDetails
+        [Route("api/OrderDetailsWithAll")]
+        public IQueryable<OrderDetail> GetOrderDetailsWithAllByOrderID(int orderID)
+        {
+            return db.OrderDetails
+                .Include(e => e.Product)
+                .Include(e => e.Size)
+                .Include(e => e.Image)
+                .Include(e => e.Material)
+                .Where(e => e.OrderID == orderID);
+        }
+
         // GET: api/OrderDetails/5
         [ResponseType(typeof(OrderDetail))]
         public async Task<IHttpActionResult> GetOrderDetail(int id)

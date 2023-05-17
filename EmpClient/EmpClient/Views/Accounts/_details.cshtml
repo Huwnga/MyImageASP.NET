@@ -1,0 +1,40 @@
+﻿@model EmpClient.Models.User
+
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.UserName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.UserName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Password)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Password)
+    </dd>
+
+    <dt>
+        Employee's FullName
+    </dt>
+
+    <dd>
+        @if (Model.Employee != null)
+        {
+            @Html.ActionLink(Model.Employee.FirstName + Model.Employee.LastName, "Details", "Employees", new { id = Model.EmployeeID }, null);
+        }
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Description)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Description)
+    </dd>
+
+</dl>

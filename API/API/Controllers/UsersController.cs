@@ -99,6 +99,8 @@ namespace Api.Controllers
             {
                 return BadRequest();
             }
+            
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, 20);
 
             db.Users.Add(user);
             await db.SaveChangesAsync();

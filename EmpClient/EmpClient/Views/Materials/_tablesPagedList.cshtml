@@ -1,0 +1,62 @@
+﻿@using PagedList.Mvc;
+@using EmpClient.Models;
+@using System.Configuration;
+
+@model  PagedList.IPagedList<Material>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Product.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].MaterialName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].CreatedAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].UpdatedAt)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @if (Model.Count() < 1)
+            {
+                <tr class="table-group-divider">
+                    <td colspan="11" class="text-center fw-semibold text-danger">
+                        Please add new Material!
+                    </td>
+                </tr>
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => item.Product.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaterialName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UpdatedAt)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MaterialID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.MaterialID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MaterialID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

@@ -16,6 +16,11 @@ namespace EmpClient.Controllers
         // GET: Orders
         public ActionResult Index(int? page)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             int number = (page ?? 1);
 
             List<Order> orders = OrderApi.GetOrdersWithAll();
@@ -30,6 +35,11 @@ namespace EmpClient.Controllers
         // GET: Orders
         public ActionResult EmployeeOrder(int? page)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             int number = (page ?? 1);
             int employeeID = ViewBag.userID;
             List<Order> orders = OrderApi.GetOrdersWithAllByEmployeeID(employeeID);
@@ -44,16 +54,28 @@ namespace EmpClient.Controllers
 
         public ActionResult Details (int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Index");
             }
+
+            ViewBag.OrderDetails = OrderDetailApi.GetOrderDetailsWithAllByOrderID((int) id);
 
             return View(OrderApi.GetOrder((int) id));
         }
 
         public ActionResult Edit (int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Index");
@@ -66,12 +88,22 @@ namespace EmpClient.Controllers
 
         public ActionResult EditOrderStatus(int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             return Edit(id);
         }
 
         [HttpPost]
         public ActionResult Edit(int? id, Order obj)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Index");
@@ -102,6 +134,11 @@ namespace EmpClient.Controllers
         [HttpPost]
         public ActionResult EditOrderStatus(int? id, Order obj)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             return Edit(id, obj);
         }
 

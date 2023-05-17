@@ -21,6 +21,11 @@ namespace EmpClient.Controllers
 
         public ActionResult Index(int? page)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             int number = (page ?? 1);
             var emps = EmployeesApi.GetEmployeesWithOrgAndManager();
 
@@ -34,6 +39,11 @@ namespace EmpClient.Controllers
 
         public ActionResult IndexChildren(int? page, int? ManagerID)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (ManagerID == null)
             {
                 return RedirectToAction("Index");
@@ -55,6 +65,11 @@ namespace EmpClient.Controllers
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Index");
@@ -66,6 +81,11 @@ namespace EmpClient.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             AddAllViewBagSelectList(new Employee(), "");
 
             return View(new Employee());
@@ -75,6 +95,11 @@ namespace EmpClient.Controllers
         [HttpPost]
         public ActionResult Create(Employee obj)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             AddAllViewBagSelectList(obj, "");
             try
             {
@@ -100,6 +125,11 @@ namespace EmpClient.Controllers
         // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             var emloyee = EmployeesApi.GetEmployeeById((int)id);
             AddAllViewBagSelectList(emloyee, "");
 
@@ -115,6 +145,11 @@ namespace EmpClient.Controllers
         [HttpPost]
         public ActionResult Edit(Employee obj, int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Index");
@@ -144,6 +179,11 @@ namespace EmpClient.Controllers
         // GET: Employees/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             return Details(id);
         }
 
@@ -151,6 +191,11 @@ namespace EmpClient.Controllers
         [HttpPost]
         public ActionResult Delete(int? id, FormCollection collection)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Index");

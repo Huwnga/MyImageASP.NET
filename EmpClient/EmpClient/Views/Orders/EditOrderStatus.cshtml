@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Orders";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    SelectList empSelectList = ViewBag.Employees;
+    SelectList stoSelectList = ViewBag.StatusOrders;
 }
 
 <div class="d-flex align-items-center justify-content-between shadow-sm p-3">
@@ -24,6 +26,8 @@
     {
         @Html.AntiForgeryToken()
 
+        @Html.Partial("~/Views/Shared/_SuccessMessage.cshtml")
+        @Html.Partial("~/Views/Shared/_ErrorMessage.cshtml")
         <div class="form-horizontal">
             <h4>Order</h4>
             <hr />
@@ -34,9 +38,18 @@
 
             <div class="form-group mb-3">
                 @Html.LabelFor(model => model.StatusOrderID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.StatusOrderID, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.StatusOrderID, "", new { @class = "text-danger" })
+                <div class="w-100">
+                    @if (empSelectList != null && empSelectList.Count() > 1)
+                    {
+                        @Html.DropDownListFor(model => model.StatusOrderID, empSelectList, htmlAttributes: new { @class = "form-select" })
+                        @Html.ValidationMessageFor(model => model.StatusOrderID, "", new { @class = "text-danger" })
+                    }
+                    else
+                    {
+                        <p class="text-center fw-semibold text-danger">
+                            Please choose a Status!
+                        </p>
+                    }
                 </div>
             </div>
 

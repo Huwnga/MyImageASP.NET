@@ -25,6 +25,8 @@
     {
         @Html.AntiForgeryToken()
 
+        @Html.Partial("~/Views/Shared/_SuccessMessage.cshtml")
+        @Html.Partial("~/Views/Shared/_ErrorMessage.cshtml")
         @Html.Partial("_fields", Model)
 
         <div class="d-flex align-items-center my-3">

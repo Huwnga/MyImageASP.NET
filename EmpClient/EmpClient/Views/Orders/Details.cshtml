@@ -1,80 +1,143 @@
-﻿@model EmpClient.Models.Order
+﻿@using EmpClient.Models;
+
+@model Order
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Orders";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    List<OrderDetail> orderDetails = ViewBag.OrderDetails;
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>OrderDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Employee's FullName
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Employee.FirstName)
-            @Html.DisplayFor(model => model.Employee.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.ContactName)
-        </dt>
-
-        <dd>
-            @Html.DisplayNameFor(model => model.Customer.ContactName)
-        </dd>
-
-        <dt>
-            Customer's Phone Number
-        </dt>
-
-        <dd>
-            @Html.DisplayNameFor(model => model.Customer.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.StatusOrder.StatusOrderName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.StatusOrder.StatusOrderName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Payment.PaymentName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Payment.PaymentName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ShipAddress)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OrderAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OrderAt)
-        </dt>
-
-    </dl>
+<div class="d-flex align-items-center justify-content-between shadow-sm p-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item">
+                @Html.ActionLink("Home", "", "", new { area = "" }, null)
+            </li>
+            <li class="breadcrumb-item">
+                @Html.ActionLink("Orders", "Index", "Orders", new { area = "" }, null)
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Details</li>
+        </ol>
+    </nav>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="mt-3 px-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-start">
+            <span class="fs-3 fw-medium me-2">Payment Method:</span>
+            <span class="fs-3 fw-medium">@Model.Payment.PaymentName</span>
+        </div>
+        <div class="d-flex justify-content-end">
+            <span class="fs-3 fw-medium me-2">Status Order:</span>
+            <span class="fs-3 fw-medium">@Model.StatusOrder.StatusOrderName</span>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex flex-column justify-content-start">
+            <span class="fs-4 fw-medium">Customer</span>
+
+            <div class="d-flex flex-column">
+                <span class="fs-6 fw-semibold">@Model.Customer.ContactName (Contact Name)</span>
+                <span class="fs-6 fw-semibold">@Model.Customer.Phone (Phone Number)</span>
+                <span class="fs-6 fw-semibold">@Model.Customer.Fax (Fax)</span>
+            </div>
+        </div>
+        <div class="d-flex flex-column justify-content-start">
+            <span class="fs-4 fw-medium">Employee</span>
+
+            <div class="d-flex flex-column">
+                <span class="fs-6 fw-semibold">@Model.Employee.FirstName@Model.Employee.LastName (Full Name)</span>
+                <span class="fs-6 fw-semibold">@Model.Employee.Mobile (Phone Number)</span>
+                <span class="fs-6 fw-semibold">@Model.Employee.Email (Email)</span>
+            </div>
+        </div>
+        <div class="d-flex flex-column justify-content-start">
+            <span class="fs-4 fw-medium">More Infomation</span>
+
+            <div class="d-flex flex-column">
+                <span class="fs-6 fw-semibold">@Model.OrderAt (Order Date)</span>
+                <span class="fs-6 fw-semibold">@Model.ShipAddress (Ship Address)</span>
+                <span class="fs-6 fw-semibold">@Model.Description (Description)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            Order ID
+                        </th>
+                        <th scope="col">
+                            Product
+                        </th>
+                        <th scope="col">
+                            Size
+                        </th>
+                        <th scope="col">
+                            Material
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayFor(modelItem => orderDetails[0].Quantity)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(modelItem => orderDetails[0].UnitPrice)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(modelItem => orderDetails[0].Description)
+                        </th>
+                        <th scope="col">
+                            Total
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+
+                    @foreach (var item in orderDetails)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderID)
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.Product.ProductName, "Details", "Products",new { id = item.ProductID }, null)
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.Size.SizeName, "Details", "Sizes", new { id = item.SizeID }, null)
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.Material.MaterialName, "Details", "Materials", new { id = item.MaterialID }, null)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UnitPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @{
+                                    decimal total = decimal.Multiply((decimal)item.Quantity, (decimal)item.UnitPrice);
+                                }
+                                @Html.DisplayFor(modelItem => total)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center my-3">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeID }, new { @class = "btn btn-dark me-2" })
+        @Html.ActionLink("Edit Status", "EditOrderStatus", new { id = Model.EmployeeID }, new { @class = "btn btn-dark me-2" })
+        @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-outline-secondary ms-2" })
+    </div>
+</div>

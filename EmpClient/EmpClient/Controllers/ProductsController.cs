@@ -15,6 +15,11 @@ namespace EmpClient.Controllers
         // GET: Products
         public ActionResult Index(int? page)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             int number = (page ?? 1);
             var products = ProductApi.GetProductsWithAll();
 
@@ -29,6 +34,11 @@ namespace EmpClient.Controllers
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Index");
@@ -40,6 +50,11 @@ namespace EmpClient.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             AddAllViewBagSelectList(new Product());
 
             return View(new Product());
@@ -49,6 +64,11 @@ namespace EmpClient.Controllers
         [HttpPost]
         public ActionResult Create(Product obj)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             AddAllViewBagSelectList(obj);
             try
             {
@@ -74,6 +94,11 @@ namespace EmpClient.Controllers
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Index");
@@ -89,6 +114,11 @@ namespace EmpClient.Controllers
         [HttpPost]
         public ActionResult Edit(Product obj, int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Index");
@@ -118,6 +148,11 @@ namespace EmpClient.Controllers
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             return Details(id);
         }
 
@@ -125,6 +160,11 @@ namespace EmpClient.Controllers
         [HttpPost]
         public ActionResult Delete(int? id, FormCollection collection)
         {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             if (id == null)
             {
                 return RedirectToAction("Index");

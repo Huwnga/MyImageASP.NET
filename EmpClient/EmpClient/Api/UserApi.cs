@@ -25,10 +25,10 @@ namespace EmpClient.Api
             return users;
         }
 
-        public static List<User> GetUser(int id)
+        public static User GetUser(int id)
         {
             string endPoint = "api/Users?id=" + id;
-            List<User> users = ApiTemplate.GetByEndPoint<List<User>>(endPoint);
+            User users = ApiTemplate.GetByEndPoint<User>(endPoint);
 
             return users;
         }
@@ -57,13 +57,12 @@ namespace EmpClient.Api
             return false;
         }
 
-        public static bool UpdUser(int id, User user)
+        public static User InsUser(User user)
         {
-            ResClient resClient = new ResClient();
-            resClient.EndPoint = "api/Users?id=" + id;
-            bool isSuccess = resClient.UpdateData(user);
+            string endPoint = "api/Users";
+            User u = ApiTemplate.InserObjByEndPoint<User>(endPoint, user);
 
-            return isSuccess;
+            return u;
         }
 
         public static bool DelUser(int id)
